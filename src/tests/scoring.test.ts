@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadSolvexLevelOne } from "../domain/loadScenario";
+import { loadSolvexLevelOne } from "../content/loadScenario";
 import { scoreScenario } from "../domain/scoring";
 
 describe("scoreScenario", () => {

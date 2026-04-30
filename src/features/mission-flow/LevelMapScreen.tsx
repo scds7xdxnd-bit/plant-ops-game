@@ -1,6 +1,6 @@
 import { ArrowRight, FileText, Lock, Map } from "lucide-react";
-import { ScreenHeader } from "./ScreenHeader";
-import { useGameStore } from "../store/useGameStore";
+import { ScreenHeader } from "../../components/ScreenHeader";
+import { useGameStore } from "../../store/useGameStore";
 
 const stages = [
   "BoD Review",

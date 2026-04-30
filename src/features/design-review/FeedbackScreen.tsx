@@ -1,6 +1,6 @@
 import { RotateCcw, Unlock } from "lucide-react";
-import { ScreenHeader } from "./ScreenHeader";
-import { useGameStore } from "../store/useGameStore";
+import { ScreenHeader } from "../../components/ScreenHeader";
+import { useGameStore } from "../../store/useGameStore";
 
 export function FeedbackScreen() {
   const scenario = useGameStore((state) => state.scenario);

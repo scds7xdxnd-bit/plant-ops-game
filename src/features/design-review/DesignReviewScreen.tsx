@@ -1,11 +1,10 @@
-import { ArrowRight, RotateCcw } from "lucide-react";
-import { ScreenHeader } from "./ScreenHeader";
-import { useGameStore } from "../store/useGameStore";
+import { RotateCcw } from "lucide-react";
+import { ScreenHeader } from "../../components/ScreenHeader";
+import { useGameStore } from "../../store/useGameStore";
 
 export function DesignReviewScreen() {
   const scoreResult = useGameStore((state) => state.scoreResult);
   const resetLevel = useGameStore((state) => state.resetLevel);
-  const goTo = useGameStore((state) => state.goTo);
 
   if (!scoreResult) {
     return null;
@@ -17,10 +16,6 @@ export function DesignReviewScreen() {
         <button className="secondary-button" onClick={resetLevel}>
           <RotateCcw size={18} />
           Reset
-        </button>
-        <button className="primary-button" onClick={() => goTo("feedback")}>
-          <ArrowRight size={18} />
-          Review Feedback
         </button>
       </ScreenHeader>
 

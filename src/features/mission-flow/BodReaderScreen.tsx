@@ -1,6 +1,6 @@
 import { ArrowRight, ClipboardList } from "lucide-react";
-import { ScreenHeader } from "./ScreenHeader";
-import { useGameStore } from "../store/useGameStore";
+import { ScreenHeader } from "../../components/ScreenHeader";
+import { useGameStore } from "../../store/useGameStore";
 
 const sectionLabels: Record<string, string> = {
   project_context: "Project Context",

@@ -2,9 +2,74 @@
 
 #### Purpose
 
-This note proposes a future repository layout once implementation begins. The vault remains useful before code exists.
+This note records the repository layout for the current browser prototype and the intended direction once the project needs multiple packages.
 
-#### Recommended Layout
+#### Current Layout
+
+```text
+plant-ops-game/
+  README.md
+  package.json
+  package-lock.json
+  index.html
+  vite.config.ts
+  tsconfig*.json
+
+  src/
+    app/
+    assets/
+      icons/
+      images/
+    components/
+    content/
+      scenarios/
+    domain/
+    features/
+      design-review/
+      mission-flow/
+    store/
+    styles/
+    tests/
+
+  plant-ops-game-vault/
+    00-index/
+    01-game-design/
+    02-simulation-model/
+    03-production-plan/
+    04-tech-infrastructure/
+    05-research/
+    06-decisions/
+    scenarios/
+    templates/
+```
+
+#### Current Ownership
+
+| Area | Purpose |
+|---|---|
+| `src/app` | App shell and route-level screen selection |
+| `src/assets` | Runtime images, icons, and other visual assets |
+| `src/components` | Shared UI components used by multiple features |
+| `src/content` | Runtime scenario content and loaders |
+| `src/domain` | Pure game logic, scoring, scenario types, and later validation helpers |
+| `src/features` | React UI grouped by gameplay area |
+| `src/store` | Runtime game state |
+| `src/styles` | Global CSS and later design tokens |
+| `src/tests` | Unit tests |
+| `plant-ops-game-vault` | Human-readable design source, plans, ADRs, and scenario drafts |
+
+#### Current Rules
+
+- Keep deterministic scoring and scenario interpretation in `src/domain`.
+- Keep YAML loaded by the browser prototype in `src/content/scenarios`.
+- Keep planning notes, ADRs, and authoring drafts in `plant-ops-game-vault`.
+- Use `src/features` for larger UI areas instead of growing a flat `screens` folder.
+- Promote components to `src/components` only when they are used across multiple features.
+- Avoid a backend until the first playable loop is proven.
+
+#### Future Layout
+
+Move to this shape only when shared packages or multiple apps become necessary:
 
 ```text
 plant-ops-game/

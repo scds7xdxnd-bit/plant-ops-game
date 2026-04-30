@@ -23,14 +23,14 @@ This note maps chemical engineering concepts to game decisions. It is the bridge
 
 #### Example Logic
 
-| BoD Clue | Likely Decision |
-|---|---|
-| Reaction is mildly exothermic | cooling system, temperature control loop, high-temperature alarm |
-| Product is heat sensitive | avoid high-temperature separation, consider vacuum or lower-temperature option |
-| Feed is flammable | vapor management, ignition control, relief protection |
-| Cooling water is limited | reduce cooling demand, consider heat integration or alternate cooling |
-| Catalyst solution is corrosive | corrosion-resistant material or lined equipment |
-| VOC emissions must be controlled | condenser, scrubber, activated carbon, vapor containment |
+| BoD Clue                         | Likely Decision                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| Reaction is mildly exothermic    | cooling system, temperature control loop, high-temperature alarm               |
+| Product is heat sensitive        | avoid high-temperature separation, consider vacuum or lower-temperature option |
+| Feed is flammable                | vapor management, ignition control, relief protection                          |
+| Cooling water is limited         | reduce cooling demand, consider heat integration or alternate cooling          |
+| Catalyst solution is corrosive   | corrosion-resistant material or lined equipment                                |
+| VOC emissions must be controlled | condenser, scrubber, activated carbon, vapor containment                       |
 
 #### Related Notes
 

@@ -1,14 +1,14 @@
 import { create } from "zustand";
+import { loadSolvexLevelOne } from "../content/loadScenario";
 import { scoreScenario, type ScoreResult } from "../domain/scoring";
-import { loadSolvexLevelOne } from "../domain/loadScenario";
 import type { Scenario } from "../domain/scenarioTypes";
 
 export type Screen =
+  | "mission-dashboard"
   | "level-map"
   | "bod-reader"
   | "decision-board"
-  | "design-review"
-  | "feedback";
+  | "design-review";
 
 interface GameState {
   scenario: Scenario;
@@ -17,6 +17,7 @@ interface GameState {
   scoreResult: ScoreResult | null;
   goTo: (screen: Screen) => void;
   toggleDecision: (decisionId: string) => void;
+  clearSelections: () => void;
   submitDesignReview: () => void;
   resetLevel: () => void;
 }
@@ -25,7 +26,7 @@ const scenario = loadSolvexLevelOne();
 
 export const useGameStore = create<GameState>((set, get) => ({
   scenario,
-  currentScreen: "level-map",
+  currentScreen: "mission-dashboard",
   selectedDecisionIds: [],
   scoreResult: null,
   goTo: (screen) => set({ currentScreen: screen }),
@@ -39,6 +40,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       }
       return { selectedDecisionIds: [...selected] };
     }),
+  clearSelections: () => set({ selectedDecisionIds: [] }),
   submitDesignReview: () => {
     const { scenario: activeScenario, selectedDecisionIds } = get();
     set({

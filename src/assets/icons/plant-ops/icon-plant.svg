@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs><style>
+.po-line{fill:none;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.po-fill{fill:#fff7e8;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.po-yellow{fill:#ffd966;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.po-green{fill:#9ee7c1;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.po-blue{fill:#9ed0f6;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.po-red{fill:#ff9f8a;stroke:#2b2623;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+</style></defs>
+<path class="po-blue" d="M8 54V34h14v20"/>
+    <path class="po-line" d="M8 42h14M15 34V20"/>
+    <path class="po-fill" d="M30 54V18h15v36"/>
+    <path class="po-line" d="M30 28h15M30 38h15"/>
+    <path class="po-yellow" d="M47 54V30h8v24"/>
+    <path class="po-line" d="M6 54h52M50 30V16M47 16h8"/>
+    <path class="po-line" d="M15 20c6-4 11-4 15 0"/>
+</svg>

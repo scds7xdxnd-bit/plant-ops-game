@@ -1,6 +1,6 @@
 import { parse } from "yaml";
-import solvexLevelOneYaml from "../data/solvex-a-level-1.yaml?raw";
-import type { Scenario } from "./scenarioTypes";
+import type { Scenario } from "../domain/scenarioTypes";
+import solvexLevelOneYaml from "./scenarios/solvex-a-level-1.yaml?raw";
 
 export function loadSolvexLevelOne(): Scenario {
   return parse(solvexLevelOneYaml) as Scenario;
