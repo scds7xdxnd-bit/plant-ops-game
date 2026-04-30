@@ -8,14 +8,14 @@ This note defines level progression and difficulty for the Design Basis MVP.
 
 | Level | Stage | Main Document | Player Decision Focus | Unlocks |
 |---:|---|---|---|---|
-| 1 | Design Basis Review | Simplified BoD | Identify process requirements | Basic PFD blocks |
-| 2 | Reaction Section | Reactor design note | Choose reactor and control needs | Reactor datasheet |
-| 3 | Separation Section | Product specification | Choose separation method | Separator datasheet |
-| 4 | Heat And Utilities | Utility constraints | Choose heating/cooling systems | Utility summary |
-| 5 | Safety Review | Safety design basis | Choose interlocks and relief systems | Safety checklist |
-| 6 | Environmental Review | Regulation summary | Choose wastewater and VOC controls | Environmental checklist |
-| 7 | PFD Assembly | Process block list | Assemble simplified PFD | Draft PFD |
-| 8 | P&ID Basics | Instrument requirement list | Select key instruments and alarms | Simplified P&ID layer |
+| 1 | Design Basis Review | Simplified BoD | Identify process requirements and reject unsupported over-design | Early design requirements |
+| 2 | Reaction Section | Reactor design note | Define reactor heat-removal and temperature-control requirements | Reactor section basis |
+| 3 | Separation Section | Product specification | Choose justified separation requirements without over-specifying equipment | Separation train outline |
+| 4 | Heat And Utilities | Utility constraints | Resolve steam, cooling-water, and heat-removal constraints | Utility requirement list |
+| 5 | Control And Safety Review | Safety/control basis | Match constraints to controls, alarms, relief, and flammable-feed safeguards | Control and safety basis |
+| 6 | Environmental Review | Regulation summary | Choose wastewater and VOC controls | Environmental treatment basis |
+| 7 | Basic PFD Assembly | Approved section decisions | Assemble simplified PFD blocks from prior mission outputs | Draft PFD block sequence |
+| 8 | Design Package Review | Simplified design package | Find inconsistencies and omissions in the junior design package | Approved next-phase package |
 
 #### Gantt-Style Level Structure
 
@@ -28,7 +28,7 @@ This note defines level progression and difficulty for the Design Basis MVP.
 | Safety Systems |  |  |  |  | XXX |  |  |  |
 | Environmental Controls |  |  |  |  |  | XXX |  |  |
 | PFD Assembly |  |  |  |  |  |  | XXX |  |
-| P&ID Basics |  |  |  |  |  |  |  | XXX |
+| Design Package Review |  |  |  |  |  |  |  | XXX |
 
 #### Mermaid Gantt Draft
 
@@ -50,8 +50,25 @@ gantt
 
   section Design Package
   PFD Assembly               :l7, after l6, 1d
-  P&ID Basics                :l8, after l7, 1d
+  Design Package Review      :l8, after l7, 1d
 ```
+
+#### Current Mission Flow Plan
+
+The first six missions should mostly use decision/review gameplay. Mission 7 should change interaction style into simplified block assembly. Mission 8 should be a capstone design package review, not full P&ID drafting.
+
+| Mission | Working Title | Gameplay Style | Output |
+|---:|---|---|---|
+| 1 | Decode The Design Basis | Select decisions directly implied by BoD clues | Approved early design requirements |
+| 2 | The Reactor Runs Hot | Select reactor heat-removal, utility, and control decisions | Reactor section basis |
+| 3 | Separation Section | Select required separations and flag over-specific technology choices | Separation train outline |
+| 4 | Heat & Utilities | Match utility constraints to process needs | Heat and utility requirement list |
+| 5 | Control & Safety Review | Match hazards and limits to controls, alarms, relief, and safeguards | Control and safety basis |
+| 6 | Environmental Review | Match waste/emission streams to treatment requirements | Environmental treatment basis |
+| 7 | Basic PFD Assembly | Arrange simplified process blocks unlocked by prior missions | Draft PFD block sequence |
+| 8 | Design Package Review | Find inconsistencies and missing requirements in a simplified package | Approved junior design package |
+ 
+Mission 8 should avoid full P&ID drafting. It may include basic instrument and safeguard recognition, but the player task is package review and inconsistency detection.
 
 #### Easy Mode
 
@@ -119,10 +136,23 @@ Use mission framing instead of plain quizzes:
 
 - Mission 1: Decode The Design Basis
 - Mission 2: The Reactor Runs Hot
-- Mission 3: The Purity Crisis
-- Mission 4: Summer Cooling Water Shortage
-- Mission 5: The VOC Audit
-- Mission 6: Design Review Boss Fight
+- Mission 3: Separation Section
+- Mission 4: Heat & Utilities
+- Mission 5: Control & Safety Review
+- Mission 6: Environmental Review
+- Mission 7: Basic PFD Assembly
+- Mission 8: Design Package Review
+
+#### Current Implemented Missions
+
+| Mission | Runtime Status | Content Notes | Unlock Rule |
+|---:|---|---|---|
+| 1 | Playable/current at campaign start | 17 decision cards: 10 correct, 7 wrong-plausible | 70% pass unlocks Mission 2 |
+| 2 | Playable/locked at campaign start | 15 decision cards: 9 correct, 6 wrong-plausible; exothermic reactor, summer cooling-water limit, normal control vs independent safety protection | 70% pass points to future Mission 3 |
+
+The current UI supports a two-mission flow. Level map items can show current, completed, and locked states. Continue from the design review uses pass status, not perfect status.
+
+Decision cards are sorted by category display label and card display label. The current category display order is alphabetical by displayed label, including Advanced, Control, Environment, Materials, Separation, and Utilities.
 
 #### Related Notes
 

@@ -19,6 +19,7 @@ plant-ops-game/
     app/
     assets/
       icons/
+        plant-ops/
       images/
     components/
     content/
@@ -26,6 +27,7 @@ plant-ops-game/
     domain/
     features/
       design-review/
+      mission-dashboard/
       mission-flow/
     store/
     styles/
@@ -61,11 +63,30 @@ plant-ops-game/
 #### Current Rules
 
 - Keep deterministic scoring and scenario interpretation in `src/domain`.
-- Keep YAML loaded by the browser prototype in `src/content/scenarios`.
+- Keep campaign YAML loaded by the browser prototype in `src/content/scenarios`.
 - Keep planning notes, ADRs, and authoring drafts in `plant-ops-game-vault`.
 - Use `src/features` for larger UI areas instead of growing a flat `screens` folder.
 - Promote components to `src/components` only when they are used across multiple features.
 - Avoid a backend until the first playable loop is proven.
+- Keep custom app icons in `src/assets/icons/plant-ops`.
+- Validate campaign YAML at load time before app state is created.
+
+#### Current Runtime Files
+
+| File | Purpose |
+|---|---|
+| `src/content/scenarios/solvex-a-campaign.yaml` | Runtime campaign data for Missions 1 and 2, and future missions |
+| `src/content/loadCampaign.ts` | YAML parser and validation entrypoint |
+| `src/content/loadScenario.ts` | Compatibility wrapper for Mission 1 |
+| `src/domain/scenarioTypes.ts` | Campaign, mission, decision, scoring, and unlock types |
+| `src/domain/validateCampaign.ts` | Lightweight campaign validation |
+| `src/domain/scoring.ts` | Deterministic scoring |
+| `src/store/useGameStore.ts` | Campaign, current mission, selected decisions, score result, and screen state |
+| `src/features/mission-dashboard/decisionPresentation.ts` | Shared decision display labels, category labels, and sort order |
+| `src/features/mission-dashboard/DesignBasisPanel.tsx` | Design basis excerpt renderer with support for Mission 1 and Mission 2 section keys |
+| `src/features/design-review/DesignReviewCompleteScreen.tsx` | Review summary, senior engineer feedback, pass-based continue, and mission advancement |
+
+Current runtime note: `src/content/scenarios/solvex-a-campaign.yaml` now contains Missions 1 and 2. `src/content/scenarios/solvex-a-level-1.yaml` remains a legacy duplicate and should not be treated as the active runtime source.
 
 #### Future Layout
 

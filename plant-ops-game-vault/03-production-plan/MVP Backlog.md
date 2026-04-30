@@ -2,7 +2,39 @@
 
 #### MVP Goal
 
-Build one playable Design Basis exercise where the player reads a simplified BoD or DBM for the Solvex-A specialty chemical plant, selects correct early process design decisions, receives senior engineer feedback, and unlocks the next Gantt-style design stage.
+Build a playable Design Basis campaign where the player reads simplified BoD or DBM material for the Solvex-A specialty chemical plant, selects correct early process design decisions, receives senior engineer feedback, and unlocks the next Gantt-style design stage.
+
+#### Current App Status
+
+Completed in the browser prototype:
+
+- Mission 1 dashboard screen
+- Mission 1 decision card selection
+- Mission 2 reactor-section content
+- Mission 1 to Mission 2 switching and unlock behavior
+- pass-based unlock from Mission 1 at 70%
+- selected decision tray
+- senior engineer action bar
+- design review completion screen
+- deterministic scoring tests
+- campaign-level YAML schema
+- campaign loader with validation
+- custom SVG icon usage
+- dynamic mission header and level map status
+- shared decision display labels and sorted decision board order
+- selected tray and design review feedback aligned by decision ID
+- Mission 2 design-basis sections rendered in the dashboard
+- compact review summary copy and score ring sizing
+
+Current runtime source:
+
+- `src/content/scenarios/solvex-a-campaign.yaml`
+
+Legacy duplicate still present:
+
+- `src/content/scenarios/solvex-a-level-1.yaml`
+
+Recommendation: keep the legacy file during the current two-mission playtest, then archive or delete it once `solvex-a-campaign.yaml` is accepted as the sole runtime content source.
 
 #### Must Have
 
@@ -11,11 +43,15 @@ Build one playable Design Basis exercise where the player reads a simplified BoD
 | Design basis loader | Load authored simplified BoD or DBM content | [[Scenario Data Schema]] |
 | Level map | Show stages as a Gantt-style progression | [[Level Structure and Difficulty Modes]] |
 | Decision board | Show process decision cards or checkboxes for selection | [[Design Basis MVP]] |
-| Drag-and-drop stage placement | Use drag-and-drop for workflow placement or PFD ordering | [[Level Structure and Difficulty Modes]] |
 | Decision categories | Limit MVP to reactor, separation, heat/utilities, control/safety, environmental treatment | [[Design Basis MVP]] |
 | Answer key | Store correct decision IDs for each level | [[Scenario Data Schema]] |
 | Mode-aware scoring | Score correct selections, missed decisions, over-selection, and missing-data flags by difficulty | [[Level Structure and Difficulty Modes]] |
 | Senior engineer feedback | Explain why each decision fits or does not fit | [[Chemical Engineering Decision Mapping]] |
+| Campaign schema | Support multiple missions from one campaign YAML | [[Scenario Data Schema]] |
+| Scenario validation | Reject broken campaign YAML before app runtime | [[Scenario Data Schema]] |
+| Design review screen | Summarize score, supported decisions, unsupported decisions, and missed decisions | [[Player Experience Flow]] |
+| Mission switching | Continue from Mission 1 to Mission 2 after unlock criteria are met | [[Level Structure and Difficulty Modes]] |
+| Mission 2 content | Reactor heat-removal and summer cooling-water constraint mission | [[Chemical Engineering Decision Mapping]] |
 
 #### Should Have
 
@@ -27,6 +63,8 @@ Build one playable Design Basis exercise where the player reads a simplified BoD
 | Review mode | Let the player revisit missed design decisions |
 | Simple plant map | Unlock process sections as visual progress |
 | Classroom materials | Instructor notes, printable scenario sheets, and post-level review screens |
+| Mission 1-2 playtest | Test the first two missions as a continuous vertical slice |
+| Mission 3 content | Add separation section mission after Mission 1-2 playtest |
 
 #### Could Have
 
@@ -36,6 +74,7 @@ Build one playable Design Basis exercise where the player reads a simplified BoD
 | Scenario editor | Let non-programmers edit design basis sections, decision options, and answer keys |
 | PFD Builder Lite | Let the player select and order simplified process blocks |
 | No-code scenario editor | Add after YAML/JSON authoring is stable |
+| Drag-and-drop stage placement | Use drag-and-drop for PFD block ordering after decision missions are proven |
 
 #### Not MVP
 

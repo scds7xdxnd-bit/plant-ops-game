@@ -1,6 +1,7 @@
 import { Music } from "lucide-react";
 import plantIcon from "../../assets/icons/plant-ops/icon-plant.svg";
 import engineerIcon from "../../assets/icons/plant-ops/icon-engineer.svg";
+import { useGameStore } from "../../store/useGameStore";
 
 const STAGE_LABELS = [
   "Design Basis Review",
@@ -14,6 +15,11 @@ const STAGE_LABELS = [
 ];
 
 export function TopMissionHeader() {
+  const scenario = useGameStore((state) => state.scenario);
+  const missionNumber = scenario.mission_number ?? 1;
+  const missionTitle = scenario.short_title ?? scenario.title;
+  const currentStageIndex = (missionNumber - 1) % STAGE_LABELS.length;
+
   return (
     <header className="top-mission-header">
       <div className="header-brand">
@@ -26,14 +32,14 @@ export function TopMissionHeader() {
 
       <div className="mission-hud">
         <div className="mission-hud__objective">
-          <span className="mission-hud__mission-pill">Mission 1</span>
-          <span className="mission-hud__title">Decode The Design Basis</span>
+          <span className="mission-hud__mission-pill">Mission {missionNumber}</span>
+          <span className="mission-hud__title">{missionTitle}</span>
         </div>
 
         <div className="mission-hud__progress-track">
           <ol className="mission-hud__progress" aria-label="Mission progress">
             {STAGE_LABELS.map((_label, i) => (
-              <li key={i} className={i === 0 ? "is-current" : ""}>
+              <li key={i} className={i === currentStageIndex ? "is-current" : ""}>
                 {i + 1}
               </li>
             ))}
@@ -49,7 +55,7 @@ export function TopMissionHeader() {
         <div className="profile-card">
           <div className="profile-info">
             <p className="profile-role">Junior Engineer</p>
-            <p className="profile-level">Level 1</p>
+            <p className="profile-level">Level {missionNumber}</p>
           </div>
           <img className="profile-avatar" src={engineerIcon} alt="" />
         </div>

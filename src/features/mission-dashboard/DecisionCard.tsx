@@ -12,40 +12,18 @@ import shieldIcon from "../../assets/icons/plant-ops/icon-shield.svg";
 import thermometerIcon from "../../assets/icons/plant-ops/icon-thermometer.svg";
 import waterDropIcon from "../../assets/icons/plant-ops/icon-water-drop.svg";
 import waterNeutralizationIcon from "../../assets/icons/plant-ops/icon-water-neutralization.svg";
-
-export const categoryLabels: Record<DecisionCategoryId, string> = {
-  reactor_system: "Materials",
-  separation_system: "Separation",
-  heat_transfer_and_utilities: "Utilities",
-  process_control_and_safety: "Control",
-  environmental_treatment: "Environment",
-  unsupported_for_now: "Advanced",
-};
-
-export const displayLabels: Record<string, string> = {
-  reactor_temperature_control_loop: "Reactor temperature control loop",
-  reactor_heat_removal_system: "Reactor heat-removal system",
-  high_temperature_alarm: "High reactor temperature alarm",
-  reactor_pressure_relief_valve: "Reactor pressure relief protection",
-  flammable_feed_vapor_control: "Flammable feed vapor / ignition-source control",
-  corrosion_resistant_feed_b_contact_parts: "Corrosion-resistant materials for Feed B",
-  light_impurity_removal_step: "Light-impurity removal step",
-  product_drying_or_water_removal: "Product water-removal / drying step",
-  wastewater_neutralization: "Wastewater neutralization",
-  voc_emission_control: "VOC emission control",
-  full_plant_3d_model: "Full 3D plant model",
-  finite_element_analysis_reactor_shell: "FEA on reactor vessel",
-  cryogenic_distillation_column: "Cryogenic distillation",
-  nuclear_grade_containment: "Nuclear-grade containment",
-  food_grade_sterile_design: "Food-grade sterile design",
-  maximize_reactor_temperature: "Operate near max reactor temperature",
-  ignore_summer_cooling_constraint: "Ignore summer cooling limit",
-};
+import {
+  categoryLabels,
+  getDecisionDisplayLabel,
+} from "./decisionPresentation";
 
 const pillOverrides: Record<string, { label: string; className: string }> = {
   reactor_pressure_relief_valve: { label: "Safety", className: "pill-safety" },
   flammable_feed_vapor_control: { label: "Safety", className: "pill-safety" },
   nuclear_grade_containment: { label: "Safety", className: "pill-safety" },
+  independent_high_temp_interlock: { label: "Safety", className: "pill-safety" },
+  relief_venting_review_runaway: { label: "Safety", className: "pill-safety" },
+  same_control_safety_protection_layer: { label: "Safety", className: "pill-safety" },
 };
 
 const categoryPillClasses: Record<DecisionCategoryId, string> = {
@@ -56,10 +34,6 @@ const categoryPillClasses: Record<DecisionCategoryId, string> = {
   environmental_treatment: "pill-environment",
   unsupported_for_now: "pill-not-needed",
 };
-
-function getDisplayLabel(id: string, fallback: string): string {
-  return displayLabels[id] ?? fallback;
-}
 
 function getPillInfo(card: DecisionCardType): {
   label: string;
@@ -80,7 +54,7 @@ interface DecisionCardProps {
 
 export function DecisionCard({ card, isSelected, onToggle }: DecisionCardProps) {
   const icon = getDecisionIcon(card.id, card.category);
-  const displayLabel = getDisplayLabel(card.id, card.label);
+  const displayLabel = getDecisionDisplayLabel(card.id, card.label);
   const pill = getPillInfo(card);
 
   return (
@@ -115,6 +89,21 @@ function getDecisionIcon(id: string, category: DecisionCategoryId): string {
     voc_emission_control: cloudIcon,
     full_plant_3d_model: cubeIcon,
     finite_element_analysis_reactor_shell: gearIcon,
+    reactor_heat_removal_summer_duty: heatWavesIcon,
+    reactor_temp_control_coolant_loop: thermometerIcon,
+    independent_high_temp_interlock: bellIcon,
+    define_max_reactor_operating_temp: thermometerIcon,
+    flag_cw_summer_design_constraint: heatWavesIcon,
+    relief_venting_review_runaway: reliefValveIcon,
+    check_coolant_supply_before_increase: waterDropIcon,
+    verify_utility_bottleneck_before_hx: gearIcon,
+    feed_rate_reduction_operating_fallback: gearIcon,
+    ignore_summer_cw_use_annual_avg: heatWavesIcon,
+    operator_alarm_only_for_runaway: bellIcon,
+    overdesign_reactor_volume_heat_removal: cubeIcon,
+    exotic_metallurgy_no_corrosion_evidence: shieldIcon,
+    full_cfd_fea_3d_reactor_modeling: cubeIcon,
+    same_control_safety_protection_layer: gearIcon,
   };
 
   if (iconsByDecisionId[id]) {

@@ -1,25 +1,9 @@
 import { X } from "lucide-react";
 import { useGameStore } from "../../store/useGameStore";
-
-const displayLabels: Record<string, string> = {
-  reactor_temperature_control_loop: "Reactor temperature control loop",
-  reactor_heat_removal_system: "Reactor heat-removal system",
-  high_temperature_alarm: "High reactor temperature alarm",
-  reactor_pressure_relief_valve: "Reactor pressure relief protection",
-  flammable_feed_vapor_control: "Flammable feed vapor / ignition-source control",
-  corrosion_resistant_feed_b_contact_parts: "Corrosion-resistant materials for Feed B",
-  light_impurity_removal_step: "Light-impurity removal step",
-  product_drying_or_water_removal: "Product water-removal / drying step",
-  wastewater_neutralization: "Wastewater neutralization",
-  voc_emission_control: "VOC emission control",
-  full_plant_3d_model: "Full 3D plant model",
-  finite_element_analysis_reactor_shell: "FEA on reactor vessel",
-  cryogenic_distillation_column: "Cryogenic distillation",
-  nuclear_grade_containment: "Nuclear-grade containment",
-  food_grade_sterile_design: "Food-grade sterile design",
-  maximize_reactor_temperature: "Operate near max reactor temperature",
-  ignore_summer_cooling_constraint: "Ignore summer cooling limit",
-};
+import {
+  getDecisionDisplayLabel,
+  sortDecisionIdsByBoardOrder,
+} from "./decisionPresentation";
 
 export function SelectedDecisionTray() {
   const scenario = useGameStore((state) => state.scenario);
@@ -38,9 +22,9 @@ export function SelectedDecisionTray() {
         </p>
       ) : (
         <div className="selected-tray__chips">
-          {selectedIds.map((id) => {
+          {sortDecisionIdsByBoardOrder(scenario, selectedIds).map((id) => {
             const card = scenario.decision_cards.find((c) => c.id === id);
-            const label = displayLabels[id] ?? card?.label ?? id;
+            const label = getDecisionDisplayLabel(id, card?.label ?? id);
             return (
               <span className="selected-tray__chip" key={id}>
                 {label}

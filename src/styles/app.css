@@ -1,4 +1,33 @@
 :root {
+  /* ── Shared workbook tokens ── */
+  --panel-bg: #fffdf7;
+  --page-bg: #f4f1e8;
+  --ink: #1f3328;
+  --ink-light: #334236;
+  --ink-muted: #6b745c;
+  --ink-subtle: #5d664a;
+  --border-light: #d9d3bb;
+  --border-medium: #d7d2bd;
+  --border-dark: #3d3832;
+  --border-strong: #2b2623;
+  --divider: #e2dcc8;
+  --green-accent-bg: #b8d9b0;
+  --green-accent-text: #1a3d24;
+  --green-accent-border: #7aa873;
+  --green-tint-bg: #eaf4d6;
+  --yellow-accent-bg: #f0d56c;
+  --yellow-accent-text: #4a3e14;
+  --yellow-accent-border: #d4a52c;
+  --yellow-tint-bg: #fefbea;
+  --red-accent-bg: #f5b7b1;
+  --red-accent-text: #782716;
+  --red-accent-border: #c97970;
+  --red-tint-bg: #fdedec;
+  --panel-radius: 8px;
+  --panel-radius-lg: 16px;
+  --panel-border: 2px solid #3d3832;
+  --panel-border-thin: 1px solid #d9d3bb;
+
   color: #17211b;
   background: #f4f1e8;
   font-family:

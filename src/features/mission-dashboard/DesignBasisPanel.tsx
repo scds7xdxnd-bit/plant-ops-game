@@ -9,11 +9,16 @@ import shieldIcon from "../../assets/icons/plant-ops/icon-shield.svg";
 import lightbulbIcon from "../../assets/icons/plant-ops/icon-lightbulb.svg";
 
 type SectionKey =
+  | "project_context"
   | "feedstock_requirements"
   | "product_targets"
   | "operating_constraints"
   | "environmental_constraints"
-  | "safety_constraints";
+  | "safety_constraints"
+  | "reactor_requirements"
+  | "cooling_utility_constraints"
+  | "safety_requirements"
+  | "design_scope";
 
 interface SectionConfig {
   heading: string;
@@ -22,6 +27,11 @@ interface SectionConfig {
 }
 
 const SECTION_CONFIG: Record<SectionKey, SectionConfig> = {
+  project_context: {
+    heading: "Project Context",
+    icon: clipboardIcon,
+    iconClass: "design-basis-section__icon--context",
+  },
   feedstock_requirements: {
     heading: "Feedstock Requirements",
     icon: flaskIcon,
@@ -47,9 +57,55 @@ const SECTION_CONFIG: Record<SectionKey, SectionConfig> = {
     icon: shieldIcon,
     iconClass: "design-basis-section__icon--safety",
   },
+  reactor_requirements: {
+    heading: "Reactor Requirements",
+    icon: flaskIcon,
+    iconClass: "design-basis-section__icon--reactor",
+  },
+  cooling_utility_constraints: {
+    heading: "Cooling Utility Constraints",
+    icon: gearIcon,
+    iconClass: "design-basis-section__icon--operating",
+  },
+  safety_requirements: {
+    heading: "Safety Requirements",
+    icon: shieldIcon,
+    iconClass: "design-basis-section__icon--safety",
+  },
+  design_scope: {
+    heading: "Design Scope",
+    icon: lightbulbIcon,
+    iconClass: "design-basis-section__icon--scope",
+  },
 };
 
-const sectionKeys = Object.keys(SECTION_CONFIG) as SectionKey[];
+const sectionOrder = Object.keys(SECTION_CONFIG) as SectionKey[];
+
+function formatSectionHeading(key: string): string {
+  return key
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function getSectionConfig(key: string): SectionConfig {
+  return (
+    SECTION_CONFIG[key as SectionKey] ?? {
+      heading: formatSectionHeading(key),
+      icon: clipboardIcon,
+      iconClass: "design-basis-section__icon--context",
+    }
+  );
+}
+
+function getOrderedSectionKeys(bod: Record<string, string[]>): string[] {
+  const knownKeys = sectionOrder.filter((key) => bod[key]?.length);
+  const extraKeys = Object.keys(bod)
+    .filter((key) => !sectionOrder.includes(key as SectionKey))
+    .filter((key) => bod[key]?.length);
+
+  return [...knownKeys, ...extraKeys];
+}
 
 export function DesignBasisPanel() {
   const scenario = useGameStore((state) => state.scenario);
@@ -88,10 +144,10 @@ export function DesignBasisPanel() {
         </div>
 
         <div className="design-basis-sections">
-          {sectionKeys.map((key) => {
+          {getOrderedSectionKeys(bod).map((key) => {
             const items = bod[key];
             if (!items || items.length === 0) return null;
-            const { heading, icon, iconClass } = SECTION_CONFIG[key];
+            const { heading, icon, iconClass } = getSectionConfig(key);
             return (
               <div className="design-basis-section" key={key}>
                 <div className={`design-basis-section__icon ${iconClass}`}>

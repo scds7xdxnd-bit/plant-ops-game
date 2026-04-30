@@ -36,6 +36,34 @@ export interface ResultBand {
   message: string;
 }
 
+/* ── Campaign schema ── */
+
+export interface Campaign {
+  id: string;
+  version: string;
+  title: string;
+  subtitle: string;
+  player_role: string;
+  plant: PlantProfile;
+  missions: Scenario[];
+}
+
+export interface PlantProfile {
+  product: string;
+  product_type: string;
+  plant_type: string;
+  annual_capacity_tpy: number;
+}
+
+export interface MissionUnlock {
+  unlocks_on_pass: string[];
+  next_mission_id: string | null;
+  requires_score_percent: number;
+  requires_perfect_score: boolean;
+}
+
+/* ── Scenario (single mission view — compatible with Campaign missions) ── */
+
 export interface Scenario {
   id: string;
   version: string;
@@ -49,12 +77,16 @@ export interface Scenario {
   };
   player_role: string;
   difficulty: "easy" | "medium" | "hard";
+  mission_number?: number;
+  short_title?: string;
+  status?: "current" | "locked" | "completed";
   stage: {
     id: string;
     name: string;
     gantt_position: number;
     unlocks_on_pass: string[];
   };
+  unlock?: MissionUnlock;
   learning_goals: string[];
   briefing: {
     senior_engineer_message: string;

@@ -36,6 +36,36 @@ The player acts as a junior process engineer for a small specialty chemical plan
 
 The larger plant-improvement simulation remains the long-term goal. The first playable version should teach the translation step from design basis language to process engineering decisions.
 
+#### Current Prototype Status
+
+The browser prototype now has a playable two-mission vertical slice for Solvex-A:
+
+- dashboard-style mission screen with top header, level map, design basis excerpt, decision board, selected decision tray, objective strip, and senior engineer action bar
+- design review completion screen with score summary, supported decisions, unsupported decisions, missed decisions, restart action, and gated continue action
+- Mission 1: Decode The Design Basis
+- Mission 2: The Reactor Runs Hot
+- Mission 1 unlocks Mission 2 on pass score, not perfect score
+- Mission 2 includes reactor heat-removal, summer cooling-water limitation, temperature control, independent safety protection, and runaway/overpressure review decisions
+- dynamic mission header and level map state for current, completed, and locked missions
+- pass-based continue action through `advanceToNextMission()`
+- design decision cards sorted by display label order and shared presentation helpers
+- selected decision tray and design review feedback now resolve labels from the same decision IDs
+- Mission 2 design-basis excerpt renders reactor-specific sections instead of only Mission 1 BoD section names
+- review score ring and metric cards have compact copy to avoid clipped text
+- custom SVG icon set loaded from `src/assets/icons/plant-ops`
+- deterministic scoring in `src/domain/scoring.ts`
+- campaign YAML in `src/content/scenarios/solvex-a-campaign.yaml`
+- campaign loader and validation in `src/content/loadCampaign.ts` and `src/domain/validateCampaign.ts`
+- Zustand runtime state in `src/store/useGameStore.ts`
+- tests covering scoring and campaign validation
+
+Current verification:
+
+- `npm run test` passes with 48 tests
+- `npm run build` passes
+
+The next product step is to playtest Missions 1 and 2 together, then start Mission 3 content. Do not start another broad visual redesign before the two-mission loop is reviewed.
+
 #### Map
 
 ```mermaid
@@ -60,4 +90,5 @@ graph TD
 | `04-tech-infrastructure` | Source of truth, stack options, repo structure, tooling, and pipeline decisions |
 | `05-research` | Domain research, scenario references, interviews, and example cases |
 | `06-decisions` | Architecture and product decision records |
+| `scenarios` | Vault-side scenario drafts and source references |
 | `templates` | Reusable note templates |
