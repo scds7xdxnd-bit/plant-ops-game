@@ -1,0 +1,10 @@
+1. should not start from complaint emails and comments on instagram and twitter etc, must start from a simplified factory foundational document (Basis of Design (BoD) or Design Basis Memorandum (DBM)), read them and convert them to engineering decisions (technical design documents, such as Process Flow Diagrams (PFDs) and Equipment Datasheets).
+	- Contains Feedstock and Product Specifications (Feedstock Requirements, Product Targets), Operational and Site Constraints (Utility Availability, Site Conditions, Environmental Regulations), Engineering Codes and Standards (Technical Codes, Safety Standards)
+	- must be divided into levels, shown in the form of a Gantt chart.
+	- The game should be less engineering and more fun 
+2. need to specify game to chemical engineering/process engineer
+3. need to specify to a specific plant, manufacturing plant? construction factory? green factory? nuclear factory? ramen factory? 등등
+4. need to scope down on decision range, eg: reactors, Separation Systems, Heat Transfer Equipment, Mass Transfer Equipment, Fluid Transport Systems, Solid Handling Equipment, Water Treatment, Steam Generation, Power and Air Supply, Storage and Handling, Process Control Instruments, Safety Interlocks and Relief Systems, **Instrumentation Diagrams (P&IDs),** Wastewater Treatment Plants, Emission Control, Waste Management, Process Simulation Software, Monitoring and Optimization Systems
+5. decision range must be emergent from chemical engineering concepts like Reaction Kinetics, Thermodynamics, Material and Energy Balances, Transport Phenomena, Yield vs. Conversion, Separation Techniques, Batch vs. Continuous Processing, Process Control, Cost, Safety, Material Compatibility, Scale-up Potential
+6. easy, medium, hard mode
+7. side note, should I also apply these?: methodologies like Design for Manufacturing (DfM), Finite Element Analysis (FEA), and 3D Modeling

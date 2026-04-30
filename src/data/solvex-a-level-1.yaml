@@ -1,0 +1,333 @@
+id: solvex_a_level_1_decode_design_basis
+version: 0.1.0
+title: "Mission 1: Decode The Design Basis"
+industry: specialty_chemicals
+plant:
+  product: "Solvex-A"
+  product_type: "Specialty solvent additive"
+  plant_type: "Small continuous/batch hybrid chemical plant"
+  annual_capacity_tpy: 5000
+player_role: "Junior process engineer"
+difficulty: easy
+stage:
+  id: bod_review
+  name: "Design Basis Review"
+  gantt_position: 1
+  unlocks_on_pass:
+    - "Basic PFD Blocks"
+    - "Mission 2: The Reactor Runs Hot"
+learning_goals:
+  - "Read a simplified Basis of Design excerpt."
+  - "Identify process constraints from feedstock, operating, environmental, and safety information."
+  - "Select early process design decisions justified by the design basis."
+  - "Avoid over-selecting decisions that are not yet supported by the document."
+
+briefing:
+  senior_engineer_message: >
+    You are reviewing the first Solvex-A design basis excerpt. Do not design the whole plant yet.
+    Your task is to identify the early design decisions that are directly implied by the document.
+    Select only decisions that can be justified from the current information.
+
+bod_excerpt:
+  project_context:
+    - "The project is a new Solvex-A specialty solvent additive unit."
+    - "The target production capacity is 5,000 tons per year."
+    - "The plant is expected to operate 330 days per year."
+  feedstock_requirements:
+    - "Feed A is a liquid organic feedstock."
+    - "Feed A contains light impurity X."
+    - "Feed A is flammable."
+    - "Feed B is an aqueous catalyst solution."
+    - "Feed B is corrosive at high concentration."
+  product_targets:
+    - "Final Solvex-A purity must be at least 98.5 wt%."
+    - "Final product water content must be below 0.5 wt%."
+  operating_constraints:
+    - "The reaction is mildly exothermic."
+    - "The maximum reactor temperature is 120 C."
+    - "Medium-pressure steam is available."
+    - "Cooling water is limited during summer operation."
+  environmental_constraints:
+    - "VOC emissions must be controlled."
+    - "Wastewater must be neutralized before discharge."
+  safety_constraints:
+    - "Overpressure protection is required for the reactor section."
+    - "Ignition sources around flammable feed handling should be controlled."
+
+instructions:
+  prompt: >
+    Select the design decisions that are directly implied by this design basis excerpt.
+    Some options are technically possible but not justified yet.
+  selection_rule: "Select all that apply."
+  expected_time_minutes: 5
+
+categories:
+  - id: reactor_system
+    label: "Reactor System"
+  - id: separation_system
+    label: "Separation System"
+  - id: heat_transfer_and_utilities
+    label: "Heat Transfer & Utilities"
+  - id: process_control_and_safety
+    label: "Process Control & Safety"
+  - id: environmental_treatment
+    label: "Environmental Treatment"
+  - id: unsupported_for_now
+    label: "Not Justified Yet"
+
+decision_cards:
+  - id: reactor_temperature_control_loop
+    category: process_control_and_safety
+    label: "Add reactor temperature control loop"
+    type: correct
+    linked_clues:
+      - "The reaction is mildly exothermic."
+      - "The maximum reactor temperature is 120 C."
+    short_hint: "The reactor has both heat generation and a temperature limit."
+
+  - id: reactor_heat_removal_system
+    category: heat_transfer_and_utilities
+    label: "Provide reactor heat removal system"
+    type: correct
+    linked_clues:
+      - "The reaction is mildly exothermic."
+      - "Cooling water is limited during summer operation."
+    short_hint: "Exothermic systems need a defined heat-removal path."
+
+  - id: high_temperature_alarm
+    category: process_control_and_safety
+    label: "Add high reactor temperature alarm"
+    type: correct
+    linked_clues:
+      - "The maximum reactor temperature is 120 C."
+      - "The reaction is mildly exothermic."
+    short_hint: "A temperature limit needs operator warning before unsafe operation."
+
+  - id: reactor_pressure_relief_valve
+    category: process_control_and_safety
+    label: "Include reactor pressure relief protection"
+    type: correct
+    linked_clues:
+      - "Overpressure protection is required for the reactor section."
+    short_hint: "This is explicitly required."
+
+  - id: flammable_feed_vapor_control
+    category: process_control_and_safety
+    label: "Control vapors and ignition sources around Feed A"
+    type: correct
+    linked_clues:
+      - "Feed A is flammable."
+      - "Ignition sources around flammable feed handling should be controlled."
+    short_hint: "Flammable liquid handling needs vapor and ignition control."
+
+  - id: corrosion_resistant_feed_b_contact_parts
+    category: reactor_system
+    label: "Use corrosion-resistant materials for high-concentration Feed B contact parts"
+    type: correct
+    linked_clues:
+      - "Feed B is corrosive at high concentration."
+    short_hint: "Corrosive catalyst solution affects material selection."
+
+  - id: light_impurity_removal_step
+    category: separation_system
+    label: "Include a light-impurity removal step"
+    type: correct
+    linked_clues:
+      - "Feed A contains light impurity X."
+      - "Final Solvex-A purity must be at least 98.5 wt%."
+    short_hint: "Impurity X and purity target imply separation work."
+
+  - id: product_drying_or_water_removal
+    category: separation_system
+    label: "Include product water-removal or drying step"
+    type: correct
+    linked_clues:
+      - "Feed B is an aqueous catalyst solution."
+      - "Final product water content must be below 0.5 wt%."
+    short_hint: "Aqueous input plus low water target implies water removal."
+
+  - id: wastewater_neutralization
+    category: environmental_treatment
+    label: "Add wastewater neutralization before discharge"
+    type: correct
+    linked_clues:
+      - "Wastewater must be neutralized before discharge."
+    short_hint: "This is explicitly required."
+
+  - id: voc_emission_control
+    category: environmental_treatment
+    label: "Add VOC emission control"
+    type: correct
+    linked_clues:
+      - "VOC emissions must be controlled."
+      - "Feed A is a liquid organic feedstock."
+    short_hint: "Organic feed handling can create VOC emissions."
+
+  - id: full_plant_3d_model
+    category: unsupported_for_now
+    label: "Build a full 3D plant model"
+    type: wrong_plausible
+    linked_clues: []
+    short_hint: "This may be useful later, but it is not required by this BoD review."
+
+  - id: finite_element_analysis_reactor_shell
+    category: unsupported_for_now
+    label: "Run FEA on the reactor shell"
+    type: wrong_plausible
+    linked_clues: []
+    short_hint: "Mechanical verification is outside this early process decision level."
+
+  - id: cryogenic_distillation_column
+    category: separation_system
+    label: "Select cryogenic distillation for impurity removal"
+    type: wrong_plausible
+    linked_clues:
+      - "Feed A contains light impurity X."
+    short_hint: "Separation is needed, but cryogenic service is not justified by the current data."
+
+  - id: nuclear_grade_containment
+    category: process_control_and_safety
+    label: "Specify nuclear-grade containment"
+    type: wrong_plausible
+    linked_clues: []
+    short_hint: "The plant is a specialty chemical unit, not a nuclear facility."
+
+  - id: food_grade_sterile_design
+    category: reactor_system
+    label: "Use food-grade sterile equipment design"
+    type: wrong_plausible
+    linked_clues: []
+    short_hint: "No food, pharma, or biological sterility requirement appears in the design basis."
+
+  - id: maximize_reactor_temperature
+    category: reactor_system
+    label: "Operate close to the maximum reactor temperature to increase rate"
+    type: wrong_plausible
+    linked_clues:
+      - "The maximum reactor temperature is 120 C."
+    short_hint: "A maximum limit is a constraint, not a target."
+
+  - id: ignore_summer_cooling_constraint
+    category: heat_transfer_and_utilities
+    label: "Use standard cooling water design and ignore summer limitation"
+    type: wrong_plausible
+    linked_clues:
+      - "Cooling water is limited during summer operation."
+    short_hint: "The design basis explicitly flags a cooling-water limitation."
+
+correct_decision_ids:
+  - reactor_temperature_control_loop
+  - reactor_heat_removal_system
+  - high_temperature_alarm
+  - reactor_pressure_relief_valve
+  - flammable_feed_vapor_control
+  - corrosion_resistant_feed_b_contact_parts
+  - light_impurity_removal_step
+  - product_drying_or_water_removal
+  - wastewater_neutralization
+  - voc_emission_control
+
+wrong_but_plausible_decision_ids:
+  - full_plant_3d_model
+  - finite_element_analysis_reactor_shell
+  - cryogenic_distillation_column
+  - nuclear_grade_containment
+  - food_grade_sterile_design
+  - maximize_reactor_temperature
+  - ignore_summer_cooling_constraint
+
+scoring:
+  mode: deterministic_easy
+  pass_threshold_percent: 70
+  perfect_threshold_percent: 100
+  points:
+    correct_selection: 1
+    missed_correct: -0.5
+    incorrect_selection: -0.25
+    perfect_bonus: 1
+  result_bands:
+    - id: excellent
+      min_percent: 90
+      title: "Design review ready"
+      message: "Your selections are well supported by the design basis. You identified the main process, safety, and environmental constraints."
+    - id: pass
+      min_percent: 70
+      title: "Acceptable first review"
+      message: "You caught the main design requirements, but some important constraints were missed or over-selected. Review the feedback before moving on."
+    - id: retry
+      min_percent: 0
+      title: "Needs revision"
+      message: "Your decision set is not yet defensible. Re-read the design basis and select only decisions that are directly supported."
+
+senior_engineer_explanations:
+  correct:
+    reactor_temperature_control_loop: >
+      Correct. A mildly exothermic reaction with a maximum reactor temperature requires active temperature control.
+      The goal is not only to reach the operating temperature, but to prevent temperature drift beyond the design limit.
+    reactor_heat_removal_system: >
+      Correct. The reaction releases heat, so the reactor section needs a heat-removal path.
+      Because cooling water is limited in summer, the utility choice cannot be treated as a generic detail.
+    high_temperature_alarm: >
+      Correct. The 120 C limit should trigger operator awareness before the reactor approaches unsafe or off-spec operation.
+      A control loop manages the variable; an alarm warns when the condition becomes abnormal.
+    reactor_pressure_relief_valve: >
+      Correct. The design basis explicitly requires overpressure protection for the reactor section.
+      This is a safety requirement, not an optional optimization.
+    flammable_feed_vapor_control: >
+      Correct. Feed A is flammable, so vapor management and ignition-source control are required around storage and feed handling.
+      This protects the process before the reaction step even begins.
+    corrosion_resistant_feed_b_contact_parts: >
+      Correct. Feed B is corrosive at high concentration, so material compatibility must be considered for the parts that contact it.
+      This may affect vessels, piping, pumps, valves, gaskets, and dosing equipment.
+    light_impurity_removal_step: >
+      Correct. Feed A contains light impurity X and the product purity target is 98.5 wt%.
+      The early process design should include a separation step capable of removing this impurity.
+    product_drying_or_water_removal: >
+      Correct. Feed B is aqueous, but the final product water content must be below 0.5 wt%.
+      That means the process needs a water-removal or drying strategy.
+    wastewater_neutralization: >
+      Correct. The design basis states that wastewater must be neutralized before discharge.
+      This requirement belongs in the environmental treatment section from the beginning.
+    voc_emission_control: >
+      Correct. VOC emissions must be controlled, and the process uses an organic feedstock.
+      The design should include vapor containment, condensation, scrubbing, carbon treatment, or another justified VOC-control method later.
+  incorrect:
+    full_plant_3d_model: >
+      Not justified. A 3D model may be useful in a later layout or construction stage, but this level is about early process design decisions.
+      Do not add deliverables that the current design basis does not require.
+    finite_element_analysis_reactor_shell: >
+      Not justified. FEA belongs to later mechanical verification, not the first process design-basis review.
+      The current task is to identify process, safety, utility, and environmental decisions.
+    cryogenic_distillation_column: >
+      Not justified. The design basis says there is a light impurity, so separation is needed, but it does not give boiling points, volatility, temperature limits, or economic reasons for cryogenic distillation.
+      A generic impurity-removal step is defensible; cryogenic distillation is over-specific.
+    nuclear_grade_containment: >
+      Not justified. This is a small specialty chemical plant. Nothing in the design basis indicates radioactive materials or nuclear-grade containment requirements.
+    food_grade_sterile_design: >
+      Not justified. No food, pharma, biotech, or sterile-processing requirement appears in the document.
+      This is an example of importing requirements from the wrong industry.
+    maximize_reactor_temperature: >
+      Incorrect. The maximum reactor temperature is a safety and design constraint, not an operating target.
+      A higher reaction rate is not enough justification to operate near the limit.
+    ignore_summer_cooling_constraint: >
+      Incorrect. The cooling-water limit is explicitly stated. Ignoring it would create a weak design basis interpretation and may cause summer operating problems.
+  missed:
+    default: >
+      Missed decision. This choice is directly supported by one or more design-basis clues.
+      Re-check the feedstock, operating, environmental, and safety sections.
+
+review_summary_template:
+  - "You selected {correct_selected_count} out of {total_correct_count} required decisions."
+  - "You missed {missed_count} required decisions."
+  - "You selected {incorrect_selected_count} unsupported decisions."
+  - "Final score: {score_percent}%."
+
+telemetry_events:
+  - level_started
+  - bod_opened
+  - decision_card_selected
+  - decision_card_deselected
+  - level_submitted
+  - feedback_viewed
+  - level_passed
+  - level_retried
