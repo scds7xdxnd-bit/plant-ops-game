@@ -244,6 +244,12 @@ bod_document:
       - "Structural steelwork, civil foundations, and architectural elements do not appear on the P&ID."
       - "Vendor internal equipment details such as tray layouts, tube bundle arrangements, and packing specifications are shown on vendor drawings."
       - "Electrical wiring and loop diagrams are produced as separate electrical and instrumentation documents."
+  design_package_review:
+    introduced_in_mission: 8
+    items:
+      - "The design package must include or reference the outputs of all prior missions: design basis, reactor basis, separation basis, utility basis, safety basis, environmental basis, and PFD."
+      - "Open data gaps identified in prior missions — unconfirmed VLE data, waste characterisation data, summer CW validation — must be documented as open items in the package."
+      - "Detailed mechanical design, finite element analysis, and 3D routing documentation are not required for process design package approval."
 
 missions:
   - id: solvex_a_mission_1
@@ -1203,8 +1209,8 @@ missions:
 
   - id: solvex_a_mission_4
     version: 0.1.0
-    title: "Mission 4: Count the Heat"
-    short_title: "Count the Heat"
+    title: "Mission 4: Heat & Utilities"
+    short_title: "Heat & Utilities"
     mission_number: 4
     difficulty: easy
     status: locked
@@ -1375,6 +1381,23 @@ missions:
           - "The drying step requires low-grade heat input."
         short_hint: "The steam supply must cover all heating consumers across the plant, not just the reactor."
 
+      - id: mp_steam_for_all_heating
+        category: heat_transfer_and_utilities
+        label: "Use medium-pressure steam for all process heating duties because it offers the highest temperature driving force"
+        type: wrong_plausible
+        linked_clues:
+          - "Low-pressure steam is also available and is the preferred heating medium for duties below 150 C."
+          - "All separation steps must operate below 130 C."
+        short_hint: "MP steam is available but LP steam is preferred for duties below 150 C — higher pressure adds cost without benefit."
+
+      - id: design_coolers_independently_ignore_total_cw_budget
+        category: heat_transfer_and_utilities
+        label: "Size each cooler independently based on its individual duty without checking the total plant cooling water budget"
+        type: wrong_plausible
+        linked_clues:
+          - "Cooling water total supply is limited to 50 m3/h during summer peak demand."
+        short_hint: "The 50 m³/h limit is a total budget shared by all cooling consumers — each cooler competes for the same resource."
+
     correct_decision_ids:
       - list_all_heat_demands_across_plant
       - match_lp_steam_to_reboiler_duty
@@ -1391,6 +1414,8 @@ missions:
       - design_coolers_on_winter_cw_only
       - skip_heat_recovery_plant_too_small
       - size_steam_on_reactor_only
+      - mp_steam_for_all_heating
+      - design_coolers_independently_ignore_total_cw_budget
 
     scoring:
       mode: deterministic_easy
@@ -1472,6 +1497,16 @@ missions:
           Incorrect. The separation reboiler and drying step are both steam consumers. A
           steam supply scoped only for the reactor may be significantly undersized for the
           full plant, creating an infrastructure gap that is expensive to correct later.
+        mp_steam_for_all_heating: >
+          Not justified. Medium-pressure steam is available but LP steam is explicitly
+          designated as the preferred medium for duties below 150 C. Using MP steam
+          where LP suffices adds steam-system capital cost and wastes exergy without
+          any process benefit. Match the utility grade to the duty, not the availability.
+        design_coolers_independently_ignore_total_cw_budget: >
+          Incorrect. The 50 m³/h summer cooling water limit is a total plant budget.
+          If each cooler is sized independently, the summed demand may exceed the
+          available supply, and the plant will trip or throttle on hot days. The total
+          must be checked against the budget before any individual cooler design is approved.
       missed:
         default: >
           Missed decision. This selection is directly supported by the utility supply data or
@@ -1685,6 +1720,13 @@ missions:
           - "Safety system design requires hazard study outputs."
         short_hint: "SIL determination requires hazard frequency and consequence data from the hazard study."
 
+      - id: inherently_safer_over_layers_of_protection
+        category: unsupported_for_now
+        label: "Apply inherently safer design to eliminate all major accident hazards as an alternative to engineered protection layers"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Inherent safety applies at the process-development stage; at detailed design the feedstock and chemistry are fixed — the task is to manage accepted hazards through protection layers."
+
     correct_decision_ids:
       - hazardous_area_classification_feed_a
       - emergency_isolation_valves_feed_a
@@ -1703,6 +1745,7 @@ missions:
       - extra_controllers_as_safety_layers
       - skip_bunding_for_feed_b
       - assign_sil_before_hazop
+      - inherently_safer_over_layers_of_protection
 
     scoring:
       mode: deterministic_easy
@@ -1793,6 +1836,13 @@ missions:
           Not justified. SIL determination requires tolerable risk targets, initiating event
           frequencies, and consequence severities — all outputs of the hazard study. Assigning
           SIL levels before the study produces numbers without technical basis.
+        inherently_safer_over_layers_of_protection: >
+          Not justified. Inherently safer design is a valuable principle, but it applies at
+          the process-development and chemistry-selection stage — the point at which hazardous
+          materials, inventories, and reaction chemistries can be substituted or minimised.
+          At detailed design stage the feedstock and process chemistry are fixed decisions made
+          by product requirements. The task now is to manage the accepted hazards through
+          independent layers of protection, not to revisit the fundamental process definition.
       missed:
         default: >
           Missed decision. This selection is directly supported by the hazard summary,
@@ -1987,6 +2037,21 @@ missions:
           - "Wastewater must be neutralized before discharge."
         short_hint: "Neutralization addresses pH only — dissolved organics and catalyst residues may also exceed permit limits."
 
+      - id: env_compliance_as_paperwork_only
+        category: unsupported_for_now
+        label: "Treat environmental compliance as a later permitting paperwork exercise"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Environmental requirements drive process design decisions — they cannot be deferred to permit application stage."
+
+      - id: ignore_solid_waste_negligible
+        category: unsupported_for_now
+        label: "Dismiss spent catalyst and filter residues as negligible without a disposal route"
+        type: wrong_plausible
+        linked_clues:
+          - "Spent catalyst and filter residues are generated in small quantities."
+        short_hint: "Even small quantities of hazardous solid waste require a confirmed disposal route in the design basis."
+
     correct_decision_ids:
       - voc_recovery_or_destruction_on_all_vents
       - define_all_wastewater_streams_by_source
@@ -2003,6 +2068,8 @@ missions:
       - fugitive_emissions_negligible_no_basis
       - skip_secondary_containment_for_feed_b_aqueous
       - discharge_wastewater_after_neutralization_only
+      - env_compliance_as_paperwork_only
+      - ignore_solid_waste_negligible
 
     scoring:
       mode: deterministic_easy
@@ -2090,6 +2157,16 @@ missions:
           organics, catalyst residues, or other contaminants that may have their own discharge
           limits. A final effluent quality checkpoint is needed to confirm that all permit
           parameters — not just pH — are met before discharge.
+        env_compliance_as_paperwork_only: >
+          Not justified. Environmental compliance is not a later paperwork exercise — it drives
+          fundamental process design decisions including emission source identification, waste
+          stream characterisation, and selection of control technologies. Deferring these to the
+          permit application stage risks redesign costs and permitting delays.
+        ignore_solid_waste_negligible: >
+          Not justified. Small quantities of spent catalyst and filter residues do not exempt
+          the plant from having a confirmed disposal route. These materials may be classified
+          as hazardous waste requiring specific handling, transport, and disposal arrangements
+          that must be established before the plant starts operating.
       missed:
         default: >
           Missed decision. This selection is directly supported by the emission sources,
@@ -2295,6 +2372,14 @@ missions:
           - "The PFD is the primary document for communicating the process concept."
         short_hint: "Omitting confirmed process sections makes the PFD an incomplete and misleading document."
 
+      - id: three_d_plant_layout_on_pfd
+        category: unsupported_for_now
+        label: "Show equipment in 3D with physical dimensions and structural elements on the PFD"
+        type: wrong_plausible
+        linked_clues:
+          - "The PFD is not a plant layout — it does not show physical locations, dimensions, or structural elements."
+        short_hint: "3D routing, dimensions, and structural elements belong in plant layout drawings, not the PFD."
+
     correct_decision_ids:
       - all_major_process_units_as_labeled_blocks
       - all_main_streams_with_flow_direction
@@ -2313,6 +2398,7 @@ missions:
       - relief_valve_symbols_on_pfd_vessels
       - full_mechanical_equipment_list_on_pfd
       - omit_env_and_utility_streams_for_simplicity
+      - three_d_plant_layout_on_pfd
 
     scoring:
       mode: deterministic_easy
@@ -2399,6 +2485,11 @@ missions:
           Incorrect. A PFD that omits environmental treatment streams and utility connections
           is incomplete. It gives a false impression that the process has no environmental
           outputs and no utility requirements.
+        three_d_plant_layout_on_pfd: >
+          Incorrect. The PFD shows process concept and stream conditions, not physical
+          equipment dimensions or 3D routing. Plant layout, structural steel, and equipment
+          dimensions are separate deliverables produced during detailed engineering. Including
+          them on the PFD misrepresents the document's purpose and overloads the drawing.
       missed:
         default: >
           Missed decision. This item is a standard required element of a conceptual Process
@@ -2590,6 +2681,20 @@ missions:
         linked_clues: []
         short_hint: "Utility systems are normally shown on separate utility P&IDs."
 
+      - id: require_fea_before_package_approval
+        category: unsupported_for_now
+        label: "Require finite element analysis of the reactor vessel before the design package can be approved"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "FEA is detailed mechanical design, not a prerequisite for process package approval."
+
+      - id: approve_package_despite_open_data_gaps
+        category: unsupported_for_now
+        label: "Approve the design package without documenting open data gaps from prior missions"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Open data gaps must be documented as open items in the package handover."
+
     correct_decision_ids:
       - all_instruments_in_isa_notation
       - all_control_loops_fully_shown
@@ -2607,6 +2712,8 @@ missions:
       - vendor_internal_details_on_pid
       - electrical_wiring_on_pid
       - utility_header_full_detail_on_process_pid
+      - require_fea_before_package_approval
+      - approve_package_despite_open_data_gaps
 
     scoring:
       mode: deterministic_easy
@@ -2696,6 +2803,17 @@ missions:
           The utility distribution system — headers, supply and return manifolds, branch
           connections — is normally detailed on separate utility P&IDs to keep the process
           drawing readable.
+        require_fea_before_package_approval: >
+          Incorrect. Finite element analysis of the reactor vessel is detailed mechanical
+          design work that follows process package approval. Holding the design package
+          for FEA delays the entire project — the process design, including equipment
+          specification and P&ID development, proceeds in parallel with detailed mechanical
+          design, not after it.
+        approve_package_despite_open_data_gaps: >
+          Incorrect. Open data gaps — unconfirmed VLE data, waste characterisation gaps,
+          unvalidated summer cooling water temperature assumptions — must be documented as
+          open items in the design package. Ignoring them creates downstream risk for
+          detailed engineering, procurement, and operations.
       missed:
         default: >
           Missed decision. This item is a standard required element of a Process and

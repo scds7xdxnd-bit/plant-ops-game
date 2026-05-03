@@ -42,7 +42,7 @@ Deliverables:
 
 #### Phase 3: Vertical Slice
 
-Goal: make Missions 1-3 prove the production direction before investing in richer mechanics.
+Goal: prove the full Missions 1-8 easy-mode production direction before investing in richer mechanics.
 
 Deliverables:
 
@@ -54,9 +54,15 @@ Deliverables:
 - Decision board sorting and selected/review feedback alignment — done
 - Mission 2 design-basis section rendering — done
 - Campaign-level progressive BoD document — done
-- Mission 3 separation-section content — done locally
-- BoD `NEW` badges and helper tests — done locally
-- First informal playtest pass
+- Mission 3 separation-section content — done
+- BoD `NEW` badges and helper tests — done
+- Mission 4 heat & utilities polish — done
+- Mission 5 safety systems polish — done
+- Mission 6 environmental treatment polish — done
+- Mission 7 PFD assembly polish — done
+- Mission 8 design package review polish — done
+- Playwright browser e2e automated campaign playthrough (Missions 1-8) — done
+- First full-campaign informal playtest pass — done
 
 #### Phase 4: MVP
 
@@ -72,11 +78,11 @@ Deliverables:
 
 #### Current Status
 
-The project is in Phase 3 moving toward Phase 4. Claude's pushed branch contains the eight-mission easy-mode campaign and the campaign-level progressive BoD document. The local branch has also reconciled Deepseek's Mission 3 separation-section work into that architecture, preserving the progressive `bod_document` model instead of restoring per-mission `bod_excerpt`.
+The project is at the end of Phase 3 and ready to enter Phase 4 balance/release-prep work. Claude's pushed branch contains the eight-mission easy-mode campaign and the campaign-level progressive BoD document. Deepseek's mission polish work has been reconciled into that architecture, preserving the progressive `bod_document` model instead of restoring per-mission `bod_excerpt`.
 
-Current local verification: `npm run test` passes with 61 tests and `npm run build` passes.
+Current local verification: `npm run test` passes with 117 tests, `npm run test:playthrough` passes, `npm run test:e2e` passes, and `npm run build` passes. The Playwright e2e test completes a full Missions 1-8 campaign playthrough including the final-mission campaign-complete state.
 
-The next engineering step is to commit and push the reconciled local changes, then playtest Missions 1-3 as one flow and verify continue/unlock behavior into Mission 4.
+All 8 missions are now polished to the same quality bar with data integrity tests, display labels, decision card icons, concise review feedback, progressive BoD sections, and campaign-complete end-state handling.
 
 #### Related Notes
 

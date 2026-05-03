@@ -24,6 +24,7 @@ const pillOverrides: Record<string, { label: string; className: string }> = {
   independent_high_temp_interlock: { label: "Safety", className: "pill-safety" },
   relief_venting_review_runaway: { label: "Safety", className: "pill-safety" },
   same_control_safety_protection_layer: { label: "Safety", className: "pill-safety" },
+  identify_relief_scenarios_reactor_and_separation: { label: "Safety", className: "pill-safety" },
 };
 
 const categoryPillClasses: Record<DecisionCategoryId, string> = {
@@ -60,6 +61,7 @@ export function DecisionCard({ card, isSelected, onToggle }: DecisionCardProps) 
   return (
     <button
       className={`decision-card ${isSelected ? "selected" : ""}`}
+      data-testid={`decision-card-${card.id}`}
       onClick={() => onToggle(card.id)}
       type="button"
     >
@@ -77,6 +79,22 @@ export function DecisionCard({ card, isSelected, onToggle }: DecisionCardProps) 
 
 function getDecisionIcon(id: string, category: DecisionCategoryId): string {
   const iconsByDecisionId: Record<string, string> = {
+    hazardous_area_classification_feed_a: flameIcon,
+    emergency_isolation_valves_feed_a: shieldIcon,
+    plant_esd_system: shieldIcon,
+    fire_and_gas_detection: bellIcon,
+    bunding_for_liquid_storage: waterDropIcon,
+    mandate_hazop_before_detailed_design: gearIcon,
+    identify_relief_scenarios_reactor_and_separation: reliefValveIcon,
+    closed_safe_disposal_for_relief_and_vents: shieldIcon,
+    passive_fire_protection_steelwork: shieldIcon,
+    atex_zone_0_entire_plant: gearIcon,
+    operator_procedures_only_for_esd: bellIcon,
+    size_all_relief_valves_now: gearIcon,
+    extra_controllers_as_safety_layers: gearIcon,
+    skip_bunding_for_feed_b: waterDropIcon,
+    assign_sil_before_hazop: gearIcon,
+    inherently_safer_over_layers_of_protection: shieldIcon,
     reactor_temperature_control_loop: thermometerIcon,
     reactor_heat_removal_system: heatWavesIcon,
     high_temperature_alarm: bellIcon,
@@ -120,6 +138,70 @@ function getDecisionIcon(id: string, category: DecisionCategoryId): string {
     sep_full_simulation: cubeIcon,
     sep_ignore_light_impurity: filterIcon,
     sep_high_temp_stripping: flameIcon,
+    list_all_heat_demands_across_plant: heatWavesIcon,
+    match_lp_steam_to_reboiler_duty: heatWavesIcon,
+    size_cw_against_summer_limit: waterDropIcon,
+    assess_heat_recovery_effluent_to_feed: heatWavesIcon,
+    flag_summer_cw_constraint_for_all_cooling: waterDropIcon,
+    confirm_lp_steam_temp_adequate_for_reboiler: thermometerIcon,
+    include_utility_balance_in_design_basis: gearIcon,
+    account_for_heat_tracing_needs: heatWavesIcon,
+    fired_heater_for_reboiler_no_justification: flameIcon,
+    refrigeration_for_condensers_no_data: heatWavesIcon,
+    design_coolers_on_winter_cw_only: waterDropIcon,
+    skip_heat_recovery_plant_too_small: heatWavesIcon,
+    size_steam_on_reactor_only: heatWavesIcon,
+    mp_steam_for_all_heating: heatWavesIcon,
+    design_coolers_independently_ignore_total_cw_budget: waterDropIcon,
+    all_major_process_units_as_labeled_blocks: cubeIcon,
+    all_main_streams_with_flow_direction: heatWavesIcon,
+    utility_connections_at_each_major_unit: heatWavesIcon,
+    recycle_stream_on_pfd: filterIcon,
+    wastewater_and_vent_routing_on_pfd: waterNeutralizationIcon,
+    numbered_streams_for_stream_table: gearIcon,
+    stream_table_with_key_properties: gearIcon,
+    feed_entry_and_product_exit_labeled: cubeIcon,
+    heat_recovery_exchangers_on_pfd: heatWavesIcon,
+    control_valve_symbols_on_pfd: gearIcon,
+    pipe_sizes_on_pfd: gearIcon,
+    every_drain_and_vent_on_pfd: waterDropIcon,
+    relief_valve_symbols_on_pfd_vessels: reliefValveIcon,
+    full_mechanical_equipment_list_on_pfd: cubeIcon,
+    omit_env_and_utility_streams_for_simplicity: waterDropIcon,
+    three_d_plant_layout_on_pfd: cubeIcon,
+    voc_recovery_or_destruction_on_all_vents: cloudIcon,
+    define_all_wastewater_streams_by_source: waterDropIcon,
+    ph_neutralization_before_discharge: waterNeutralizationIcon,
+    secondary_containment_all_chemical_storage: waterDropIcon,
+    quantified_emission_estimates_for_permit: gearIcon,
+    fugitive_emission_monitoring_program: bellIcon,
+    recover_organic_vapor_before_destruction: filterIcon,
+    define_disposal_route_for_solid_waste: cubeIcon,
+    full_biological_ww_treatment_no_data: cubeIcon,
+    open_flame_flare_for_voc_control: flameIcon,
+    fugitive_emissions_negligible_no_basis: cloudIcon,
+    skip_secondary_containment_for_feed_b_aqueous: waterDropIcon,
+    discharge_wastewater_after_neutralization_only: waterDropIcon,
+    env_compliance_as_paperwork_only: gearIcon,
+    ignore_solid_waste_negligible: cubeIcon,
+
+    // Mission 8
+    all_instruments_in_isa_notation: gearIcon,
+    all_control_loops_fully_shown: gearIcon,
+    independent_high_high_temp_interlock_shown_separately: bellIcon,
+    manual_block_valves_on_major_lines: shieldIcon,
+    check_valves_on_feed_and_product_lines: shieldIcon,
+    pipe_spec_breaks_on_pid: gearIcon,
+    reactor_relief_valve_with_discharge_routing: reliefValveIcon,
+    sample_points_on_product_and_key_streams: waterDropIcon,
+    esd_connections_to_final_elements: shieldIcon,
+    three_d_pipe_routing_on_pid: cubeIcon,
+    structural_civil_details_on_pid: cubeIcon,
+    vendor_internal_details_on_pid: gearIcon,
+    electrical_wiring_on_pid: gearIcon,
+    utility_header_full_detail_on_process_pid: heatWavesIcon,
+    require_fea_before_package_approval: cubeIcon,
+    approve_package_despite_open_data_gaps: gearIcon,
   };
 
   if (iconsByDecisionId[id]) {

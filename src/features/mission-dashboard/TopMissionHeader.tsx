@@ -32,7 +32,7 @@ export function TopMissionHeader() {
 
       <div className="mission-hud">
         <div className="mission-hud__objective">
-          <span className="mission-hud__mission-pill">Mission {missionNumber}</span>
+          <span className="mission-hud__mission-pill" data-testid="current-mission">Mission {missionNumber}</span>
           <span className="mission-hud__title">{missionTitle}</span>
         </div>
 

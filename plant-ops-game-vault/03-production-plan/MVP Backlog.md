@@ -11,8 +11,11 @@ Completed in the browser prototype:
 - Mission 1 dashboard screen
 - Mission 1 decision card selection
 - Mission 2 reactor-section content
-- Mission 3 separation-section content reconciled locally
-- Missions 4-8 authored as easy-mode campaign scaffold
+- Mission 4 polished: Heat & Utilities mission with 8 correct + 7 wrong-plausible decisions, utility-focused content, full display labels, icons, concise feedback, data integrity/scoring/unlock/BoD tests
+- Mission 5 polished: Layers of Protection mission with 9 correct + 7 wrong-plausible decisions, safety systems focus, full display labels, icons, concise feedback, data integrity/scoring/unlock/BoD tests
+- Mission 6 polished: What Leaves the Fence mission with 8 correct + 7 wrong-plausible decisions, environmental treatment focus, emission sources, wastewater characterisation, neutralisation, secondary containment, fugitive monitoring, waste minimisation hierarchy, solid waste disposal, quantified permit estimates, full display labels, icons, concise feedback, data integrity/scoring/unlock/BoD tests
+- Mission 7 polished: Draw the Process mission with 9 correct + 7 wrong-plausible decisions, PFD assembly focus, process blocks, stream routing, utility connections, recycle, environmental interfaces, stream table, battery-limit labels, heat recovery exchangers, PFD vs P&ID scope, full display labels, icons, concise feedback, data integrity/scoring/unlock/BoD tests
+- Mission 8 polished: Tag Everything mission with 9 correct + 7 wrong-plausible decisions, design package review focus, P&ID/PFD distinction, control/safety/environmental consistency checks, isolation/protection hardware, FEA and open-data-gap exclusions, campaign-complete final state, full display labels, icons, concise feedback, data integrity/scoring/final-unlock/BoD tests
 - mission-to-mission switching and unlock behavior
 - pass-based unlocks at 70%
 - selected decision tray
@@ -29,6 +32,7 @@ Completed in the browser prototype:
 - progressive design-basis sections rendered in the dashboard and BoD reader
 - `NEW` badges for current-mission BoD sections
 - compact review summary copy and score ring sizing
+- Playwright browser e2e automated playthrough test for Missions 1-8 and final campaign-complete state
 - `.claude/` local worktrees ignored and excluded from test discovery
 
 Current runtime source:
@@ -39,7 +43,7 @@ Legacy duplicate still present:
 
 - `src/content/scenarios/solvex-a-level-1.yaml`
 
-Recommendation: keep the legacy file during the current Mission 1-3 playtest, then archive or delete it once `solvex-a-campaign.yaml` is accepted as the sole runtime content source.
+Recommendation: keep the legacy file during the current full-campaign playtest, then archive or delete it once `solvex-a-campaign.yaml` is accepted as the sole runtime content source.
 
 #### Must Have
 
@@ -58,6 +62,7 @@ Recommendation: keep the legacy file during the current Mission 1-3 playtest, th
 | Mission switching | Continue from one mission to the next after unlock criteria are met | [[Level Structure and Difficulty Modes]] |
 | Mission 2 content | Reactor heat-removal and summer cooling-water constraint mission | [[Chemical Engineering Decision Mapping]] |
 | Mission 3 content | Separation requirements, impurity/water removal, property data gaps, and wastewater routing | [[Chemical Engineering Decision Mapping]] |
+| Full easy-mode campaign | Missions 1-8 polished with deterministic scoring, explanations, unlocks, and automated tests | [[Level Structure and Difficulty Modes]] |
 
 #### Should Have
 
@@ -69,8 +74,8 @@ Recommendation: keep the legacy file during the current Mission 1-3 playtest, th
 | Review mode | Let the player revisit missed design decisions |
 | Simple plant map | Unlock process sections as visual progress |
 | Classroom materials | Instructor notes, printable scenario sheets, and post-level review screens |
-| Mission 1-3 playtest | Test the first three missions as a continuous vertical slice |
-| Commit reconciled local changes | Push the Deepseek Mission 3 reconciliation on top of Claude's GitHub branch |
+| Full-campaign playtest | Test Missions 1-8 as a continuous classroom-style vertical slice |
+| Balance pass | Tune wording, card difficulty, scoring thresholds, and feedback after full-campaign playtest |
 
 #### Could Have
 

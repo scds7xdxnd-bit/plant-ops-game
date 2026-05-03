@@ -43,6 +43,7 @@ export function MentorActionBar() {
 
           <button
             className="btn-submit"
+            data-testid="submit-review"
             disabled={!hasSelections}
             onClick={submitDesignReview}
             type="button"

@@ -235,6 +235,130 @@ describe("Mission 3 data integrity", () => {
   });
 });
 
+describe("Mission 4 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[3];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_4");
+    expect(mission.mission_number).toBe(4);
+    expect(mission.title).toBe("Mission 4: Heat & Utilities");
+    expect(mission.short_title).toBe("Heat & Utilities");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 8 correct decisions, 7 wrong-but-plausible decisions, and 15 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(8);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(15);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("has 70% pass threshold and 100% perfect threshold", () => {
+    expect(mission.scoring.pass_threshold_percent).toBe(70);
+    expect(mission.scoring.perfect_threshold_percent).toBe(100);
+    expect(mission.scoring.points.correct_selection).toBe(1);
+    expect(mission.scoring.points.missed_correct).toBe(-0.5);
+    expect(mission.scoring.points.incorrect_selection).toBe(-0.25);
+  });
+
+  it("unlocks Mission 5 on pass", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBe("solvex_a_mission_5");
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+    expect(mission.unlock!.unlocks_on_pass).toContain(
+      "Mission 5: Layers of Protection",
+    );
+  });
+
+  it("every decision card has a display label", () => {
+    for (const card of mission.decision_cards) {
+      expect(getDecisionDisplayLabel(card.id, card.label)).toBeTruthy();
+    }
+  });
+});
+
+describe("Mission 5 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[4];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_5");
+    expect(mission.mission_number).toBe(5);
+    expect(mission.title).toBe("Mission 5: Layers of Protection");
+    expect(mission.short_title).toBe("Layers of Protection");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 9 correct decisions, 7 wrong-but-plausible decisions, and 16 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(9);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(16);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("has 70% pass threshold and 100% perfect threshold", () => {
+    expect(mission.scoring.pass_threshold_percent).toBe(70);
+    expect(mission.scoring.perfect_threshold_percent).toBe(100);
+    expect(mission.scoring.points.correct_selection).toBe(1);
+    expect(mission.scoring.points.missed_correct).toBe(-0.5);
+    expect(mission.scoring.points.incorrect_selection).toBe(-0.25);
+  });
+
+  it("unlocks Mission 6 on pass", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBe("solvex_a_mission_6");
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+    expect(mission.unlock!.unlocks_on_pass).toContain(
+      "Mission 6: What Leaves the Fence",
+    );
+  });
+
+  it("every decision card has a display label", () => {
+    for (const card of mission.decision_cards) {
+      expect(getDecisionDisplayLabel(card.id, card.label)).toBeTruthy();
+    }
+  });
+});
+
 describe("decision board ordering", () => {
   const campaign = loadSolvexCampaign();
 
@@ -283,6 +407,135 @@ describe("progressive BoD document", () => {
     expect(
       mission3Sections.find((entry) => entry.key === "project_context")?.isNew,
     ).toBe(false);
+  });
+
+  it("shows Mission 4 BoD sections at mission 4 and marks them as new", () => {
+    const mission4Sections = getBodForMission(campaign, 4);
+    const mission4Keys = mission4Sections.map((entry) => entry.key);
+
+    expect(mission4Keys).toContain("utility_supply");
+    expect(mission4Keys).toContain("plant_heat_demands");
+    expect(mission4Keys).toContain("heat_recovery_note");
+    expect(mission4Keys).toContain("utility_scope");
+
+    const newMission4Keys = mission4Sections
+      .filter((entry) => entry.isNew)
+      .map((entry) => entry.key);
+    expect(newMission4Keys).toContain("utility_supply");
+    expect(newMission4Keys).toContain("plant_heat_demands");
+    expect(newMission4Keys).toContain("heat_recovery_note");
+    expect(newMission4Keys).toContain("utility_scope");
+  });
+
+  it("does not show Mission 5+ BoD sections at mission 4", () => {
+    const mission4Keys = getBodForMission(campaign, 4).map((entry) => entry.key);
+    expect(mission4Keys).not.toContain("hazard_summary");
+    expect(mission4Keys).not.toContain("regulatory_requirements");
+    expect(mission4Keys).not.toContain("protection_philosophy");
+    expect(mission4Keys).not.toContain("safety_scope");
+  });
+
+  it("shows Mission 5 BoD sections at mission 5 and marks them as new", () => {
+    const mission5Sections = getBodForMission(campaign, 5);
+    const mission5Keys = mission5Sections.map((entry) => entry.key);
+
+    expect(mission5Keys).toContain("hazard_summary");
+    expect(mission5Keys).toContain("regulatory_requirements");
+    expect(mission5Keys).toContain("protection_philosophy");
+    expect(mission5Keys).toContain("safety_scope");
+
+    const newMission5Keys = mission5Sections
+      .filter((entry) => entry.isNew)
+      .map((entry) => entry.key);
+    expect(newMission5Keys).toContain("hazard_summary");
+    expect(newMission5Keys).toContain("regulatory_requirements");
+    expect(newMission5Keys).toContain("protection_philosophy");
+    expect(newMission5Keys).toContain("safety_scope");
+  });
+
+  it("does not show Mission 6+ BoD sections at mission 5", () => {
+    const mission5Keys = getBodForMission(campaign, 5).map((entry) => entry.key);
+    expect(mission5Keys).not.toContain("emission_sources");
+    expect(mission5Keys).not.toContain("pfd_purpose");
+  });
+
+  it("Mission 3 sections are not marked as new at mission 4", () => {
+    const mission4Sections = getBodForMission(campaign, 4);
+    expect(
+      mission4Sections.find((entry) => entry.key === "reactor_effluent_composition")
+        ?.isNew,
+    ).toBe(false);
+    expect(
+      mission4Sections.find((entry) => entry.key === "separation_constraints")
+        ?.isNew,
+    ).toBe(false);
+  });
+
+  it("Mission 4 sections are not marked as new at mission 5", () => {
+    const mission5Sections = getBodForMission(campaign, 5);
+    expect(
+      mission5Sections.find((entry) => entry.key === "utility_supply")?.isNew,
+    ).toBe(false);
+    expect(
+      mission5Sections.find((entry) => entry.key === "plant_heat_demands")?.isNew,
+    ).toBe(false);
+  });
+
+  it("shows Mission 7 BoD sections at mission 7 and marks them as new", () => {
+    const mission7Sections = getBodForMission(campaign, 7);
+    const mission7Keys = mission7Sections.map((entry) => entry.key);
+
+    expect(mission7Keys).toContain("pfd_purpose");
+    expect(mission7Keys).toContain("confirmed_process_sections");
+    expect(mission7Keys).toContain("pfd_stream_requirements");
+    expect(mission7Keys).toContain("pfd_scope");
+
+    const newMission7Keys = mission7Sections
+      .filter((entry) => entry.isNew)
+      .map((entry) => entry.key);
+    expect(newMission7Keys).toContain("pfd_purpose");
+    expect(newMission7Keys).toContain("confirmed_process_sections");
+    expect(newMission7Keys).toContain("pfd_stream_requirements");
+    expect(newMission7Keys).toContain("pfd_scope");
+  });
+
+  it("Mission 7 sections are not marked as new at mission 8", () => {
+    const mission8Sections = getBodForMission(campaign, 8);
+    expect(
+      mission8Sections.find((entry) => entry.key === "pfd_purpose")?.isNew,
+    ).toBe(false);
+    expect(
+      mission8Sections.find((entry) => entry.key === "confirmed_process_sections")?.isNew,
+    ).toBe(false);
+  });
+
+  it("does not show Mission 8 BoD sections at mission 7", () => {
+    const mission7Keys = getBodForMission(campaign, 7).map((entry) => entry.key);
+    expect(mission7Keys).not.toContain("pid_versus_pfd");
+    expect(mission7Keys).not.toContain("control_and_safety_requirements");
+    expect(mission7Keys).not.toContain("isolation_and_protection_hardware");
+    expect(mission7Keys).not.toContain("pid_scope");
+    expect(mission7Keys).not.toContain("design_package_review");
+  });
+
+  it("shows Mission 8 BoD sections at mission 8 and marks them as new", () => {
+    const mission8Sections = getBodForMission(campaign, 8);
+    const mission8Keys = mission8Sections.map((entry) => entry.key);
+
+    expect(mission8Keys).toContain("pid_versus_pfd");
+    expect(mission8Keys).toContain("control_and_safety_requirements");
+    expect(mission8Keys).toContain("isolation_and_protection_hardware");
+    expect(mission8Keys).toContain("pid_scope");
+    expect(mission8Keys).toContain("design_package_review");
+
+    const newMission8Keys = mission8Sections
+      .filter((entry) => entry.isNew)
+      .map((entry) => entry.key);
+    expect(newMission8Keys).toContain("pid_versus_pfd");
+    expect(newMission8Keys).toContain("control_and_safety_requirements");
+    expect(newMission8Keys).toContain("isolation_and_protection_hardware");
+    expect(newMission8Keys).toContain("pid_scope");
+    expect(newMission8Keys).toContain("design_package_review");
   });
 });
 
@@ -341,6 +594,286 @@ describe("scoring with mission 3", () => {
 
   it("returns retry when no correct decisions are selected", () => {
     const result = scoreScenario(mission, ["sep_full_simulation"]);
+    expect(result.passed).toBe(false);
+    expect(result.band.id).toBe("retry");
+  });
+});
+
+describe("scoring with mission 5", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[4];
+
+  it("returns 100% for a perfect selection", () => {
+    const result = scoreScenario(mission, mission.correct_decision_ids);
+    expect(result.scorePercent).toBe(100);
+    expect(result.passed).toBe(true);
+    expect(result.perfect).toBe(true);
+    expect(result.incorrectSelectedIds).toEqual([]);
+    expect(result.missedCorrectIds).toEqual([]);
+  });
+
+  it("penalizes unsupported over-selection", () => {
+    const result = scoreScenario(mission, [
+      ...mission.correct_decision_ids,
+      "atex_zone_0_entire_plant",
+    ]);
+    expect(result.scorePercent).toBeLessThan(100);
+    expect(result.incorrectSelectedIds).toEqual(["atex_zone_0_entire_plant"]);
+  });
+
+  it("returns retry when no correct decisions are selected", () => {
+    const result = scoreScenario(mission, [
+      "atex_zone_0_entire_plant",
+      "operator_procedures_only_for_esd",
+    ]);
+    expect(result.passed).toBe(false);
+    expect(result.band.id).toBe("retry");
+  });
+});
+
+describe("scoring with mission 4", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[3];
+
+  it("returns 100% for a perfect selection", () => {
+    const result = scoreScenario(mission, mission.correct_decision_ids);
+    expect(result.scorePercent).toBe(100);
+    expect(result.passed).toBe(true);
+    expect(result.perfect).toBe(true);
+    expect(result.incorrectSelectedIds).toEqual([]);
+    expect(result.missedCorrectIds).toEqual([]);
+  });
+
+  it("penalizes unsupported over-selection", () => {
+    const result = scoreScenario(mission, [
+      ...mission.correct_decision_ids,
+      "mp_steam_for_all_heating",
+    ]);
+    expect(result.scorePercent).toBeLessThan(100);
+    expect(result.incorrectSelectedIds).toEqual(["mp_steam_for_all_heating"]);
+  });
+
+  it("returns retry when no correct decisions are selected", () => {
+    const result = scoreScenario(mission, [
+      "mp_steam_for_all_heating",
+      "fired_heater_for_reboiler_no_justification",
+    ]);
+    expect(result.passed).toBe(false);
+    expect(result.band.id).toBe("retry");
+  });
+});
+
+describe("Mission 6 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[5];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_6");
+    expect(mission.mission_number).toBe(6);
+    expect(mission.title).toBe("Mission 6: What Leaves the Fence");
+    expect(mission.short_title).toBe("What Leaves the Fence");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 8 correct decisions, 7 wrong-but-plausible decisions, and 15 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(8);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(15);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("has 70% pass threshold and 100% perfect threshold", () => {
+    expect(mission.scoring.pass_threshold_percent).toBe(70);
+    expect(mission.scoring.perfect_threshold_percent).toBe(100);
+    expect(mission.scoring.points.correct_selection).toBe(1);
+    expect(mission.scoring.points.missed_correct).toBe(-0.5);
+    expect(mission.scoring.points.incorrect_selection).toBe(-0.25);
+  });
+
+  it("unlocks Mission 7 on pass", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBe("solvex_a_mission_7");
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+    expect(mission.unlock!.unlocks_on_pass).toContain(
+      "Mission 7: Draw the Process",
+    );
+  });
+
+  it("every decision card has a display label", () => {
+    for (const card of mission.decision_cards) {
+      expect(getDecisionDisplayLabel(card.id, card.label)).toBeTruthy();
+    }
+  });
+});
+
+describe("Mission 7 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[6];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_7");
+    expect(mission.mission_number).toBe(7);
+    expect(mission.title).toBe("Mission 7: Draw the Process");
+    expect(mission.short_title).toBe("Draw the Process");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 9 correct decisions, 7 wrong-but-plausible decisions, and 16 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(9);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(16);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("has 70% pass threshold and 100% perfect threshold", () => {
+    expect(mission.scoring.pass_threshold_percent).toBe(70);
+    expect(mission.scoring.perfect_threshold_percent).toBe(100);
+    expect(mission.scoring.points.correct_selection).toBe(1);
+    expect(mission.scoring.points.missed_correct).toBe(-0.5);
+    expect(mission.scoring.points.incorrect_selection).toBe(-0.25);
+  });
+
+  it("unlocks Mission 8 on pass", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBe("solvex_a_mission_8");
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+    expect(mission.unlock!.unlocks_on_pass).toContain(
+      "Mission 8: Tag Everything",
+    );
+  });
+
+  it("every decision card has a display label", () => {
+    for (const card of mission.decision_cards) {
+      expect(getDecisionDisplayLabel(card.id, card.label)).toBeTruthy();
+    }
+  });
+});
+
+describe("Mission 8 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[7];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_8");
+    expect(mission.mission_number).toBe(8);
+    expect(mission.title).toBe("Mission 8: Tag Everything");
+    expect(mission.short_title).toBe("Tag Everything");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 9 correct decisions, 7 wrong-but-plausible decisions, and 16 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(9);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(16);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("has 70% pass threshold and 100% perfect threshold", () => {
+    expect(mission.scoring.pass_threshold_percent).toBe(70);
+    expect(mission.scoring.perfect_threshold_percent).toBe(100);
+    expect(mission.scoring.points.correct_selection).toBe(1);
+    expect(mission.scoring.points.missed_correct).toBe(-0.5);
+    expect(mission.scoring.points.incorrect_selection).toBe(-0.25);
+  });
+
+  it("is the final mission with null next_mission_id", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBeNull();
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+    expect(mission.unlock!.unlocks_on_pass).toContain("Campaign Complete");
+  });
+
+  it("every decision card has a display label", () => {
+    for (const card of mission.decision_cards) {
+      expect(getDecisionDisplayLabel(card.id, card.label)).toBeTruthy();
+    }
+  });
+});
+
+describe("scoring with mission 7", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[6];
+
+  it("returns 100% for a perfect selection", () => {
+    const result = scoreScenario(mission, mission.correct_decision_ids);
+    expect(result.scorePercent).toBe(100);
+    expect(result.passed).toBe(true);
+    expect(result.perfect).toBe(true);
+    expect(result.incorrectSelectedIds).toEqual([]);
+    expect(result.missedCorrectIds).toEqual([]);
+  });
+
+  it("penalizes unsupported over-selection", () => {
+    const result = scoreScenario(mission, [
+      ...mission.correct_decision_ids,
+      "control_valve_symbols_on_pfd",
+    ]);
+    expect(result.scorePercent).toBeLessThan(100);
+    expect(result.incorrectSelectedIds).toEqual(["control_valve_symbols_on_pfd"]);
+  });
+
+  it("returns retry when no correct decisions are selected", () => {
+    const result = scoreScenario(mission, [
+      "control_valve_symbols_on_pfd",
+      "pipe_sizes_on_pfd",
+    ]);
     expect(result.passed).toBe(false);
     expect(result.band.id).toBe("retry");
   });

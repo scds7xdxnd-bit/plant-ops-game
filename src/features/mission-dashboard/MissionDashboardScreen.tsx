@@ -12,7 +12,7 @@ export function MissionDashboardScreen() {
   const totalCorrect = scenario.correct_decision_ids.length;
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" data-testid="mission-dashboard">
       <TopMissionHeader />
       <main className="dashboard-main">
         <LevelSidebar />

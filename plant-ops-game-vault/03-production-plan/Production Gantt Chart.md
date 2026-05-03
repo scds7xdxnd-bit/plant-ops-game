@@ -2,7 +2,7 @@
 
 #### Draft Production Plan
 
-The browser prototype has completed the first playable three-mission local loop: Mission 1, Mission 2, reconciled Mission 3, campaign schema, progressive BoD, campaign validation, pass-based unlock, and mission-to-mission progression. The next production focus is committing/pushing the local reconciliation and playtesting Missions 1-3.
+The browser prototype has completed the full eight-mission easy-mode campaign loop: Missions 1-8, campaign schema, progressive BoD, campaign validation, pass-based unlock, automated store playthrough, and Playwright browser e2e through the final campaign-complete state. The next production focus is full-campaign playtest and balance review.
 
 ```mermaid
 gantt
@@ -24,18 +24,23 @@ gantt
   Polish review and mission panels     :done, b4, after b3, 1d
   Add progressive BoD document         :done, b5, after b4, 1d
   Reconcile Mission 3 separation       :done, b6, after b5, 1d
-  Commit and push reconciliation       :b7, after b6, 1d
-  Playtest Missions 1 to 3             :b8, after b7, 2d
+  Commit and push reconciliation       :done, b7, after b6, 1d
+  Playtest Missions 1 to 3             :done, b8, after b7, 2d
+  Polish Mission 4 heat & utilities     :done, b9, after b8, 1d
+  Polish Mission 5 safety systems       :done, b10, after b9, 1d
+  Polish Mission 6 environmental         :done, b11, after b10, 1d
+  Polish Mission 7 PFD assembly           :done, b12, after b11, 1d
+  Polish Mission 8 package review         :done, b13, after b12, 1d
+  Add full campaign e2e coverage          :done, b14, after b13, 1d
 
   section Expansion
-  Review Missions 4 to 8 scaffold      :c0, after b8, 3d
-  Author Missions 4 to 6              :c1, after c0, 5d
-  Build PFD block assembly mission     :c2, after c1, 4d
-  Build capstone package review        :c3, after c2, 4d
+  Full campaign playtest                  :done, c0, after b14, 3d
+  Balance scoring and feedback            :done, c1, after c0, 4d
+  Authoring workflow checklist            :done, c2, after c1, 2d
+  Classroom review materials              :done, c3, after c2, 3d
 
   section Release Prep
-  Balance scoring and feedback         :d1, after c3, 4d
-  Instructor/classroom review          :d2, after d1, 4d
+  Instructor/classroom review          :done, d2, after c3, 4d
   Package MVP build                    :d3, after d2, 3d
 ```
 
@@ -48,7 +53,7 @@ gantt
 | Campaign schema ready | Runtime campaign YAML loads through validation and supports multiple missions |
 | Two-mission vertical slice | Player can complete Mission 1, unlock Mission 2, and continue into reactor-section content |
 | Three-mission playtest ready | Mission 1, Mission 2, and Mission 3 pass tests/build and are ready for informal playtest |
-| MVP campaign playable | Missions 1-8 are playable with appropriate interaction variety |
+| MVP campaign playable | Missions 1-8 are playable and pass store/browser automated campaign flow tests |
 | MVP release candidate | Features required for first classroom release are defined, tested, and packaged |
 
 #### Related Notes

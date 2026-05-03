@@ -38,14 +38,18 @@ The larger plant-improvement simulation remains the long-term goal. The first pl
 
 #### Current Prototype Status
 
-The browser prototype now has an eight-mission easy-mode Solvex-A campaign scaffold, with Missions 1-3 reconciled for the current data model:
+The browser prototype now has a complete eight-mission easy-mode Solvex-A campaign, with all missions reconciled for the current progressive BoD data model:
 
 - dashboard-style mission screen with top header, level map, design basis excerpt, decision board, selected decision tray, objective strip, and senior engineer action bar
 - design review completion screen with score summary, supported decisions, unsupported decisions, missed decisions, restart action, and gated continue action
 - Mission 1: Decode The Design Basis
 - Mission 2: The Reactor Runs Hot
 - Mission 3: Separation Section
-- Missions 4-8 are authored in easy mode as the remaining campaign scaffold
+- Mission 4: Heat & Utilities — polished with 8 correct + 7 wrong-plausible decisions, heat transfer/utility focus, progressive BoD support
+- Mission 5: Layers of Protection — polished with 9 correct + 7 wrong-plausible decisions, safety systems focus, protection-layer thinking, progressive BoD support
+- Mission 6: What Leaves the Fence — polished with 8 correct + 7 wrong-plausible decisions, environmental treatment focus, waste minimisation hierarchy, emission controls, wastewater neutralisation, solid waste disposal, progressive BoD support
+- Mission 7: Draw the Process — polished with 9 correct + 7 wrong-plausible decisions, PFD assembly focus, process blocks, streams, utilities, stream table, PFD vs P&ID scope, 3D layout exclusion, progressive BoD support
+- Mission 8: Tag Everything — polished with 9 correct + 7 wrong-plausible decisions, design package review focus, instrument/control/safety/environmental consistency checks, FEA and open-data-gap exclusions, campaign-complete end state
 - Missions unlock on pass score, not perfect score
 - Mission 2 includes reactor heat-removal, summer cooling-water limitation, temperature control, independent safety protection, and runaway/overpressure review decisions
 - Mission 3 includes separation requirements, impurity/water removal, VLE/property-data gaps, temperature sensitivity, and wastewater routing decisions
@@ -63,16 +67,19 @@ The browser prototype now has an eight-mission easy-mode Solvex-A campaign scaff
 - campaign loader and validation in `src/content/loadCampaign.ts` and `src/domain/validateCampaign.ts`
 - Zustand runtime state in `src/store/useGameStore.ts`
 - tests covering scoring and campaign validation
+- Playwright browser-level e2e test for full Missions 1-8 automated playthrough via `data-testid` selectors
 - `.claude/` local worktrees are ignored and excluded from Vitest discovery
 
 Current verification:
 
-- `npm run test` passes with 61 tests
+- `npm run test` passes with 117 tests
+- `npm run test:playthrough` passes with 2 store-level playthrough tests
+- `npm run test:e2e` passes with 1 Playwright browser test (full Missions 1-8 automated click-through and campaign-complete verification)
 - `npm run build` passes
 
-Git state note: Claude's eight-mission progressive BoD work is already on GitHub. Deepseek's local Mission 3 work has been reconciled into the current local branch but has not yet been committed or pushed.
+Git state note: Claude's eight-mission progressive BoD work is already on GitHub. Deepseek's local Mission 3 work has been reconciled. Missions 4, 5, 6, 7, and 8 have been polished with full data integrity, scoring, unlock, progressive BoD, and automated flow tests.
 
-The next product step is to playtest Missions 1-3 together and verify the mission unlock flow through Mission 4. Do not start another broad visual redesign before the three-mission loop is reviewed.
+The next product step is full-campaign playtest and balance review: tune wording, scoring, difficulty, and feedback now that the complete Missions 1-8 flow is automated.
 
 #### Map
 

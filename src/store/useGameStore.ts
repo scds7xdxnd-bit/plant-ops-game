@@ -70,7 +70,9 @@ export const useGameStore = create<GameState>((set, get) => ({
       scoreResult: null,
     }),
   advanceToNextMission: () => {
-    const { campaign: activeCampaign, currentMissionId } = get();
+    const { campaign: activeCampaign, currentMissionId, scoreResult } = get();
+    if (!scoreResult?.passed) return;
+
     const currentMission = activeCampaign.missions.find(
       (m) => m.id === currentMissionId,
     );

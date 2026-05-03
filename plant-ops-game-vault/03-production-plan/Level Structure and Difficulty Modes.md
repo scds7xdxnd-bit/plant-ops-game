@@ -63,7 +63,7 @@ The first six missions should mostly use decision/review gameplay. Mission 7 sho
 | 2 | The Reactor Runs Hot | Select reactor heat-removal, utility, and control decisions | Reactor section basis |
 | 3 | Separation Section | Select required separations and flag over-specific technology choices | Separation train outline |
 | 4 | Heat & Utilities | Match utility constraints to process needs | Heat and utility requirement list |
-| 5 | Control & Safety Review | Match hazards and limits to controls, alarms, relief, and safeguards | Control and safety basis |
+| 5 | Layers of Protection | Match hazards and limits to controls, alarms, relief, and safeguards | Control and safety basis |
 | 6 | Environmental Review | Match waste/emission streams to treatment requirements | Environmental treatment basis |
 | 7 | Basic PFD Assembly | Arrange simplified process blocks unlocked by prior missions | Draft PFD block sequence |
 | 8 | Design Package Review | Find inconsistencies and missing requirements in a simplified package | Approved junior design package |
@@ -138,7 +138,7 @@ Use mission framing instead of plain quizzes:
 - Mission 2: The Reactor Runs Hot
 - Mission 3: Separation Section
 - Mission 4: Heat & Utilities
-- Mission 5: Control & Safety Review
+- Mission 5: Layers of Protection
 - Mission 6: Environmental Review
 - Mission 7: Basic PFD Assembly
 - Mission 8: Design Package Review
@@ -150,7 +150,11 @@ Use mission framing instead of plain quizzes:
 | 1 | Playable/current at campaign start | 17 decision cards: 10 correct, 7 wrong-plausible | 70% pass unlocks Mission 2 |
 | 2 | Playable/locked at campaign start | 15 decision cards: 9 correct, 6 wrong-plausible; exothermic reactor, summer cooling-water limit, normal control vs independent safety protection | 70% pass unlocks Mission 3 |
 | 3 | Playable/locked at campaign start, reconciled locally | 16 decision cards: 9 correct, 7 wrong-plausible; separation requirements, impurity/water removal, property-data gaps, temperature sensitivity, wastewater routing | 70% pass unlocks Mission 4 |
-| 4-8 | Authored/locked scaffold | Easy-mode campaign content exists; needs playtest and polish after Missions 1-3 are proven | Chained 70% pass unlocks |
+| 4 | Heat & Utilities | 15 decision cards: 8 correct, 7 wrong-plausible; heat transfer, steam levels, summer CW constraints for all cooling, heat recovery assessment, utility balance, heat tracing needs | 70% pass unlocks Mission 5 |
+| 5 | Layers of Protection | 16 decision cards: 9 correct, 7 wrong-plausible; hazardous area classification, ESD isolation valves, fire and gas detection, bunding, HAZOP before detailed design, relief scenario identification, closed disposal, passive fire protection, inherently safer design vs protection layers; unsupported safety over-designs | 70% pass unlocks Mission 6 |
+| 6 | Environmental Review — polished | 15 decision cards: 8 correct, 7 wrong-plausible; VOC recovery/destruction on all vents, wastewater stream characterisation by source, pH neutralisation, secondary containment for all chemical storage, quantified emission estimates for permit, fugitive emission monitoring, organic vapor recovery before destruction, solid waste disposal route; unsupported premature biological treatment, open-flame flaring, dismissing fugitive emissions, skipping secondary containment for aqueous Feed B, discharging after neutralisation only, treating compliance as paperwork, ignoring solid waste | 70% pass unlocks Mission 7 |
+| 7 | Draw the Process — polished | 16 decision cards: 9 correct, 7 wrong-plausible; major process units as labeled blocks, main streams with flow direction, utility connections at each unit, recycle stream, wastewater/vent routing, numbered streams for stream table, stream table with key properties, battery-limit labels, heat recovery exchangers; unsupported P&ID-level detail (control valves, pipe specs, drains, relief symbols, equipment list, omitting env streams, 3D layout) | 70% pass unlocks Mission 8 |
+| 8 | Design Package Review — polished | 16 decision cards: 9 correct, 7 wrong-plausible; ISA notation instruments, complete control loops, independent HH temp interlock, block valves, check valves, pipe spec breaks, relief valve with discharge routing, sample points, ESD connections; unsupported 3D routing, structural details, vendor internals, electrical wiring, utility headers, FEA requirement, approving package without documenting data gaps; final mission with unlocks_on_pass: Campaign Complete and null next_mission_id | Null next_mission_id (campaign complete) |
 
 The current UI supports chained mission flow. Level map items can show current, completed, and locked states. Continue from the design review uses pass status, not perfect status.
 

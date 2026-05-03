@@ -129,7 +129,67 @@ Mission 3 is reconciled locally in the live campaign YAML:
 - Scoring: same deterministic easy point system as Missions 1 and 2, with 70% pass and 100% perfect
 - Unlock: points to `solvex_a_mission_4`
 
-Missions 4-8 are authored as easy-mode campaign scaffold. The design-basis renderer uses campaign-level `bod_document` sections, not per-mission `bod_excerpt`. `getBodForMission(campaign, missionNumber)` returns sections where `introduced_in_mission <= missionNumber` and marks sections introduced in the current mission with `isNew`.
+Mission 4 has been polished in the live campaign YAML:
+
+- ID: `solvex_a_mission_4`
+- Title: `Mission 4: Heat & Utilities`
+- Status at campaign start: `locked`
+- Design basis focus: heat transfer, utilities, cooling water constraints, steam levels, heat recovery, utility bottlenecks
+- Decision cards: 15 total
+- Correct decisions: 8
+- Wrong-but-plausible decisions: 7
+- Scoring: same deterministic easy point system as Missions 1-3, with 70% pass and 100% perfect
+- Unlock: points to `solvex_a_mission_5`
+
+Mission 5 has been polished in the live campaign YAML:
+
+- ID: `solvex_a_mission_5`
+- Title: `Mission 5: Layers of Protection`
+- Status at campaign start: `locked`
+- Design basis focus: plant-wide safety requirements, flammable feed storage, exothermic runaway, hazardous area classification, ESD philosophy, fire and gas detection, HAZOP timing, relief scenarios, passive fire protection, inherently safer design vs protection layers
+- Decision cards: 16 total
+- Correct decisions: 9
+- Wrong-but-plausible decisions: 7
+- Scoring: same deterministic easy point system as Missions 1-4, with 70% pass and 100% perfect
+- Unlock: points to `solvex_a_mission_6`
+
+Mission 6 has been polished in the live campaign YAML:
+
+- ID: `solvex_a_mission_6`
+- Title: `Mission 6: What Leaves the Fence`
+- Status at campaign start: `locked`
+- Design basis focus: environmental treatment, VOC emission sources and controls, wastewater stream characterisation, pH neutralisation, secondary containment, fugitive emission monitoring, waste minimisation hierarchy (recover before destroy), solid waste disposal route, quantified emission estimates for permit
+- Decision cards: 15 total
+- Correct decisions: 8
+- Wrong-but-plausible decisions: 7 (including premature biological treatment, open-flame flaring, dismissing fugitive emissions, skipping secondary containment for aqueous streams, discharging after neutralisation only, treating compliance as paperwork, ignoring solid waste)
+- Scoring: same deterministic easy point system as Missions 1-5, with 70% pass and 100% perfect
+- Unlock: points to `solvex_a_mission_7`
+
+Mission 7 has been polished in the live campaign YAML:
+
+- ID: `solvex_a_mission_7`
+- Title: `Mission 7: Draw the Process`
+- Status at campaign start: `locked`
+- Design basis focus: PFD assembly, major process blocks, stream routing and flow direction, utility connections, recycle streams, environmental interfaces, stream numbering and stream table, battery-limit labeling, heat recovery exchangers; PFD vs P&ID scope distinction, excluded detail (control valves, pipe specs, drains, relief devices, equipment lists, 3D layout)
+- Decision cards: 16 total
+- Correct decisions: 9
+- Wrong-but-plausible decisions: 7 (P&ID level detail, pipe specs, drains/vents, relief device symbols, full equipment list, omitting environmental streams, 3D plant layout)
+- Scoring: same deterministic easy point system as Missions 1-6, with 70% pass and 100% perfect
+- Unlock: points to `solvex_a_mission_8`
+
+Mission 8 has been polished in the live campaign YAML:
+
+- ID: `solvex_a_mission_8`
+- Title: `Mission 8: Tag Everything`
+- Status at campaign start: `locked`
+- Design basis focus: design package review, P&ID/PFD distinction, control and safety requirements, isolation and protection hardware, relief discharge routing, sample points, ESD connections, open-data-gap tracking, and final package consistency checks
+- Decision cards: 16 total
+- Correct decisions: 9
+- Wrong-but-plausible decisions: 7 (including unsupported 3D routing, structural detail, vendor internals, electrical wiring, utility headers, FEA before package approval, and approving despite open data gaps)
+- Scoring: same deterministic easy point system as Missions 1-7, with 70% pass and 100% perfect
+- Unlock: final campaign-complete state with `next_mission_id: null`
+
+The design-basis renderer uses campaign-level `bod_document` sections, not per-mission `bod_excerpt`. `getBodForMission(campaign, missionNumber)` returns sections where `introduced_in_mission <= missionNumber` and marks sections introduced in the current mission with `isNew`.
 
 #### Current Validation Rules
 
@@ -160,8 +220,8 @@ Missions 4-8 are authored as easy-mode campaign scaffold. The design-basis rende
 - `Scenario` remains the per-mission compatibility type while the UI is migrated gradually.
 - `loadSolvexCampaign()` validates campaign data at load time.
 - `loadSolvexLevelOne()` remains as a compatibility wrapper for older tests and components.
-- `src/content/scenarios/solvex-a-level-1.yaml` is a legacy duplicate and should be archived or deleted after the Mission 1-3 playtest proves the campaign YAML workflow.
-- Current test coverage includes scoring, campaign validation, duplicate mission IDs and numbers, BoD validation, progressive BoD visibility, Mission 2 and Mission 3 data integrity, Mission 2 and Mission 3 scoring, and decision board ordering.
+- `src/content/scenarios/solvex-a-level-1.yaml` is a legacy duplicate and should be archived or deleted after the full campaign playtest confirms `solvex-a-campaign.yaml` as the sole runtime content source.
+- Current test coverage includes scoring, campaign validation, duplicate mission IDs and numbers, BoD validation, progressive BoD visibility, Mission 1-8 data integrity, Mission 1-8 scoring, decision board ordering, automated store-level campaign playthrough, and automated browser-level e2e playthrough (Playwright, Missions 1-8 including final campaign-complete state).
 
 #### Related Notes
 
