@@ -1,4 +1,4 @@
-import type { Campaign, Scenario } from "./scenarioTypes";
+import type { Campaign, Scenario, BodSection } from "./scenarioTypes";
 
 export interface CampaignValidationError {
   path: string;
@@ -16,6 +16,35 @@ export function validateCampaign(
 
   if (!campaign.id) {
     errors.push({ path: "id", message: "Campaign must have an id." });
+  }
+
+  // Validate bod_document
+  if (
+    !campaign.bod_document ||
+    typeof campaign.bod_document !== "object" ||
+    Array.isArray(campaign.bod_document)
+  ) {
+    errors.push({
+      path: "bod_document",
+      message: "Campaign must have a bod_document object.",
+    });
+  } else {
+    for (const [key, section] of Object.entries(
+      campaign.bod_document as Record<string, BodSection>,
+    )) {
+      if (typeof section.introduced_in_mission !== "number" || section.introduced_in_mission < 1) {
+        errors.push({
+          path: `bod_document.${key}.introduced_in_mission`,
+          message: `bod_document section "${key}" must have a positive introduced_in_mission number.`,
+        });
+      }
+      if (!Array.isArray(section.items) || section.items.length === 0) {
+        errors.push({
+          path: `bod_document.${key}.items`,
+          message: `bod_document section "${key}" must have at least one item.`,
+        });
+      }
+    }
   }
 
   if (!Array.isArray(campaign.missions) || campaign.missions.length === 0) {

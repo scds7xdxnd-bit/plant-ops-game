@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { loadSolvexCampaign } from "../content/loadCampaign";
 import { scoreScenario, type ScoreResult } from "../domain/scoring";
-import type { Scenario, Campaign } from "../domain/scenarioTypes";
+import type { Scenario, Campaign, BodSection } from "../domain/scenarioTypes";
 
 export type Screen =
   | "mission-dashboard"
@@ -111,4 +111,22 @@ export function getCurrentMission(
     throw new Error(`Mission "${missionId}" not found in campaign.`);
   }
   return mission;
+}
+
+/**
+ * Returns the progressive BoD sections visible to a player on the given mission number.
+ * A section is visible when introduced_in_mission <= missionNumber.
+ * Each entry includes an `isNew` flag for sections introduced in the current mission.
+ */
+export function getBodForMission(
+  campaign: Campaign,
+  missionNumber: number,
+): Array<{ key: string; section: BodSection; isNew: boolean }> {
+  return Object.entries(campaign.bod_document)
+    .filter(([, section]) => section.introduced_in_mission <= missionNumber)
+    .map(([key, section]) => ({
+      key,
+      section,
+      isNew: section.introduced_in_mission === missionNumber,
+    }));
 }

@@ -287,6 +287,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [],
     });
     expect(errors.length).toBeGreaterThan(0);
@@ -306,6 +307,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [{ ...mission }, { ...mission }],
     });
     const dupErrors = errors.filter((e) => e.message.includes("Duplicate"));
@@ -328,6 +330,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [m1, m2],
     });
     const dupErrors = errors.filter(
@@ -355,6 +358,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [badMission],
     });
     expect(errors.length).toBeGreaterThan(0);
@@ -382,6 +386,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [badMission],
     });
     const dupErrors = errors.filter((e) => e.message.includes("Duplicate"));
@@ -409,6 +414,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [badMission],
     });
 
@@ -443,6 +449,7 @@ describe("campaign validation", () => {
         plant_type: "Test",
         annual_capacity_tpy: 100,
       },
+      bod_document: {},
       missions: [badMission],
     });
 
