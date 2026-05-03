@@ -38,6 +38,16 @@ export interface ResultBand {
 
 /* ── Campaign schema ── */
 
+/**
+ * A single section in the progressive Basis of Design document.
+ * introduced_in_mission controls which missions see this section:
+ * a player on mission N sees all sections where introduced_in_mission <= N.
+ */
+export interface BodSection {
+  introduced_in_mission: number;
+  items: string[];
+}
+
 export interface Campaign {
   id: string;
   version: string;
@@ -45,6 +55,8 @@ export interface Campaign {
   subtitle: string;
   player_role: string;
   plant: PlantProfile;
+  /** Progressive BoD — one document that grows section by section across missions. */
+  bod_document: Record<string, BodSection>;
   missions: Scenario[];
 }
 
@@ -91,7 +103,6 @@ export interface Scenario {
   briefing: {
     senior_engineer_message: string;
   };
-  bod_excerpt: Record<string, string[]>;
   instructions: {
     prompt: string;
     selection_rule: string;

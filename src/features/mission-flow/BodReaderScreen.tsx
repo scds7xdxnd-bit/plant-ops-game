@@ -1,19 +1,14 @@
 import { ArrowRight, ClipboardList } from "lucide-react";
 import { ScreenHeader } from "../../components/ScreenHeader";
-import { useGameStore } from "../../store/useGameStore";
-
-const sectionLabels: Record<string, string> = {
-  project_context: "Project Context",
-  feedstock_requirements: "Feedstock Requirements",
-  product_targets: "Product Targets",
-  operating_constraints: "Operating Constraints",
-  environmental_constraints: "Environmental Constraints",
-  safety_constraints: "Safety Constraints",
-};
+import { useGameStore, getBodForMission } from "../../store/useGameStore";
 
 export function BodReaderScreen() {
   const scenario = useGameStore((state) => state.scenario);
+  const campaign = useGameStore((state) => state.campaign);
   const goTo = useGameStore((state) => state.goTo);
+
+  const missionNumber = scenario.mission_number ?? 1;
+  const bodSections = getBodForMission(campaign, missionNumber);
 
   return (
     <section className="screen">
@@ -33,11 +28,20 @@ export function BodReaderScreen() {
       </section>
 
       <section className="document-grid">
-        {Object.entries(scenario.bod_excerpt).map(([section, items]) => (
-          <article className="document-section" key={section}>
-            <h2>{sectionLabels[section] ?? section}</h2>
+        {bodSections.map(({ key, section, isNew }) => (
+          <article className="document-section" key={key}>
+            <h2>
+              {section.items.length > 0 &&
+                key
+                  .split("_")
+                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                  .join(" ")}
+              {isNew && (
+                <span className="document-section__new-badge"> NEW</span>
+              )}
+            </h2>
             <ul>
-              {items.map((item) => (
+              {section.items.map((item) => (
                 <li key={item}>
                   <ArrowRight size={14} />
                   <span>{item}</span>

@@ -9,6 +9,233 @@ plant:
   plant_type: "Small continuous/batch hybrid chemical plant"
   annual_capacity_tpy: 5000
 
+bod_document:
+  project_context:
+    introduced_in_mission: 1
+    items:
+      - "The project is a new Solvex-A specialty solvent additive unit."
+      - "The target production capacity is 5,000 tons per year."
+      - "The plant is expected to operate 330 days per year."
+  feedstock_requirements:
+    introduced_in_mission: 1
+    items:
+      - "Feed A is a liquid organic feedstock."
+      - "Feed A contains light impurity X."
+      - "Feed A is flammable."
+      - "Feed B is an aqueous catalyst solution."
+      - "Feed B is corrosive at high concentration."
+  product_targets:
+    introduced_in_mission: 1
+    items:
+      - "Final Solvex-A purity must be at least 98.5 wt%."
+      - "Final product water content must be below 0.5 wt%."
+  operating_constraints:
+    introduced_in_mission: 1
+    items:
+      - "The reaction is mildly exothermic."
+      - "The maximum reactor temperature is 120 C."
+      - "Medium-pressure steam is available."
+      - "Cooling water is limited during summer operation."
+  environmental_constraints:
+    introduced_in_mission: 1
+    items:
+      - "VOC emissions must be controlled."
+      - "Wastewater must be neutralized before discharge."
+  safety_constraints:
+    introduced_in_mission: 1
+    items:
+      - "Overpressure protection is required for the reactor section."
+      - "Ignition sources around flammable feed handling should be controlled."
+  reaction_section_overview:
+    introduced_in_mission: 2
+    items:
+      - "The reactor section converts Feed A and Feed B into Solvex-A in a single liquid-phase exothermic reaction."
+      - "The heat of reaction is approximately −150 kJ per mole of Solvex-A produced."
+      - "Reactor operating temperature must stay between 80 C and 110 C for target product quality."
+  reactor_requirements:
+    introduced_in_mission: 2
+    items:
+      - "Reaction selectivity to Solvex-A drops by 3 percentage points per 10 C above 110 C."
+      - "Feed conversion at 80–110 C is 92 % to 96 % per pass."
+      - "At 120 C, side-product formation doubles and an exothermic decomposition pathway becomes credible."
+  cooling_utility_constraints:
+    introduced_in_mission: 2
+    items:
+      - "Cooling water supply temperature is 25 C in winter and 32 C in summer."
+      - "Maximum cooling water return temperature is 45 C."
+      - "Cooling water flow is limited to 50 m³/h during summer peak demand."
+  safety_requirements:
+    introduced_in_mission: 2
+    items:
+      - "An exothermic runaway to above 140 C is a credible scenario if normal cooling is lost."
+      - "Runaway can generate overpressure through vapour formation and gas generation from decomposition."
+      - "Independent layers of protection shall be provided for the reactor temperature hazard."
+  design_scope:
+    introduced_in_mission: 2
+    items:
+      - "This review covers the reactor-section design basis only."
+      - "Full relief-system sizing, detailed piping design, and mechanical vessel design are outside scope at this stage."
+      - "Advanced modelling (CFD, FEA, full 3D plant model) is not required now."
+  reactor_effluent_composition:
+    introduced_in_mission: 3
+    items:
+      - "The reactor effluent is a liquid mixture containing Solvex-A product, unreacted Feed A, light impurity X, and water from the catalyst solution."
+      - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
+      - "Light impurity X originates from Feed A and must be removed to meet the product purity target."
+  product_specification_detail:
+    introduced_in_mission: 3
+    items:
+      - "Light impurity X must be reduced to below 1 wt% in the final product."
+  separation_constraints:
+    introduced_in_mission: 3
+    items:
+      - "Solvex-A is temperature-sensitive; all separation steps must operate below 130 C to avoid product degradation."
+      - "The organic and aqueous phases from the reactor effluent are partially immiscible."
+      - "Organic vapors generated during separation are flammable and must be contained."
+  separation_scope:
+    introduced_in_mission: 3
+    items:
+      - "No boiling point or relative volatility data is available in this design basis."
+      - "The specific separation technology has not been selected yet."
+      - "Solvent recovery and recycle routes are under consideration but not yet confirmed."
+  utility_supply:
+    introduced_in_mission: 4
+    items:
+      - "Medium-pressure steam is available at the plant battery limit."
+      - "Low-pressure steam is also available and is the preferred heating medium for duties below 150 C."
+      - "Cooling water is available at 25 C in winter and 32 C in summer."
+      - "Maximum cooling water return temperature is 45 C."
+      - "Cooling water total supply is limited to 50 m3/h during summer peak demand."
+      - "Electrical power is available for pumps, compressors, and instrumentation."
+  plant_heat_demands:
+    introduced_in_mission: 4
+    items:
+      - "The reactor generates approximately 150 kJ per mole of Solvex-A produced and requires continuous cooling."
+      - "The separation train requires a reboiler for the impurity-removal step and a condenser to recover overhead vapors."
+      - "The drying or water-removal step requires low-grade heat input."
+      - "Cold feeds entering the reactor may benefit from preheating using process heat."
+  heat_recovery_note:
+    introduced_in_mission: 4
+    items:
+      - "The hot reactor effluent stream enters the separation section at elevated temperature."
+      - "Cold feed streams enter the process at ambient temperature."
+      - "Heat recovery between hot and cold streams has not been assessed yet."
+  utility_scope:
+    introduced_in_mission: 4
+    items:
+      - "Utility balance calculations and heat exchanger sizing are outside scope at this design-basis stage."
+      - "The task is to define the utility basis conditions and identify all demands, not to size equipment."
+  hazard_summary:
+    introduced_in_mission: 5
+    items:
+      - "Feed A is a flammable liquid organic. Vapors can form an ignitable mixture with air."
+      - "Feed B is a corrosive aqueous catalyst solution at high concentration."
+      - "The reaction is exothermic. A credible runaway to above 140 C exists if cooling is lost."
+      - "Runaway can cause overpressure through vapor formation and gas generation from decomposition."
+      - "Solvex-A product is a specialty organic solvent additive; its hazard properties are under review."
+  regulatory_requirements:
+    introduced_in_mission: 5
+    items:
+      - "Hazardous area classification is required for all areas where a flammable atmosphere may exist."
+      - "An emergency shutdown system is required to safely isolate and depressurize the plant."
+      - "A formal hazard and operability study is required before detailed engineering begins."
+  protection_philosophy:
+    introduced_in_mission: 5
+    items:
+      - "Independent layers of protection are required for the reactor runaway hazard."
+      - "Safety instrumented functions must be independent of the basic process control system."
+      - "Consequence-based protection is not a substitute for inherent safety measures where feasible."
+  safety_scope:
+    introduced_in_mission: 5
+    items:
+      - "Detailed relief system sizing, SIL determination, and hazardous area zone drawings are outside scope at this design-basis stage."
+      - "Safety system design requires hazard study outputs before it can be completed."
+  emission_sources:
+    introduced_in_mission: 6
+    items:
+      - "The process uses a flammable organic feedstock. Organic vapors can be released from storage, reactor vents, and separation overheads."
+      - "The reactor is vented during normal operation and may be purged during startup and shutdown."
+      - "Separation overhead streams contain organic vapors that must be condensed or controlled before release."
+      - "Product storage tanks will emit small volumes of vapor during filling and temperature cycling."
+  wastewater_streams:
+    introduced_in_mission: 6
+    items:
+      - "The aqueous phase separated from the reactor effluent contains dissolved catalyst residues and trace organics."
+      - "Equipment washing during maintenance generates wash water containing trace process materials."
+      - "Catalyst solution bleed streams are produced during catalyst management operations."
+      - "Wastewater must be neutralized before discharge."
+  waste_and_containment:
+    introduced_in_mission: 6
+    items:
+      - "Spent catalyst and filter residues are generated in small quantities."
+      - "Secondary containment spill collection may produce contaminated rainwater requiring treatment."
+      - "VOC emissions must be controlled."
+  environmental_scope:
+    introduced_in_mission: 6
+    items:
+      - "Environmental permit applications require quantified emission estimates for all regulated streams."
+      - "The specific treatment technology for each stream has not been selected yet."
+      - "Biological wastewater treatment feasibility depends on organic loading data not yet available."
+  pfd_purpose:
+    introduced_in_mission: 7
+    items:
+      - "A Process Flow Diagram shows the major process units, the main process streams, and key utility connections."
+      - "The PFD is the primary document for communicating the process concept and stream conditions."
+      - "The PFD is not a P&ID — it does not show individual instruments, control valves, or pipe specifications."
+      - "The PFD is not a plant layout — it does not show physical locations, dimensions, or structural elements."
+  confirmed_process_sections:
+    introduced_in_mission: 7
+    items:
+      - "Feed preparation: Feed A feed drum and Feed B feed drum."
+      - "Reaction section: Reactor with cooling jacket or coil."
+      - "Phase separation: Liquid-liquid decanter to split organic and aqueous phases."
+      - "Impurity removal: Separation column to remove light impurity X."
+      - "Water removal: Drying or water-removal unit."
+      - "Product section: Product storage drum."
+      - "Environmental treatment: VOC recovery unit and wastewater neutralization unit."
+      - "Recycle: Unreacted Feed A recycle from separation back to reactor."
+  pfd_stream_requirements:
+    introduced_in_mission: 7
+    items:
+      - "All main process streams must have flow direction shown."
+      - "All main streams must be numbered for reference in the stream table."
+      - "The stream table must show key stream conditions: temperature, pressure, phase, and approximate flow rate."
+  pfd_scope:
+    introduced_in_mission: 7
+    items:
+      - "Individual control valve symbols, instrument bubbles, and pipe specifications are P&ID level detail."
+      - "Relief valve symbols, drain connections, and vent details are P&ID level detail."
+      - "A full equipment list with mechanical data is a separate document, not part of the PFD."
+  pid_versus_pfd:
+    introduced_in_mission: 8
+    items:
+      - "The P&ID shows all instrumentation using ISA notation: measurement devices, controllers, and final control elements."
+      - "The P&ID shows all control loops with their measurement points, controller blocks, and final control elements."
+      - "The P&ID shows all mechanical components: block valves, check valves, control valves, and safety relief valves."
+      - "The P&ID shows pipe specification breaks indicating where materials or pressure ratings change."
+      - "The P&ID does not show 3D routing, structural elements, or vendor internal equipment details."
+  control_and_safety_requirements:
+    introduced_in_mission: 8
+    items:
+      - "The reactor temperature control loop must appear: measurement, controller block, and coolant flow control valve."
+      - "The independent high-high temperature interlock must be shown separately from the temperature control loop."
+      - "Feed flow, reactor pressure, and separator level are examples of additional process variables requiring measurement and control."
+      - "The plant emergency shutdown system connects to isolation valves and final control elements across the plant."
+  isolation_and_protection_hardware:
+    introduced_in_mission: 8
+    items:
+      - "Manual block valves are required on all major process lines for maintenance isolation."
+      - "Check valves are required on feed and product lines to prevent backflow."
+      - "The reactor pressure relief valve must be shown with its discharge line routed to the safe disposal system."
+      - "Sample points are required on product and key intermediate streams."
+  pid_scope:
+    introduced_in_mission: 8
+    items:
+      - "Three-dimensional pipe routing and isometric details are produced separately as isometric drawings."
+      - "Structural steelwork, civil foundations, and architectural elements do not appear on the P&ID."
+      - "Vendor internal equipment details such as tray layouts, tube bundle arrangements, and packing specifications are shown on vendor drawings."
+      - "Electrical wiring and loop diagrams are produced as separate electrical and instrumentation documents."
+
 missions:
   - id: solvex_a_mission_1
     version: 0.1.0
@@ -49,32 +276,6 @@ missions:
         You are reviewing the first Solvex-A design basis excerpt. Do not design the whole plant yet.
         Your task is to identify the early design decisions that are directly implied by the document.
         Select only decisions that can be justified from the current information.
-
-    bod_excerpt:
-      project_context:
-        - "The project is a new Solvex-A specialty solvent additive unit."
-        - "The target production capacity is 5,000 tons per year."
-        - "The plant is expected to operate 330 days per year."
-      feedstock_requirements:
-        - "Feed A is a liquid organic feedstock."
-        - "Feed A contains light impurity X."
-        - "Feed A is flammable."
-        - "Feed B is an aqueous catalyst solution."
-        - "Feed B is corrosive at high concentration."
-      product_targets:
-        - "Final Solvex-A purity must be at least 98.5 wt%."
-        - "Final product water content must be below 0.5 wt%."
-      operating_constraints:
-        - "The reaction is mildly exothermic."
-        - "The maximum reactor temperature is 120 C."
-        - "Medium-pressure steam is available."
-        - "Cooling water is limited during summer operation."
-      environmental_constraints:
-        - "VOC emissions must be controlled."
-        - "Wastewater must be neutralized before discharge."
-      safety_constraints:
-        - "Overpressure protection is required for the reactor section."
-        - "Ignition sources around flammable feed handling should be controlled."
 
     instructions:
       prompt: >
@@ -397,28 +598,6 @@ missions:
         generic detail. Your task: select the design-basis decisions that make the
         reactor section safe, operable, and defensible for this plant.
 
-    bod_excerpt:
-      project_context:
-        - "The reactor section converts Feed A and Feed B into Solvex-A in a single liquid-phase exothermic reaction."
-        - "The heat of reaction is approximately −150 kJ per mole of Solvex-A produced."
-        - "Reactor operating temperature must stay between 80 C and 110 C for target product quality."
-      reactor_requirements:
-        - "Reaction selectivity to Solvex-A drops by 3 percentage points per 10 C above 110 C."
-        - "Feed conversion at 80–110 C is 92 % to 96 % per pass."
-        - "At 120 C, side-product formation doubles and an exothermic decomposition pathway becomes credible."
-      cooling_utility_constraints:
-        - "Cooling water supply temperature is 25 C in winter and 32 C in summer."
-        - "Maximum cooling water return temperature is 45 C."
-        - "Cooling water flow is limited to 50 m³/h during summer peak demand."
-      safety_requirements:
-        - "An exothermic runaway to above 140 C is a credible scenario if normal cooling is lost."
-        - "Runaway can generate overpressure through vapour formation and gas generation from decomposition."
-        - "Independent layers of protection shall be provided for the reactor temperature hazard."
-      design_scope:
-        - "This review covers the reactor-section design basis only."
-        - "Full relief-system sizing, detailed piping design, and mechanical vessel design are outside scope at this stage."
-        - "Advanced modelling (CFD, FEA, full 3D plant model) is not required now."
-
     instructions:
       prompt: >
         Select the reactor-section design-basis decisions that are justified by the
@@ -679,6 +858,1830 @@ missions:
       - "You selected {correct_selected_count} out of {total_correct_count} required reactor decisions."
       - "You missed {missed_count} required decisions."
       - "You selected {incorrect_selected_count} unsupported decisions."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_3
+    version: 0.1.0
+    title: "Mission 3: Separate or Contaminate"
+    short_title: "Separate or Contaminate"
+    mission_number: 3
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: separation_section
+      name: "Separation Section"
+      gantt_position: 3
+      unlocks_on_pass:
+        - "Heat & Utilities Basics"
+        - "Mission 4: Count the Heat"
+    unlock:
+      unlocks_on_pass:
+        - "Heat & Utilities Basics"
+        - "Mission 4: Count the Heat"
+      next_mission_id: solvex_a_mission_4
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Identify what contaminants the reactor effluent carries and which product specifications they threaten."
+      - "Link the aqueous catalyst feed to a downstream water-removal obligation."
+      - "Recognise that immiscible phases should be split before further separation."
+      - "Avoid specifying a separation technology before the physical property basis exists."
+      - "Include organic vapor recovery as both a feedstock-recovery and a VOC-control measure."
+
+    briefing:
+      senior_engineer_message: >
+        The reactor section is defined. Now we move downstream. The Solvex-A product leaves
+        the reactor carrying water from the catalyst solution, light impurity X from Feed A,
+        and a small fraction of unreacted Feed A. Your task is to select the separation-section
+        design decisions that are directly supported by the product specification and the process
+        information we have so far. Do not choose a specific separation technology unless the
+        data in front of you justifies it.
+
+    instructions:
+      prompt: >
+        Select the separation-section design-basis decisions that are justified by the information
+        above. Avoid selecting a specific separation technology that requires physical property data
+        not yet provided.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 6
+
+    categories:
+      - id: separation_system
+        label: "Separation System"
+      - id: heat_transfer_and_utilities
+        label: "Heat Transfer & Utilities"
+      - id: process_control_and_safety
+        label: "Process Control & Safety"
+      - id: environmental_treatment
+        label: "Environmental Treatment"
+      - id: unsupported_for_now
+        label: "Not Justified Yet"
+
+    decision_cards:
+      - id: remove_light_impurity_x
+        category: separation_system
+        label: "Include a separation step to remove light impurity X from Solvex-A"
+        type: correct
+        linked_clues:
+          - "Light impurity X must be reduced to below 1 wt%."
+          - "Final Solvex-A purity must be at least 98.5 wt%."
+        short_hint: "Impurity X and the purity target together require a dedicated removal step."
+
+      - id: include_water_removal_step_sep
+        category: separation_system
+        label: "Include a dedicated water-removal or drying step downstream of the reactor"
+        type: correct
+        linked_clues:
+          - "The reactor effluent contains water from the catalyst solution."
+          - "Final product water content must be below 0.5 wt%."
+        short_hint: "An aqueous feed input means water ends up in the product stream."
+
+      - id: phase_separation_before_drying
+        category: separation_system
+        label: "Include a liquid-liquid phase separation step to split the organic and aqueous phases before further processing"
+        type: correct
+        linked_clues:
+          - "The organic and aqueous phases from the reactor effluent are partially immiscible."
+        short_hint: "Immiscible phases can be split cheaply before more energy-intensive steps."
+
+      - id: recycle_unreacted_feed_a
+        category: separation_system
+        label: "Recover and recycle unreacted Feed A back to the reactor"
+        type: correct
+        linked_clues:
+          - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
+          - "Feed A is a flammable organic feedstock."
+        short_hint: "Discarding unreacted feedstock is a cost and a waste problem."
+
+      - id: organic_vapor_recovery_on_separation
+        category: environmental_treatment
+        label: "Include organic vapor recovery on separation-unit overhead streams before any destruction device"
+        type: correct
+        linked_clues:
+          - "Organic vapors generated during separation are flammable and must be contained."
+          - "VOC emissions must be controlled."
+        short_hint: "Recover first, then destroy — vapors from heated organic streams are both a safety and an emissions obligation."
+
+      - id: temp_limit_below_130c
+        category: separation_system
+        label: "Constrain all separation steps to operate below 130 C to prevent Solvex-A degradation"
+        type: correct
+        linked_clues:
+          - "Solvex-A is temperature-sensitive; all separation steps must operate below 130 C."
+        short_hint: "A product degradation temperature limit constrains reboiler and heater design."
+
+      - id: product_quality_checkpoint_sep
+        category: process_control_and_safety
+        label: "Include a product quality measurement point at the final separation step outlet"
+        type: correct
+        linked_clues:
+          - "Final Solvex-A purity must be at least 98.5 wt%."
+          - "Final product water content must be below 0.5 wt%."
+        short_hint: "Product specifications must be verified before the product reaches storage."
+
+      - id: size_separation_for_worst_case_feed
+        category: separation_system
+        label: "Size the separation train for the worst-case feed impurity level, not the nominal"
+        type: correct
+        linked_clues:
+          - "Feed A contains light impurity X."
+          - "Light impurity X must be reduced to below 1 wt%."
+        short_hint: "Design for the highest credible impurity load, not the average."
+
+      - id: select_cryogenic_distillation_no_data
+        category: unsupported_for_now
+        label: "Select cryogenic distillation for light impurity X removal"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Cryogenic service needs boiling point and VLE data that are not in the design basis."
+
+      - id: single_flash_to_meet_purity
+        category: separation_system
+        label: "Achieve the 98.5 wt% purity target in a single flash drum"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "A single equilibrium stage is unlikely to achieve a 98.5 wt% purity target."
+
+      - id: combine_impurity_and_water_removal
+        category: unsupported_for_now
+        label: "Combine impurity X removal and water removal in a single distillation column"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Combining two different separation objectives in one column requires VLE data to justify."
+
+      - id: skip_recycle_loss_acceptable
+        category: separation_system
+        label: "Do not recycle unreacted Feed A — the 4 to 8 percent loss is acceptable"
+        type: wrong_plausible
+        linked_clues:
+          - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
+        short_hint: "For a 5,000 tpy plant, 4 to 8 percent feed loss is 200 to 400 tonnes per year."
+
+      - id: skip_phase_separation_direct_to_column
+        category: separation_system
+        label: "Skip phase separation and send the full reactor effluent directly to a distillation column"
+        type: wrong_plausible
+        linked_clues:
+          - "The organic and aqueous phases from the reactor effluent are partially immiscible."
+        short_hint: "A two-phase immiscible feed to a distillation column creates serious operability problems."
+
+      - id: defer_all_separation_to_detailed_engineering
+        category: unsupported_for_now
+        label: "Defer all separation-section decisions to detailed engineering"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Separation-step sequence, recycle routes, and quality checkpoints must be defined at the design-basis stage."
+
+    correct_decision_ids:
+      - remove_light_impurity_x
+      - include_water_removal_step_sep
+      - phase_separation_before_drying
+      - recycle_unreacted_feed_a
+      - organic_vapor_recovery_on_separation
+      - temp_limit_below_130c
+      - product_quality_checkpoint_sep
+      - size_separation_for_worst_case_feed
+
+    wrong_but_plausible_decision_ids:
+      - select_cryogenic_distillation_no_data
+      - single_flash_to_meet_purity
+      - combine_impurity_and_water_removal
+      - skip_recycle_loss_acceptable
+      - skip_phase_separation_direct_to_column
+      - defer_all_separation_to_detailed_engineering
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "Separation basis sound"
+          message: "You correctly identified the required separation steps, the product quality checkpoint, and the constraints on technology selection. The separation section design basis is well defined."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You identified the main separation requirements, but some steps or constraints were missed. Review the feedback and re-check the product specification and effluent composition sections."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The separation design basis is not yet defensible. Re-read the effluent composition and product specification sections and select only decisions directly supported by the data."
+
+    senior_engineer_explanations:
+      correct:
+        remove_light_impurity_x: >
+          Correct. Impurity X originates from Feed A and the design basis sets both a 1 wt% limit
+          on X and a 98.5 wt% purity target. A dedicated removal step is required regardless of
+          which technology is ultimately selected.
+        include_water_removal_step_sep: >
+          Correct. Feed B is aqueous, so water enters the process at the reactor. The product
+          specification requires water below 0.5 wt%, so the separation train must include a
+          dedicated water-removal or drying step — it cannot be assumed to disappear.
+        phase_separation_before_drying: >
+          Correct. The organic and aqueous phases are partially immiscible, which means a liquid-
+          liquid decanter or settler can bulk-separate them with minimal energy. Sending an
+          immiscible two-phase mixture to a distillation column or dryer without this step first
+          creates hydraulic and operability problems.
+        recycle_unreacted_feed_a: >
+          Correct. Unreacted Feed A at 4–8% of the reactor outlet is a significant material
+          loss if discarded. For a 5,000 tpy plant, that is 200–400 tonnes per year of organic
+          feed that contributes to both feed cost and waste disposal. Recycle is the standard
+          design position pending an economic confirmation.
+        organic_vapor_recovery_on_separation: >
+          Correct. Heated separation steps generate organic vapors from the flammable feedstock
+          and product. Recovering these vapors for recycle before any destruction step is both the
+          preferred waste minimisation approach and a requirement for VOC compliance.
+        temp_limit_below_130c: >
+          Correct. A 130 C degradation limit on Solvex-A constrains how every separation unit
+          is operated. Reboiler temperature, steam supply pressure, and product-side temperatures
+          in all heat exchangers must all be checked against this limit during equipment sizing.
+        product_quality_checkpoint_sep: >
+          Correct. The 98.5 wt% purity and 0.5 wt% water targets must be verified at the outlet
+          of the final separation step before the product goes to storage or dispatch. This is a
+          basic quality assurance requirement that belongs in the design basis.
+        size_separation_for_worst_case_feed: >
+          Correct. Feed specifications always carry variability. The separation equipment must
+          meet the product quality target at the highest credible impurity load in the feed,
+          not only at the nominal or average composition.
+      incorrect:
+        select_cryogenic_distillation_no_data: >
+          Not justified. Cryogenic distillation requires a large boiling point difference between
+          the impurity and the product and specific VLE data to confirm feasibility. Neither
+          boiling points nor relative volatility data appear in this design basis. A generic
+          impurity-removal step is defensible; cryogenic service is not yet.
+        single_flash_to_meet_purity: >
+          Incorrect. A single equilibrium flash at one temperature and pressure achieves a
+          separation limited by the thermodynamic equilibrium of the system. Without very
+          favourable VLE data — which is not provided — achieving 98.5 wt% in a single
+          flash stage cannot be assumed.
+        combine_impurity_and_water_removal: >
+          Not justified. Combining removal of an organic impurity and removal of water in a
+          single column is an advanced design option that depends on relative volatilities, any
+          azeotrope behaviour, and feasibility studies. Without VLE data, this cannot be
+          specified.
+        skip_recycle_loss_acceptable: >
+          Incorrect. A 4–8% feedstock loss is rarely acceptable economically or environmentally.
+          Recycle feasibility must be assessed and either confirmed or rejected with calculation —
+          it cannot be dismissed by assumption at the design-basis stage.
+        skip_phase_separation_direct_to_column: >
+          Incorrect. Feeding an immiscible organic-aqueous two-phase liquid directly to a
+          distillation column disrupts tray or packing hydraulics. Phase separation upstream
+          is standard practice when the phases are known to be immiscible, as stated in the
+          design basis.
+        defer_all_separation_to_detailed_engineering: >
+          Not justified. The separation-step sequence, recycle routes, product quality checkpoints,
+          and key constraints on temperature and technology must all appear in the design basis.
+          Deferring everything leaves the detailed engineering team without a defined scope.
+      missed:
+        default: >
+          Missed decision. This selection is directly supported by the reactor effluent composition,
+          product specification, or separation constraints. Re-check those sections of the design basis.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required separation decisions."
+      - "You missed {missed_count} required decisions."
+      - "You selected {incorrect_selected_count} unsupported decisions."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_4
+    version: 0.1.0
+    title: "Mission 4: Count the Heat"
+    short_title: "Count the Heat"
+    mission_number: 4
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: heat_transfer_and_utilities
+      name: "Heat Transfer & Utilities"
+      gantt_position: 4
+      unlocks_on_pass:
+        - "Safety Systems Overview"
+        - "Mission 5: Layers of Protection"
+    unlock:
+      unlocks_on_pass:
+        - "Safety Systems Overview"
+        - "Mission 5: Layers of Protection"
+      next_mission_id: solvex_a_mission_5
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Enumerate all process heat demands across the full plant, not just the reactor."
+      - "Match heating medium to temperature requirements before specifying equipment."
+      - "Recognise that summer cooling-water limitations constrain every cooler and condenser, not only the reactor."
+      - "Identify heat recovery opportunities between hot and cold process streams."
+      - "Avoid specifying premium utilities when lower-grade alternatives are already available and adequate."
+
+    briefing:
+      senior_engineer_message: >
+        We have defined the reactor and the separation train. Now we need to account for all the
+        heat the plant adds and removes, and confirm that the utilities available can actually
+        deliver it. The summer cooling-water limitation is not just a reactor problem — it
+        affects every cooler and condenser in the plant. Your task is to identify the utility
+        and heat-transfer design decisions that belong in the design basis at this stage.
+
+    instructions:
+      prompt: >
+        Select the heat-transfer and utilities design-basis decisions that are justified by the
+        information above. Avoid specifying detailed equipment sizes or premium utilities where
+        lower-grade options are already available and adequate.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 6
+
+    categories:
+      - id: heat_transfer_and_utilities
+        label: "Heat Transfer & Utilities"
+      - id: reactor_system
+        label: "Reactor System"
+      - id: separation_system
+        label: "Separation System"
+      - id: unsupported_for_now
+        label: "Not Justified Yet"
+
+    decision_cards:
+      - id: list_all_heat_demands_across_plant
+        category: heat_transfer_and_utilities
+        label: "Enumerate all process heat demands across the full plant before sizing any utility system"
+        type: correct
+        linked_clues:
+          - "The reactor generates heat requiring cooling."
+          - "The separation train requires a reboiler and a condenser."
+          - "The drying step requires low-grade heat."
+        short_hint: "The utility system must cover all demands, not just the reactor."
+
+      - id: match_lp_steam_to_reboiler_duty
+        category: heat_transfer_and_utilities
+        label: "Use low-pressure steam as the preferred heating medium for separation reboiler and drying duties below 150 C"
+        type: correct
+        linked_clues:
+          - "Low-pressure steam is available and is the preferred heating medium for duties below 150 C."
+          - "Solvex-A separation steps must operate below 130 C."
+        short_hint: "LP steam covers the temperature range and is the preferred lower-cost option."
+
+      - id: size_cw_against_summer_limit
+        category: heat_transfer_and_utilities
+        label: "Size all coolers and condensers using the summer cooling-water conditions as the governing case"
+        type: correct
+        linked_clues:
+          - "Cooling water is limited to 50 m3/h during summer peak demand."
+          - "Cooling water supply temperature is 32 C in summer."
+          - "Maximum cooling water return temperature is 45 C."
+        short_hint: "Summer conditions constrain every piece of cooling equipment across the plant."
+
+      - id: assess_heat_recovery_effluent_to_feed
+        category: heat_transfer_and_utilities
+        label: "Assess heat recovery opportunity between hot reactor effluent and cold feed streams"
+        type: correct
+        linked_clues:
+          - "The hot reactor effluent enters the separation section at elevated temperature."
+          - "Cold feed streams enter the process at ambient temperature."
+          - "Heat recovery has not been assessed yet."
+        short_hint: "Using process heat to preheat feeds reduces steam demand and cooling load."
+
+      - id: flag_summer_cw_constraint_for_all_cooling
+        category: heat_transfer_and_utilities
+        label: "Flag the summer cooling-water supply limit as a design constraint for all coolers and condensers, not only the reactor"
+        type: correct
+        linked_clues:
+          - "Cooling water total supply is limited to 50 m3/h during summer peak demand."
+        short_hint: "The total cooling water budget must cover every consumer, not just the biggest one."
+
+      - id: confirm_lp_steam_temp_adequate_for_reboiler
+        category: heat_transfer_and_utilities
+        label: "Confirm that low-pressure steam saturation temperature is adequate for all reboiler and heater duties before specifying steam supply pressure"
+        type: correct
+        linked_clues:
+          - "Low-pressure steam is available and preferred for duties below 150 C."
+          - "All separation steps must operate below 130 C."
+        short_hint: "Steam pressure sets saturation temperature; check it matches the process duty before committing."
+
+      - id: include_utility_balance_in_design_basis
+        category: heat_transfer_and_utilities
+        label: "Include a utility balance summary covering steam, cooling water, and electricity in the design basis before heat exchanger sizing begins"
+        type: correct
+        linked_clues:
+          - "Utility balance calculations are outside scope at this stage, but demands must be identified."
+        short_hint: "Identifying all demands now prevents surprise utility shortfalls in detailed design."
+
+      - id: account_for_heat_tracing_needs
+        category: heat_transfer_and_utilities
+        label: "Account for heat tracing requirements for lines carrying high-viscosity or high-freezing-point materials"
+        type: correct
+        linked_clues:
+          - "Feed A is a liquid organic feedstock."
+          - "Feed B is an aqueous catalyst solution."
+        short_hint: "Organic and aqueous lines may need tracing to remain pumpable in cold ambient conditions."
+
+      - id: fired_heater_for_reboiler_no_justification
+        category: unsupported_for_now
+        label: "Install a direct-fired heater for the separation reboiler"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "A fired heater is justified only when steam temperature is insufficient — LP steam covers the separation duty here."
+
+      - id: refrigeration_for_condensers_no_data
+        category: unsupported_for_now
+        label: "Specify refrigeration for overhead condensers because cooling water may not be cold enough"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Refrigeration requires evidence that cooling water temperature is inadequate. No such evidence appears in this design basis."
+
+      - id: design_coolers_on_winter_cw_only
+        category: heat_transfer_and_utilities
+        label: "Design all coolers using winter cooling water temperature only"
+        type: wrong_plausible
+        linked_clues:
+          - "Cooling water supply temperature is 25 C in winter and 32 C in summer."
+        short_hint: "Summer is the governing case for cooling equipment — winter is the best case, not the design case."
+
+      - id: skip_heat_recovery_plant_too_small
+        category: heat_transfer_and_utilities
+        label: "Assume heat recovery is not worthwhile at this plant scale without any calculation"
+        type: wrong_plausible
+        linked_clues:
+          - "The hot reactor effluent enters the separation section at elevated temperature."
+        short_hint: "Heat recovery potential must be assessed, not assumed away based on plant size."
+
+      - id: size_steam_on_reactor_only
+        category: heat_transfer_and_utilities
+        label: "Size the steam supply based on reactor heating needs only, ignoring the separation train and drying step"
+        type: wrong_plausible
+        linked_clues:
+          - "The separation train requires a reboiler."
+          - "The drying step requires low-grade heat input."
+        short_hint: "The steam supply must cover all heating consumers across the plant, not just the reactor."
+
+    correct_decision_ids:
+      - list_all_heat_demands_across_plant
+      - match_lp_steam_to_reboiler_duty
+      - size_cw_against_summer_limit
+      - assess_heat_recovery_effluent_to_feed
+      - flag_summer_cw_constraint_for_all_cooling
+      - confirm_lp_steam_temp_adequate_for_reboiler
+      - include_utility_balance_in_design_basis
+      - account_for_heat_tracing_needs
+
+    wrong_but_plausible_decision_ids:
+      - fired_heater_for_reboiler_no_justification
+      - refrigeration_for_condensers_no_data
+      - design_coolers_on_winter_cw_only
+      - skip_heat_recovery_plant_too_small
+      - size_steam_on_reactor_only
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "Utility basis well defined"
+          message: "You identified all major heat demands, matched the available utilities to the process needs, and correctly flagged the summer cooling-water limit as the governing constraint across the full plant."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You caught the main utility requirements, but some demands were missed or the wrong utility was specified. Review the feedback before moving on."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The heat and utility basis is not yet defensible. Re-read all heat demand and utility supply sections and ensure the summer case governs your cooling decisions."
+
+    senior_engineer_explanations:
+      correct:
+        list_all_heat_demands_across_plant: >
+          Correct. The utility system must supply or remove heat for every consumer in the plant.
+          Missing even one demand at the design-basis stage can leave the utility supply undersized
+          and require expensive retrofits later.
+        match_lp_steam_to_reboiler_duty: >
+          Correct. LP steam is available, preferred, and its saturation temperature covers the
+          separation reboiler and drying duties that must stay below 130 C. Specifying a higher-
+          grade utility without need adds cost without benefit.
+        size_cw_against_summer_limit: >
+          Correct. The summer cooling-water supply is the binding constraint for all cooling
+          equipment across the plant. A condenser or cooler sized on winter conditions will
+          underperform in summer regardless of how well the reactor cooling is designed.
+        assess_heat_recovery_effluent_to_feed: >
+          Correct. A hot reactor effluent stream and cold feed streams arriving at ambient
+          temperature is a classic heat recovery opportunity. Assessing this now reduces
+          steam demand and cooling load and may change equipment sizing significantly.
+        flag_summer_cw_constraint_for_all_cooling: >
+          Correct. The 50 m3/h summer limit is a plant-wide budget shared across the reactor
+          cooler, separation condensers, and any other cooling consumers. Every cooling duty
+          competes for the same limited resource.
+        confirm_lp_steam_temp_adequate_for_reboiler: >
+          Correct. LP steam saturation temperature depends on supply pressure. Confirming it
+          is above the required reboiler temperature before committing to LP steam prevents
+          a situation where the specified utility cannot actually deliver the required duty.
+        include_utility_balance_in_design_basis: >
+          Correct. Identifying all steam, cooling water, and electrical demands now allows
+          the utility system to be scoped correctly before detailed equipment design begins.
+          A utility balance is a standard design-basis deliverable.
+        account_for_heat_tracing_needs: >
+          Correct. Liquid organics and aqueous catalyst solutions may become viscous or
+          freeze in cold ambient conditions if lines are not heat-traced. This is a utility
+          demand that should be acknowledged in the design basis even before tracing design.
+      incorrect:
+        fired_heater_for_reboiler_no_justification: >
+          Not justified. A fired heater is appropriate when steam temperature is genuinely
+          insufficient for the required duty. LP steam covers the separation temperature
+          range here. Adding a fired heater without a temperature-gap justification introduces
+          unnecessary capital cost and safety complexity.
+        refrigeration_for_condensers_no_data: >
+          Not justified. Refrigeration is appropriate when cooling water temperature is
+          too high to achieve the required condensing temperature. No data in this design
+          basis shows that 32 C summer cooling water is inadequate for the condenser duty.
+          This cannot be specified without evidence.
+        design_coolers_on_winter_cw_only: >
+          Incorrect. Winter conditions are the best case for cooling, not the design case.
+          A cooler or condenser sized on 25 C winter supply will be undersized when 32 C
+          summer supply arrives, exactly when cooling demand may be at its highest.
+        skip_heat_recovery_plant_too_small: >
+          Not justified. Heat recovery potential depends on stream temperatures, duties, and
+          capital cost of exchangers — not on plant size as a rule of thumb. This must be
+          assessed before it can be dismissed.
+        size_steam_on_reactor_only: >
+          Incorrect. The separation reboiler and drying step are both steam consumers. A
+          steam supply scoped only for the reactor may be significantly undersized for the
+          full plant, creating an infrastructure gap that is expensive to correct later.
+      missed:
+        default: >
+          Missed decision. This selection is directly supported by the utility supply data or
+          the plant heat demands described in the design basis. Re-check those sections.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required utility decisions."
+      - "You missed {missed_count} required decisions."
+      - "You selected {incorrect_selected_count} unsupported decisions."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_5
+    version: 0.1.0
+    title: "Mission 5: Layers of Protection"
+    short_title: "Layers of Protection"
+    mission_number: 5
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: safety_systems
+      name: "Safety Systems"
+      gantt_position: 5
+      unlocks_on_pass:
+        - "Environmental Controls Overview"
+        - "Mission 6: What Leaves the Fence"
+    unlock:
+      unlocks_on_pass:
+        - "Environmental Controls Overview"
+        - "Mission 6: What Leaves the Fence"
+      next_mission_id: solvex_a_mission_6
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Identify plant-wide safety requirements implied by flammable feeds, corrosive materials, and a credible exothermic runaway."
+      - "Distinguish between process control and independent safety protection layers."
+      - "Recognise that a formal hazard review must precede detailed safety design."
+      - "Apply the principle that relief and vent discharges must go to a safe disposal system."
+      - "Avoid over-specifying safety measures before hazard analysis data is available."
+
+    briefing:
+      senior_engineer_message: >
+        We have defined the process. Now we think about what happens when things go wrong.
+        This plant handles a flammable organic feed, a corrosive catalyst, and runs an
+        exothermic reaction with a credible runaway scenario. Your task is to identify the
+        plant-wide safety-system design decisions that are directly supported by the hazard
+        information in the design basis — and to recognise what cannot yet be specified
+        without a formal hazard study.
+
+    instructions:
+      prompt: >
+        Select the plant-wide safety-system design decisions that are justified by the hazard
+        information above. Avoid specifying detailed safety designs that require hazard study
+        outputs not yet available.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 7
+
+    categories:
+      - id: process_control_and_safety
+        label: "Process Control & Safety"
+      - id: reactor_system
+        label: "Reactor System"
+      - id: environmental_treatment
+        label: "Environmental Containment"
+      - id: unsupported_for_now
+        label: "Not Justified Yet"
+
+    decision_cards:
+      - id: hazardous_area_classification_feed_a
+        category: process_control_and_safety
+        label: "Classify Feed A storage and handling areas as hazardous for electrical equipment selection"
+        type: correct
+        linked_clues:
+          - "Feed A is a flammable liquid organic. Vapors can form an ignitable mixture with air."
+          - "Hazardous area classification is required for all areas where a flammable atmosphere may exist."
+        short_hint: "Flammable liquid handling areas require hazardous area zone classification."
+
+      - id: emergency_isolation_valves_feed_a
+        category: process_control_and_safety
+        label: "Include emergency isolation valves on flammable Feed A supply lines to the process"
+        type: correct
+        linked_clues:
+          - "Feed A is a flammable liquid organic."
+          - "An emergency shutdown system is required."
+        short_hint: "Isolating the flammable feed supply is a primary ESD action."
+
+      - id: plant_esd_system
+        category: process_control_and_safety
+        label: "Specify a plant emergency shutdown system to safely isolate and depressurize all process sections"
+        type: correct
+        linked_clues:
+          - "An emergency shutdown system is required to safely isolate and depressurize the plant."
+        short_hint: "ESD is explicitly required by the design basis."
+
+      - id: fire_and_gas_detection
+        category: process_control_and_safety
+        label: "Include a fire and gas detection system covering all flammable material handling areas"
+        type: correct
+        linked_clues:
+          - "Feed A is a flammable liquid organic. Vapors can form an ignitable mixture with air."
+          - "Hazardous area classification is required."
+        short_hint: "Gas detection is a standard first layer of protection for flammable feed areas."
+
+      - id: bunding_for_liquid_storage
+        category: environmental_treatment
+        label: "Provide liquid containment bunding for all chemical storage areas including Feed A and Feed B"
+        type: correct
+        linked_clues:
+          - "Feed A is a flammable liquid organic."
+          - "Feed B is a corrosive aqueous catalyst solution."
+        short_hint: "Bunding contains spills of both flammable and corrosive liquids."
+
+      - id: mandate_hazop_before_detailed_design
+        category: process_control_and_safety
+        label: "Require a formal hazard and operability study to be completed before detailed safety engineering begins"
+        type: correct
+        linked_clues:
+          - "A formal hazard and operability study is required before detailed engineering begins."
+          - "Safety system design requires hazard study outputs before it can be completed."
+        short_hint: "HAZOP is a design-basis commitment, not an optional later step."
+
+      - id: identify_relief_scenarios_reactor_and_separation
+        category: reactor_system
+        label: "Identify all relief device scenarios for the reactor and separation sections in the design basis"
+        type: correct
+        linked_clues:
+          - "Runaway can cause overpressure through vapor formation and gas generation."
+          - "Detailed relief system sizing is outside scope at this stage."
+        short_hint: "Identifying scenarios is within design-basis scope; sizing devices is not."
+
+      - id: closed_safe_disposal_for_relief_and_vents
+        category: process_control_and_safety
+        label: "Route all pressure relief and emergency venting to a closed safe disposal system"
+        type: correct
+        linked_clues:
+          - "Feed A is flammable."
+          - "Solvex-A is a specialty organic; hazard properties are under review."
+          - "Runaway generates vapor and decomposition gases."
+        short_hint: "Open-atmosphere relief discharge is not acceptable for flammable or potentially toxic streams."
+
+      - id: passive_fire_protection_steelwork
+        category: process_control_and_safety
+        label: "Specify passive fire protection for structural steelwork supporting vessels in hazardous areas"
+        type: correct
+        linked_clues:
+          - "Feed A is a flammable liquid organic."
+          - "The plant handles flammable materials in process areas."
+        short_hint: "A pool fire under structural steel can cause vessel collapse; PFP maintains structural integrity."
+
+      - id: atex_zone_0_entire_plant
+        category: unsupported_for_now
+        label: "Classify the entire plant as ATEX Zone 0 as a conservative blanket approach"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Zone classification must be based on a study, not applied blanket to avoid the analysis."
+
+      - id: operator_procedures_only_for_esd
+        category: process_control_and_safety
+        label: "Rely on operator procedures alone for all emergency actions without automatic ESD logic"
+        type: wrong_plausible
+        linked_clues:
+          - "An emergency shutdown system is required."
+          - "Independent layers of protection are required for the reactor runaway hazard."
+        short_hint: "Human response alone is not an independent protection layer for a credible runaway."
+
+      - id: size_all_relief_valves_now
+        category: unsupported_for_now
+        label: "Perform full relief valve sizing calculations for all vessels at this design-basis stage"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Detailed relief valve sizing requires hazard study outputs and stream data not yet available."
+
+      - id: extra_controllers_as_safety_layers
+        category: process_control_and_safety
+        label: "Add redundant process controllers as the safety protection layer for the runaway hazard"
+        type: wrong_plausible
+        linked_clues:
+          - "Safety instrumented functions must be independent of the basic process control system."
+        short_hint: "The basic process control system is not an independent safety layer."
+
+      - id: skip_bunding_for_feed_b
+        category: environmental_treatment
+        label: "Omit secondary containment for Feed B storage because it is aqueous and not classified as flammable"
+        type: wrong_plausible
+        linked_clues:
+          - "Feed B is a corrosive aqueous catalyst solution at high concentration."
+        short_hint: "Bunding is required for corrosive materials regardless of flammability classification."
+
+      - id: assign_sil_before_hazop
+        category: unsupported_for_now
+        label: "Assign SIL ratings to all safety instrumented functions before the hazard study is completed"
+        type: wrong_plausible
+        linked_clues:
+          - "A formal hazard and operability study is required before detailed engineering begins."
+          - "Safety system design requires hazard study outputs."
+        short_hint: "SIL determination requires hazard frequency and consequence data from the hazard study."
+
+    correct_decision_ids:
+      - hazardous_area_classification_feed_a
+      - emergency_isolation_valves_feed_a
+      - plant_esd_system
+      - fire_and_gas_detection
+      - bunding_for_liquid_storage
+      - mandate_hazop_before_detailed_design
+      - identify_relief_scenarios_reactor_and_separation
+      - closed_safe_disposal_for_relief_and_vents
+      - passive_fire_protection_steelwork
+
+    wrong_but_plausible_decision_ids:
+      - atex_zone_0_entire_plant
+      - operator_procedures_only_for_esd
+      - size_all_relief_valves_now
+      - extra_controllers_as_safety_layers
+      - skip_bunding_for_feed_b
+      - assign_sil_before_hazop
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "Safety basis well defined"
+          message: "You identified the key plant-wide safety requirements, applied independent-layers-of-protection thinking, and correctly deferred detailed safety design until after the hazard study."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You caught the main safety requirements, but some protection measures were missed or incorrectly specified. Review the feedback and re-check the hazard summary and protection philosophy."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The safety-system design basis is not yet defensible. Re-read the hazard summary, regulatory requirements, and protection philosophy, and select only decisions directly supported by the data."
+
+    senior_engineer_explanations:
+      correct:
+        hazardous_area_classification_feed_a: >
+          Correct. Feed A is a flammable liquid that can form an ignitable vapor-air mixture.
+          Electrical equipment in areas where this vapor may be present must be rated for the
+          zone classification. This is a regulatory requirement as well as a design-basis decision.
+        emergency_isolation_valves_feed_a: >
+          Correct. Cutting off the flammable feed supply is a primary action during any
+          major process emergency. Emergency isolation valves on Feed A lines are a fundamental
+          ESD requirement for flammable liquid handling.
+        plant_esd_system: >
+          Correct. The design basis explicitly requires an ESD system. At this stage the task
+          is to confirm it must exist and that it covers all process sections. ESD logic and
+          final design come later, after the hazard study.
+        fire_and_gas_detection: >
+          Correct. Gas and flame detection is a standard first layer of protection and early
+          warning system for any plant handling flammable materials. It is a design-basis
+          requirement that must be confirmed before the detailed design can be scoped.
+        bunding_for_liquid_storage: >
+          Correct. Secondary containment bunding prevents flammable Feed A spills from spreading
+          to ignition sources and confines corrosive Feed B spills to a controlled area.
+          Both materials require bunding regardless of their different hazard classifications.
+        mandate_hazop_before_detailed_design: >
+          Correct. HAZOP is a design-basis commitment, not an optional later exercise. It must
+          be completed before safety-critical equipment is specified so that the hazard analysis
+          drives the design rather than confirming it retrospectively.
+        identify_relief_scenarios_reactor_and_separation: >
+          Correct. Identifying which scenarios can cause overpressure is within design-basis
+          scope — it defines what the relief system must handle. Sizing the devices themselves
+          requires detailed data and is a separate later step.
+        closed_safe_disposal_for_relief_and_vents: >
+          Correct. Relieving flammable or potentially toxic vapors to open atmosphere creates
+          a secondary fire or toxicity hazard. All relief and emergency vent discharge must
+          be directed to a disposal system — a flare, thermal oxidizer, or scrubber — before
+          the stream reaches atmosphere.
+        passive_fire_protection_steelwork: >
+          Correct. A pool fire under structural steel can heat it to failure temperature within
+          minutes, causing vessel collapse and escalation. Passive fire protection on structural
+          members in hazardous areas is standard practice for plants handling flammable liquids.
+      incorrect:
+        atex_zone_0_entire_plant: >
+          Not justified. Zone 0 means a flammable atmosphere is present continuously or for
+          long periods. Applying it blanket to the entire plant avoids the zone analysis work
+          but massively over-specifies electrical equipment and drives unnecessary cost. A
+          zone classification study is required.
+        operator_procedures_only_for_esd: >
+          Not justified. Human response time and reliability are insufficient as the sole
+          protection layer for a credible exothermic runaway. The design basis requires
+          independent protection layers, which means automatic systems that do not depend
+          on operator action alone.
+        size_all_relief_valves_now: >
+          Not justified. Relief valve sizing requires knowledge of the worst credible case
+          for each vessel, including fire case, blocked outlet, runaway, and other scenarios.
+          This data comes from the hazard study, which has not yet been performed.
+        extra_controllers_as_safety_layers: >
+          Incorrect. The basic process control system and the safety instrumented system
+          must be independent. Adding more controllers to the BPCS does not create
+          independent safety layers — it reinforces the same layer that is already counted.
+        skip_bunding_for_feed_b: >
+          Incorrect. Corrosive materials require secondary containment to protect personnel,
+          infrastructure, and the environment from spills, regardless of whether they are
+          flammable. Feed B is explicitly described as corrosive at high concentration.
+        assign_sil_before_hazop: >
+          Not justified. SIL determination requires tolerable risk targets, initiating event
+          frequencies, and consequence severities — all outputs of the hazard study. Assigning
+          SIL levels before the study produces numbers without technical basis.
+      missed:
+        default: >
+          Missed decision. This selection is directly supported by the hazard summary,
+          regulatory requirements, or protection philosophy described in the design basis.
+          Re-check those sections.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required safety decisions."
+      - "You missed {missed_count} required decisions."
+      - "You selected {incorrect_selected_count} unsupported decisions."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_6
+    version: 0.1.0
+    title: "Mission 6: What Leaves the Fence"
+    short_title: "What Leaves the Fence"
+    mission_number: 6
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: environmental_controls
+      name: "Environmental Controls"
+      gantt_position: 6
+      unlocks_on_pass:
+        - "PFD Assembly Basics"
+        - "Mission 7: Draw the Process"
+    unlock:
+      unlocks_on_pass:
+        - "PFD Assembly Basics"
+        - "Mission 7: Draw the Process"
+      next_mission_id: solvex_a_mission_7
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Identify all streams that leave the plant boundary: vents, wastewater, and solid waste."
+      - "Map emission sources to required control technologies."
+      - "Recognise that environmental permit applications require quantified emission estimates."
+      - "Apply the waste-minimisation hierarchy: recover before destroying, contain before treating."
+      - "Avoid over-specifying treatment systems before waste characterisation data is available."
+
+    briefing:
+      senior_engineer_message: >
+        Everything that leaves the plant boundary is regulated. Atmospheric vents, wastewater
+        discharge, and solid waste all need to be defined and controlled before we can apply
+        for operating permits. Your task is to identify the environmental control decisions
+        that are directly supported by the process description and the regulatory requirements
+        in the design basis. Be precise about what you know now and what needs more data.
+
+    instructions:
+      prompt: >
+        Select the environmental control design decisions that are justified by the information
+        above. Avoid specifying detailed treatment technology designs before waste characterisation
+        data is available.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 6
+
+    categories:
+      - id: environmental_treatment
+        label: "Environmental Treatment"
+      - id: process_control_and_safety
+        label: "Monitoring & Containment"
+      - id: separation_system
+        label: "Recovery Before Treatment"
+      - id: unsupported_for_now
+        label: "Not Justified Yet"
+
+    decision_cards:
+      - id: voc_recovery_or_destruction_on_all_vents
+        category: environmental_treatment
+        label: "Add VOC recovery or destruction on all process and storage vents handling organic materials"
+        type: correct
+        linked_clues:
+          - "Organic vapors can be released from storage, reactor vents, and separation overheads."
+          - "VOC emissions must be controlled."
+        short_hint: "Every vent handling organic vapors is a potential regulated VOC emission point."
+
+      - id: define_all_wastewater_streams_by_source
+        category: environmental_treatment
+        label: "Define all wastewater streams by source before designing any treatment system"
+        type: correct
+        linked_clues:
+          - "The aqueous phase contains dissolved catalyst residues and trace organics."
+          - "Equipment washing generates wash water."
+          - "Catalyst bleed streams are produced during catalyst management."
+        short_hint: "Treatment design depends on knowing what is in each wastewater stream."
+
+      - id: ph_neutralization_before_discharge
+        category: environmental_treatment
+        label: "Include pH neutralization for all acidic or basic wastewater streams before discharge"
+        type: correct
+        linked_clues:
+          - "Wastewater must be neutralized before discharge."
+          - "Feed B is a corrosive aqueous catalyst solution."
+        short_hint: "Neutralization is explicitly required for wastewater discharge."
+
+      - id: secondary_containment_all_chemical_storage
+        category: process_control_and_safety
+        label: "Specify secondary containment for all liquid chemical storage areas"
+        type: correct
+        linked_clues:
+          - "Secondary containment spill collection may produce contaminated rainwater."
+          - "Feed A is flammable. Feed B is corrosive."
+        short_hint: "Secondary containment is required for both environmental protection and safety."
+
+      - id: quantified_emission_estimates_for_permit
+        category: environmental_treatment
+        label: "Require quantified emission estimates for all regulated streams as part of the environmental permit application"
+        type: correct
+        linked_clues:
+          - "Environmental permit applications require quantified emission estimates for all regulated streams."
+        short_hint: "Operating permits require numbers, not just a list of emission points."
+
+      - id: fugitive_emission_monitoring_program
+        category: process_control_and_safety
+        label: "Include a fugitive emission monitoring program for seals, flanges, and valves in organic service"
+        type: correct
+        linked_clues:
+          - "Organic vapors can be released from the process."
+          - "VOC emissions must be controlled."
+        short_hint: "Fugitive emissions from equipment in organic service are a regulated VOC source."
+
+      - id: recover_organic_vapor_before_destruction
+        category: separation_system
+        label: "Recover organic vapors from separation and storage vents for recycle before sending to any destruction device"
+        type: correct
+        linked_clues:
+          - "Separation overhead streams contain organic vapors."
+          - "Product storage tanks emit vapors during filling."
+        short_hint: "Recover and recycle first — destruction is the last resort in the waste minimisation hierarchy."
+
+      - id: define_disposal_route_for_solid_waste
+        category: environmental_treatment
+        label: "Confirm the disposal route for catalyst residues and solid waste in the design basis"
+        type: correct
+        linked_clues:
+          - "Spent catalyst and filter residues are generated in small quantities."
+        short_hint: "Even small quantities of hazardous solid waste need a confirmed disposal route in the design basis."
+
+      - id: full_biological_ww_treatment_no_data
+        category: unsupported_for_now
+        label: "Design a full biological wastewater treatment plant at this stage"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Biological treatment feasibility depends on organic loading and biodegradability data not yet available."
+
+      - id: open_flame_flare_for_voc_control
+        category: unsupported_for_now
+        label: "Use open-flame flaring as the primary VOC control method"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Open-flame flaring is over-engineered for a small specialty chemical plant and creates ignition risk."
+
+      - id: fugitive_emissions_negligible_no_basis
+        category: unsupported_for_now
+        label: "Treat fugitive emissions from equipment as negligible at the design-basis stage without any basis"
+        type: wrong_plausible
+        linked_clues:
+          - "VOC emissions must be controlled."
+        short_hint: "Fugitive emissions are a regulated VOC source — dismissing them without data is not defensible."
+
+      - id: skip_secondary_containment_for_feed_b_aqueous
+        category: environmental_treatment
+        label: "Omit secondary containment for Feed B because it is aqueous and therefore low environmental risk"
+        type: wrong_plausible
+        linked_clues:
+          - "Feed B is a corrosive aqueous catalyst solution at high concentration."
+        short_hint: "Aqueous does not mean environmentally benign — a corrosive catalyst solution requires containment."
+
+      - id: discharge_wastewater_after_neutralization_only
+        category: environmental_treatment
+        label: "Discharge process wastewater to drain after neutralization with no further quality check"
+        type: wrong_plausible
+        linked_clues:
+          - "The aqueous phase contains dissolved catalyst residues and trace organics."
+          - "Wastewater must be neutralized before discharge."
+        short_hint: "Neutralization addresses pH only — dissolved organics and catalyst residues may also exceed permit limits."
+
+    correct_decision_ids:
+      - voc_recovery_or_destruction_on_all_vents
+      - define_all_wastewater_streams_by_source
+      - ph_neutralization_before_discharge
+      - secondary_containment_all_chemical_storage
+      - quantified_emission_estimates_for_permit
+      - fugitive_emission_monitoring_program
+      - recover_organic_vapor_before_destruction
+      - define_disposal_route_for_solid_waste
+
+    wrong_but_plausible_decision_ids:
+      - full_biological_ww_treatment_no_data
+      - open_flame_flare_for_voc_control
+      - fugitive_emissions_negligible_no_basis
+      - skip_secondary_containment_for_feed_b_aqueous
+      - discharge_wastewater_after_neutralization_only
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "Environmental basis complete"
+          message: "You identified all emission sources, applied the recover-before-destroy hierarchy, and correctly deferred treatment design until waste characterisation data is available."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You identified the main environmental requirements, but some emission sources or control measures were missed. Review the feedback before moving on."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The environmental design basis is not yet defensible. Re-read all emission source and wastewater sections and ensure every regulated stream has an identified control measure."
+
+    senior_engineer_explanations:
+      correct:
+        voc_recovery_or_destruction_on_all_vents: >
+          Correct. Every vent point handling organic vapors — reactor, separation overheads,
+          storage tanks — is a potential regulated VOC emission source. VOC control is explicitly
+          required in the design basis and must be addressed for each source.
+        define_all_wastewater_streams_by_source: >
+          Correct. Different wastewater streams carry different contaminants: the aqueous
+          separator stream carries catalyst residues and trace organics, wash water carries
+          trace process materials, and catalyst bleed is high-concentration catalyst.
+          Each stream needs to be characterised before any treatment system can be designed.
+        ph_neutralization_before_discharge: >
+          Correct. Neutralization before discharge is explicitly stated in the design basis.
+          The catalyst solution is corrosive, so the aqueous phase leaving the process is
+          likely acidic or basic and must be brought to an acceptable pH range.
+        secondary_containment_all_chemical_storage: >
+          Correct. Secondary containment prevents both a safety incident (flammable Feed A
+          spread to an ignition source) and an environmental incident (corrosive or contaminated
+          liquid reaching soil or drainage). It is required for all liquid chemical storage.
+        quantified_emission_estimates_for_permit: >
+          Correct. Environmental regulators require numbers in permit applications, not just
+          a list of control technologies. Identifying the obligation to quantify emissions at
+          the design-basis stage ensures that emission data is collected as part of the design
+          process rather than scrambled for at permit submission time.
+        fugitive_emission_monitoring_program: >
+          Correct. Flanges, valve stems, pump seals, and other equipment in organic service
+          emit small but aggregated quantities of organic vapor. These fugitive emissions are
+          a regulated VOC source and require a monitoring programme under most jurisdictions.
+        recover_organic_vapor_before_destruction: >
+          Correct. The waste minimisation hierarchy puts recovery and reuse above treatment
+          and disposal. Recovering organic vapors from separation and storage vents for
+          recycle recovers feedstock value and reduces the load on any downstream VOC
+          destruction device.
+        define_disposal_route_for_solid_waste: >
+          Correct. Catalyst residues and filter solids, even in small quantities, may be
+          classified as hazardous waste requiring specific handling, transport, and disposal.
+          The disposal route must be confirmed in the design basis before the plant is built,
+          not after it is operating.
+      incorrect:
+        full_biological_ww_treatment_no_data: >
+          Not justified. Biological treatment requires knowledge of biodegradable organic
+          loading, inhibitory substances, and minimum temperature for effective treatment.
+          None of this data appears in the current design basis. Specifying a full biological
+          treatment plant now is premature.
+        open_flame_flare_for_voc_control: >
+          Not justified. Open-flame flaring is appropriate for large petrochemical plants with
+          high hydrocarbon flow rates. For a small specialty chemical plant, a flare creates
+          ignition risk near flammable feed areas and is likely over-engineered relative to
+          the VOC volumes involved.
+        fugitive_emissions_negligible_no_basis: >
+          Not justified. A regulatory permit application for a plant handling organic materials
+          requires fugitive emission estimates. Declaring them negligible without measurement
+          or calculation data is not a defensible position with regulators.
+        skip_secondary_containment_for_feed_b_aqueous: >
+          Incorrect. Aqueous classification does not mean the stream is environmentally benign.
+          Feed B is a corrosive catalyst solution at high concentration. A spill would damage
+          infrastructure, harm personnel, and potentially contaminate drainage. Secondary
+          containment is required.
+        discharge_wastewater_after_neutralization_only: >
+          Incorrect. Neutralization removes the pH problem but does nothing about dissolved
+          organics, catalyst residues, or other contaminants that may have their own discharge
+          limits. A final effluent quality checkpoint is needed to confirm that all permit
+          parameters — not just pH — are met before discharge.
+      missed:
+        default: >
+          Missed decision. This selection is directly supported by the emission sources,
+          wastewater stream descriptions, or environmental scope in the design basis.
+          Re-check those sections.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required environmental decisions."
+      - "You missed {missed_count} required decisions."
+      - "You selected {incorrect_selected_count} unsupported decisions."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_7
+    version: 0.1.0
+    title: "Mission 7: Draw the Process"
+    short_title: "Draw the Process"
+    mission_number: 7
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: pfd_assembly
+      name: "PFD Assembly"
+      gantt_position: 7
+      unlocks_on_pass:
+        - "P&ID Introduction"
+        - "Mission 8: Tag Everything"
+    unlock:
+      unlocks_on_pass:
+        - "P&ID Introduction"
+        - "Mission 8: Tag Everything"
+      next_mission_id: solvex_a_mission_8
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Identify what a Process Flow Diagram must show versus what it must not show."
+      - "Confirm that all major process units, streams, and utility connections from the design basis appear on the PFD."
+      - "Recognise that instrument detail, pipe specifications, and mechanical data belong on the P&ID, not the PFD."
+      - "Understand the role of the stream table in making the PFD a quantitative engineering document."
+
+    briefing:
+      senior_engineer_message: >
+        The process sections are all defined. Before we get into the P&ID, we need a clean
+        Process Flow Diagram that everyone on the project — from the client to the detailed
+        engineers — can use as a reference. Your task is to select what must appear on the
+        Solvex-A conceptual PFD, and equally important, to identify what does not belong on
+        a PFD at this level.
+
+    instructions:
+      prompt: >
+        Select the items that must appear on the Solvex-A conceptual Process Flow Diagram.
+        Also identify items that are incorrectly included at PFD level.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 6
+
+    categories:
+      - id: reactor_system
+        label: "Process Units on PFD"
+      - id: heat_transfer_and_utilities
+        label: "Streams & Utilities on PFD"
+      - id: separation_system
+        label: "Stream Table"
+      - id: unsupported_for_now
+        label: "Not PFD Level"
+
+    decision_cards:
+      - id: all_major_process_units_as_labeled_blocks
+        category: reactor_system
+        label: "Show all major process units as labeled blocks: reactor, decanter, separation column, dryer, feed drums, product storage, and treatment units"
+        type: correct
+        linked_clues:
+          - "A Process Flow Diagram shows the major process units."
+          - "Confirmed process sections include reactor, decanter, separation column, dryer, and treatment units."
+        short_hint: "Every confirmed process section must appear on the PFD as a labeled block."
+
+      - id: all_main_streams_with_flow_direction
+        category: heat_transfer_and_utilities
+        label: "Show all main process streams with flow direction arrows connecting the units"
+        type: correct
+        linked_clues:
+          - "A Process Flow Diagram shows the main process streams."
+          - "All main process streams must have flow direction shown."
+        short_hint: "Streams without direction arrows are not readable as a process flow diagram."
+
+      - id: utility_connections_at_each_major_unit
+        category: heat_transfer_and_utilities
+        label: "Show utility connections at each major process unit: steam in and out, cooling water in and out"
+        type: correct
+        linked_clues:
+          - "The PFD shows key utility connections."
+          - "The reactor requires cooling. The separation reboiler requires steam."
+        short_hint: "Key utility inlets and outlets belong on the PFD at each consuming unit."
+
+      - id: recycle_stream_on_pfd
+        category: heat_transfer_and_utilities
+        label: "Show the unreacted Feed A recycle stream from the separation section back to the reactor"
+        type: correct
+        linked_clues:
+          - "Recycle: Unreacted Feed A recycle from separation back to reactor."
+          - "All main process streams must have flow direction shown."
+        short_hint: "Recycle streams are main process streams and must appear on the PFD."
+
+      - id: wastewater_and_vent_routing_on_pfd
+        category: heat_transfer_and_utilities
+        label: "Show wastewater stream routing to environmental treatment and vapor vent stream routing to VOC control"
+        type: correct
+        linked_clues:
+          - "Environmental treatment: VOC recovery unit and wastewater neutralization unit."
+          - "The PFD is the primary document for communicating the process concept."
+        short_hint: "Environmental streams are part of the process and must be shown on the PFD."
+
+      - id: numbered_streams_for_stream_table
+        category: separation_system
+        label: "Number all main process streams for reference in the stream table"
+        type: correct
+        linked_clues:
+          - "All main streams must be numbered for reference in the stream table."
+        short_hint: "Stream numbers link the PFD drawing to the stream table data."
+
+      - id: stream_table_with_key_properties
+        category: separation_system
+        label: "Include a stream table showing temperature, pressure, phase, and approximate flow rate for all numbered streams"
+        type: correct
+        linked_clues:
+          - "The stream table must show key stream conditions: temperature, pressure, phase, and approximate flow rate."
+          - "The PFD is the primary document for communicating stream conditions."
+        short_hint: "The stream table is what makes the PFD a quantitative engineering reference."
+
+      - id: feed_entry_and_product_exit_labeled
+        category: reactor_system
+        label: "Label Feed A entry, Feed B entry, and Solvex-A product exit as named battery-limit streams"
+        type: correct
+        linked_clues:
+          - "The PFD is the primary document for communicating the process concept."
+          - "Feed preparation and product sections are confirmed process units."
+        short_hint: "Battery-limit streams are the interface between the plant and the outside world."
+
+      - id: heat_recovery_exchangers_on_pfd
+        category: heat_transfer_and_utilities
+        label: "Show heat exchangers used for feed preheat or heat recovery as process units on the PFD"
+        type: correct
+        linked_clues:
+          - "The hot reactor effluent can preheat cold feed streams."
+          - "Heat recovery between hot and cold streams was identified as an opportunity."
+        short_hint: "Heat recovery exchangers are major process units that affect stream conditions."
+
+      - id: control_valve_symbols_on_pfd
+        category: unsupported_for_now
+        label: "Show individual control valve symbols and instrument bubbles on the PFD"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Control valves and instrument symbols are P&ID level detail, not PFD."
+
+      - id: pipe_sizes_on_pfd
+        category: unsupported_for_now
+        label: "Show pipe sizes and material specifications on the PFD stream lines"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Pipe specifications belong on the P&ID and line list, not the PFD."
+
+      - id: every_drain_and_vent_on_pfd
+        category: unsupported_for_now
+        label: "Show every drain, vent purge, and sample connection on the PFD"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Individual drain and vent connections are P&ID level detail."
+
+      - id: relief_valve_symbols_on_pfd_vessels
+        category: unsupported_for_now
+        label: "Show relief valve symbols on all process vessels on the PFD"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Relief device detail — location, size, discharge routing — belongs on the P&ID."
+
+      - id: full_mechanical_equipment_list_on_pfd
+        category: unsupported_for_now
+        label: "Integrate a full equipment list with mechanical specifications into the PFD drawing"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "The equipment list is a separate document — mechanical data does not appear on the PFD."
+
+      - id: omit_env_and_utility_streams_for_simplicity
+        category: heat_transfer_and_utilities
+        label: "Omit environmental treatment and utility connections from the PFD to keep the drawing cleaner"
+        type: wrong_plausible
+        linked_clues:
+          - "The PFD is the primary document for communicating the process concept."
+        short_hint: "Omitting confirmed process sections makes the PFD an incomplete and misleading document."
+
+    correct_decision_ids:
+      - all_major_process_units_as_labeled_blocks
+      - all_main_streams_with_flow_direction
+      - utility_connections_at_each_major_unit
+      - recycle_stream_on_pfd
+      - wastewater_and_vent_routing_on_pfd
+      - numbered_streams_for_stream_table
+      - stream_table_with_key_properties
+      - feed_entry_and_product_exit_labeled
+      - heat_recovery_exchangers_on_pfd
+
+    wrong_but_plausible_decision_ids:
+      - control_valve_symbols_on_pfd
+      - pipe_sizes_on_pfd
+      - every_drain_and_vent_on_pfd
+      - relief_valve_symbols_on_pfd_vessels
+      - full_mechanical_equipment_list_on_pfd
+      - omit_env_and_utility_streams_for_simplicity
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "PFD scope well defined"
+          message: "You correctly identified all required PFD content and clearly separated it from P&ID level detail. The conceptual PFD for Solvex-A is ready to be drawn."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You captured the main PFD requirements, but some content was misclassified between PFD and P&ID level. Review the feedback before moving on."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The PFD scope is not yet correctly defined. Re-read the PFD purpose, confirmed process sections, and scope exclusions and try again."
+
+    senior_engineer_explanations:
+      correct:
+        all_major_process_units_as_labeled_blocks: >
+          Correct. Every confirmed process section must appear on the PFD as a labeled block.
+          Omitting any section creates a gap in the process narrative and misleads anyone
+          using the PFD as a reference.
+        all_main_streams_with_flow_direction: >
+          Correct. Streams without flow direction arrows are ambiguous. The PFD must show
+          how material moves through the process from feed to product and from the process
+          to environmental and utility destinations.
+        utility_connections_at_each_major_unit: >
+          Correct. Utility connections — steam, cooling water — at each process unit make
+          the PFD a complete energy and mass flow reference. They are needed to communicate
+          the utility balance and to drive later detailed design.
+        recycle_stream_on_pfd: >
+          Correct. The recycle of unreacted Feed A is a defining feature of the process
+          material balance. It affects feed rates, reactor sizing, and separation loading.
+          A PFD without the recycle stream is missing a major process feature.
+        wastewater_and_vent_routing_on_pfd: >
+          Correct. Environmental streams are part of the process and must be shown connecting
+          the treatment units to their sources. A PFD that omits wastewater and vent routing
+          gives an incomplete picture of the process to engineers, clients, and regulators.
+        numbered_streams_for_stream_table: >
+          Correct. Stream numbers are the link between the flow diagram and the stream table.
+          Without numbering, the stream table cannot be referenced and the PFD loses its
+          quantitative value.
+        stream_table_with_key_properties: >
+          Correct. The stream table elevates the PFD from a sketch to an engineering document.
+          Temperature, pressure, phase, and flow rate data at each stream make it useful for
+          sizing, checking balances, and communicating the process to others.
+        feed_entry_and_product_exit_labeled: >
+          Correct. Battery-limit streams define the interface between the plant and the outside
+          world. They must be clearly labeled so that the plant boundary and tie-in points are
+          unambiguous.
+        heat_recovery_exchangers_on_pfd: >
+          Correct. Heat recovery exchangers affect stream temperatures and energy consumption.
+          They are major process units that belong on the PFD to communicate the heat
+          integration concept.
+      incorrect:
+        control_valve_symbols_on_pfd: >
+          Incorrect. Control valve symbols, instrument bubbles, and ISA-notation details belong
+          on the P&ID. The PFD shows process function; the P&ID shows the instrumentation and
+          control that implement it.
+        pipe_sizes_on_pfd: >
+          Incorrect. Pipe sizes and material specifications belong on the P&ID and the line list.
+          Adding them to the PFD clutters the drawing and is not standard practice.
+        every_drain_and_vent_on_pfd: >
+          Incorrect. Individual drain, vent, and purge connections are P&ID level detail.
+          Including every minor connection makes the PFD unreadable and defeats its purpose
+          as a process concept document.
+        relief_valve_symbols_on_pfd_vessels: >
+          Incorrect. Relief device location, type, and discharge routing are P&ID level
+          decisions made after the hazard study. The PFD acknowledges overpressure protection
+          is required but does not specify individual relief devices.
+        full_mechanical_equipment_list_on_pfd: >
+          Incorrect. Mechanical specifications belong in the equipment list, which is a separate
+          document. Integrating it into the PFD drawing is not standard practice and overloads
+          the drawing.
+        omit_env_and_utility_streams_for_simplicity: >
+          Incorrect. A PFD that omits environmental treatment streams and utility connections
+          is incomplete. It gives a false impression that the process has no environmental
+          outputs and no utility requirements.
+      missed:
+        default: >
+          Missed decision. This item is a standard required element of a conceptual Process
+          Flow Diagram, as described in the PFD purpose and confirmed process sections.
+          Re-check those sections.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required PFD elements."
+      - "You missed {missed_count} required elements."
+      - "You selected {incorrect_selected_count} elements that do not belong on a PFD."
+      - "Final score: {score_percent}%."
+
+    telemetry_events:
+      - level_started
+      - bod_opened
+      - decision_card_selected
+      - decision_card_deselected
+      - level_submitted
+      - feedback_viewed
+      - level_passed
+      - level_retried
+
+  - id: solvex_a_mission_8
+    version: 0.1.0
+    title: "Mission 8: Tag Everything"
+    short_title: "Tag Everything"
+    mission_number: 8
+    difficulty: easy
+    status: locked
+    industry: specialty_chemicals
+    plant:
+      product: "Solvex-A"
+      product_type: "Specialty solvent additive"
+      plant_type: "Small continuous/batch hybrid chemical plant"
+      annual_capacity_tpy: 5000
+    player_role: "Junior process engineer"
+    stage:
+      id: pid_basics
+      name: "P&ID Basics"
+      gantt_position: 8
+      unlocks_on_pass:
+        - "Campaign Complete"
+    unlock:
+      unlocks_on_pass:
+        - "Campaign Complete"
+      next_mission_id: null
+      requires_score_percent: 70
+      requires_perfect_score: false
+    learning_goals:
+      - "Understand what a P&ID adds to the PFD and why both documents are needed."
+      - "Identify the instrumentation and control elements that must appear on a P&ID."
+      - "Recognise that safety instrumented functions must be shown independently from the basic process control system."
+      - "Identify isolation and protection hardware — block valves, check valves, relief valves — that belongs on the P&ID."
+      - "Avoid placing mechanical, electrical, or vendor detail that does not belong on a P&ID."
+
+    briefing:
+      senior_engineer_message: >
+        The PFD is approved. Now we move to the P&ID — the document that tells every engineer,
+        operator, and maintenance technician exactly what is installed and how it is controlled.
+        The P&ID does not replace the PFD; it adds a layer of detail that the PFD deliberately
+        omits. Your final task is to identify what the Solvex-A P&ID must add, and what does
+        not belong on a P&ID.
+
+    instructions:
+      prompt: >
+        The Solvex-A PFD is complete. Select the items that the P&ID must add that the PFD does
+        not show. Also identify items that do not belong on a P&ID.
+      selection_rule: "Select all that apply."
+      expected_time_minutes: 7
+
+    categories:
+      - id: process_control_and_safety
+        label: "Instrumentation & Control"
+      - id: reactor_system
+        label: "Safety & Isolation Hardware"
+      - id: separation_system
+        label: "Pipe Specification"
+      - id: unsupported_for_now
+        label: "Not on a P&ID"
+
+    decision_cards:
+      - id: all_instruments_in_isa_notation
+        category: process_control_and_safety
+        label: "Show all instruments using ISA notation: temperature, pressure, flow, and level indicators and their controllers"
+        type: correct
+        linked_clues:
+          - "The P&ID shows all instrumentation using ISA notation."
+          - "Feed flow, reactor pressure, and separator level require measurement and control."
+        short_hint: "Every measurement and control device must appear with the correct ISA symbol."
+
+      - id: all_control_loops_fully_shown
+        category: process_control_and_safety
+        label: "Show all control loops with measurement point, controller block, and final control element"
+        type: correct
+        linked_clues:
+          - "The P&ID shows all control loops with measurement points, controller blocks, and final control elements."
+          - "The reactor temperature control loop must appear with its coolant flow control valve."
+        short_hint: "A control loop is incomplete on a P&ID without all three elements shown."
+
+      - id: independent_high_high_temp_interlock_shown_separately
+        category: process_control_and_safety
+        label: "Show the reactor high-high temperature interlock as a separate safety instrumented function, independent from the temperature control loop"
+        type: correct
+        linked_clues:
+          - "The independent high-high temperature interlock must be shown separately from the temperature control loop."
+          - "Safety instrumented functions must be independent of the basic process control system."
+        short_hint: "Control and safety must appear as separate systems on the P&ID."
+
+      - id: manual_block_valves_on_major_lines
+        category: reactor_system
+        label: "Show manual block valves on all major process lines for maintenance isolation"
+        type: correct
+        linked_clues:
+          - "Manual block valves are required on all major process lines for maintenance isolation."
+        short_hint: "Block valves make equipment isolatable for safe maintenance."
+
+      - id: check_valves_on_feed_and_product_lines
+        category: reactor_system
+        label: "Show check valves on feed and product lines to prevent backflow"
+        type: correct
+        linked_clues:
+          - "Check valves are required on feed and product lines to prevent backflow."
+        short_hint: "Backflow can contaminate feeds, damage equipment, or create hazards."
+
+      - id: pipe_spec_breaks_on_pid
+        category: separation_system
+        label: "Show pipe specification breaks on the P&ID where material or pressure rating changes along a line"
+        type: correct
+        linked_clues:
+          - "The P&ID shows pipe specification breaks indicating where materials or pressure ratings change."
+        short_hint: "Spec breaks tell fabricators and operators exactly where one pipe class ends and another begins."
+
+      - id: reactor_relief_valve_with_discharge_routing
+        category: reactor_system
+        label: "Show the reactor pressure relief valve with its discharge line routed to the safe disposal system"
+        type: correct
+        linked_clues:
+          - "The reactor pressure relief valve must be shown with its discharge line routed to the safe disposal system."
+        short_hint: "The relief valve and its discharge route are both safety-critical and must both appear."
+
+      - id: sample_points_on_product_and_key_streams
+        category: process_control_and_safety
+        label: "Show sample point connections on the product stream and key intermediate streams"
+        type: correct
+        linked_clues:
+          - "Sample points are required on product and key intermediate streams."
+        short_hint: "Sample points are a P&ID hardware item needed for quality checks and troubleshooting."
+
+      - id: esd_connections_to_final_elements
+        category: process_control_and_safety
+        label: "Show ESD system connections to final control elements and isolation valves across the P&ID"
+        type: correct
+        linked_clues:
+          - "The plant emergency shutdown system connects to isolation valves and final control elements."
+        short_hint: "ESD actions must be traceable on the P&ID from logic to each valve it operates."
+
+      - id: three_d_pipe_routing_on_pid
+        category: unsupported_for_now
+        label: "Show 3D pipe routing and isometric details on the P&ID"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "3D routing belongs on isometric drawings, not the P&ID."
+
+      - id: structural_civil_details_on_pid
+        category: unsupported_for_now
+        label: "Show structural steelwork, civil foundations, and architectural elements on the P&ID"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Structural and civil details are produced on civil and structural drawings."
+
+      - id: vendor_internal_details_on_pid
+        category: unsupported_for_now
+        label: "Show vendor internal details such as tray layouts, tube bundle arrangements, and packing specifications on the P&ID"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Vendor internal details appear on vendor drawings, not the P&ID."
+
+      - id: electrical_wiring_on_pid
+        category: unsupported_for_now
+        label: "Replace instrument symbols with full electrical wiring schematics on the P&ID"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Electrical wiring and loop diagrams are produced as separate documents."
+
+      - id: utility_header_full_detail_on_process_pid
+        category: unsupported_for_now
+        label: "Show the complete utility header design and distribution system in full detail on the process P&ID"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Utility systems are normally shown on separate utility P&IDs."
+
+    correct_decision_ids:
+      - all_instruments_in_isa_notation
+      - all_control_loops_fully_shown
+      - independent_high_high_temp_interlock_shown_separately
+      - manual_block_valves_on_major_lines
+      - check_valves_on_feed_and_product_lines
+      - pipe_spec_breaks_on_pid
+      - reactor_relief_valve_with_discharge_routing
+      - sample_points_on_product_and_key_streams
+      - esd_connections_to_final_elements
+
+    wrong_but_plausible_decision_ids:
+      - three_d_pipe_routing_on_pid
+      - structural_civil_details_on_pid
+      - vendor_internal_details_on_pid
+      - electrical_wiring_on_pid
+      - utility_header_full_detail_on_process_pid
+
+    scoring:
+      mode: deterministic_easy
+      pass_threshold_percent: 70
+      perfect_threshold_percent: 100
+      points:
+        correct_selection: 1
+        missed_correct: -0.5
+        incorrect_selection: -0.25
+        perfect_bonus: 1
+      result_bands:
+        - id: excellent
+          min_percent: 90
+          title: "P&ID scope complete"
+          message: "You correctly identified all P&ID additions, kept safety instrumented functions independent from control, and cleanly separated P&ID content from other engineering documents. Solvex-A campaign complete."
+        - id: pass
+          min_percent: 70
+          title: "Acceptable first review"
+          message: "You identified the main P&ID requirements, but some instrumentation, hardware, or scope boundaries were missed. Review the feedback to consolidate your understanding."
+        - id: retry
+          min_percent: 0
+          title: "Needs revision"
+          message: "The P&ID scope is not yet correctly defined. Re-read the P&ID versus PFD section, control and safety requirements, and scope exclusions, then try again."
+
+    senior_engineer_explanations:
+      correct:
+        all_instruments_in_isa_notation: >
+          Correct. The P&ID is the definitive instrument reference document for the plant.
+          Every measurement device, indicator, transmitter, and controller must be shown
+          using standardised ISA symbols so that any engineer or instrument technician can
+          read it without ambiguity.
+        all_control_loops_fully_shown: >
+          Correct. A control loop on a P&ID must show all three elements: the measurement
+          point, the controller block, and the final control element. A loop shown with any
+          element missing is incomplete and cannot be used for commissioning or maintenance.
+        independent_high_high_temp_interlock_shown_separately: >
+          Correct. The temperature control loop and the high-high temperature safety trip
+          are two different systems serving two different functions. Showing them as separate
+          systems on the P&ID reflects the independence requirement established in Mission 2
+          and confirmed in Mission 5.
+        manual_block_valves_on_major_lines: >
+          Correct. Block valves make equipment isolatable for maintenance and inspection
+          without shutting down the entire plant. Their location on the P&ID defines the
+          isolation philosophy for every piece of equipment.
+        check_valves_on_feed_and_product_lines: >
+          Correct. Check valves prevent process material from flowing backward — into the
+          feed system or into product that has already been quality-checked. Their presence
+          on the P&ID ensures they are included in fabrication and are visible to operators
+          and maintenance technicians.
+        pipe_spec_breaks_on_pid: >
+          Correct. A pipe specification break marks exactly where the pipe material, wall
+          thickness, or pressure rating changes. Without spec breaks on the P&ID, fabricators
+          do not know which specification applies where, and the risk of using the wrong
+          material on a corrosive or high-pressure section increases.
+        reactor_relief_valve_with_discharge_routing: >
+          Correct. The relief valve and its discharge routing are both safety-critical items.
+          Showing only the valve without its discharge line leaves the P&ID incomplete —
+          the safe disposal destination must be traceable on the drawing.
+        sample_points_on_product_and_key_streams: >
+          Correct. Sample points are physical connections installed in the pipe. They must
+          appear on the P&ID so they are included in fabrication, are accessible for
+          maintenance, and are known to operators taking quality samples.
+        esd_connections_to_final_elements: >
+          Correct. Every final control element or isolation valve that the ESD system
+          operates must show its ESD connection on the P&ID. This traceability is essential
+          for hazard study review, commissioning, and ongoing safety testing of the ESD logic.
+      incorrect:
+        three_d_pipe_routing_on_pid: >
+          Incorrect. Three-dimensional pipe routing shows how pipes navigate around structural
+          elements, equipment, and each other in physical space. This information belongs on
+          isometric drawings and pipe rack models, not on the P&ID.
+        structural_civil_details_on_pid: >
+          Incorrect. Structural steelwork, foundations, and architectural elements are the
+          domain of civil and structural engineering drawings. Including them on the P&ID
+          would make it illegible and misrepresent its scope.
+        vendor_internal_details_on_pid: >
+          Incorrect. The P&ID shows equipment as a block with its external connections. What
+          is inside — tray layout, tube arrangement, packing type — is vendor design information
+          shown on vendor drawings, not the P&ID.
+        electrical_wiring_on_pid: >
+          Incorrect. Instrument symbols on the P&ID use ISA notation to communicate the
+          function and location of instruments. The actual wiring — cable routes, junction
+          boxes, terminal connections — is documented in electrical and loop diagrams, not
+          the P&ID.
+        utility_header_full_detail_on_process_pid: >
+          Incorrect. The process P&ID shows utility connections at each process equipment item.
+          The utility distribution system — headers, supply and return manifolds, branch
+          connections — is normally detailed on separate utility P&IDs to keep the process
+          drawing readable.
+      missed:
+        default: >
+          Missed decision. This item is a standard required element of a Process and
+          Instrumentation Diagram, as described in the P&ID versus PFD section, control
+          and safety requirements, or isolation and protection hardware sections.
+          Re-check those sections.
+
+    review_summary_template:
+      - "You selected {correct_selected_count} out of {total_correct_count} required P&ID elements."
+      - "You missed {missed_count} required elements."
+      - "You selected {incorrect_selected_count} elements that do not belong on a P&ID."
       - "Final score: {score_percent}%."
 
     telemetry_events:
