@@ -79,25 +79,34 @@ bod_document:
   reactor_effluent_composition:
     introduced_in_mission: 3
     items:
-      - "The reactor effluent is a liquid mixture containing Solvex-A product, unreacted Feed A, light impurity X, and water from the catalyst solution."
-      - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
-      - "Light impurity X originates from Feed A and must be removed to meet the product purity target."
+      - "Reactor effluent contains Solvex-A product, unreacted Feed A, light impurity X, water from Feed B aqueous catalyst, and dissolved catalyst residues."
+      - "Feed A and impurity X are organic compounds; water enters from the aqueous catalyst solution."
+      - "The stream arrives at reactor outlet conditions and must be conditioned for separation."
   product_specification_detail:
     introduced_in_mission: 3
     items:
-      - "Light impurity X must be reduced to below 1 wt% in the final product."
+      - "Final Solvex-A purity shall be at least 98.5 wt%."
+      - "Final product water content shall be below 0.5 wt%."
+      - "Product must not be exposed to temperatures above 130 C for more than 5 minutes."
   separation_constraints:
     introduced_in_mission: 3
     items:
-      - "Solvex-A is temperature-sensitive; all separation steps must operate below 130 C to avoid product degradation."
-      - "The organic and aqueous phases from the reactor effluent are partially immiscible."
-      - "Organic vapors generated during separation are flammable and must be contained."
+      - "Light impurity X has a lower normal boiling point than Solvex-A."
+      - "Exact relative volatility and VLE data for Solvex-A / impurity X have not yet been confirmed."
+      - "Water forms a heterogeneous azeotrope with some organic components in the mixture."
+      - "Catalyst residues are non-volatile and remain in the bottoms or aqueous phase."
   separation_scope:
     introduced_in_mission: 3
     items:
-      - "No boiling point or relative volatility data is available in this design basis."
-      - "The specific separation technology has not been selected yet."
-      - "Solvent recovery and recycle routes are under consideration but not yet confirmed."
+      - "This mission covers the separation-section design basis only."
+      - "Final column tray counts, column diameters, heat exchanger sizing, and rigorous simulation are outside scope."
+      - "Pump, piping, and detailed vessel mechanical design belong to later stages."
+  environmental_interfaces:
+    introduced_in_mission: 3
+    items:
+      - "Aqueous purge and water-rich streams must be routed to wastewater neutralisation before discharge."
+      - "Full wastewater treatment design is covered in a later mission."
+      - "VOC and vapour management from separation vents must be consistent with environmental constraints identified in Mission 1."
   utility_supply:
     introduced_in_mission: 4
     items:
@@ -872,8 +881,8 @@ missions:
 
   - id: solvex_a_mission_3
     version: 0.1.0
-    title: "Mission 3: Separate or Contaminate"
-    short_title: "Separate or Contaminate"
+    title: "Mission 3: Separation Section"
+    short_title: "Separation Section"
     mission_number: 3
     difficulty: easy
     status: locked
@@ -889,36 +898,35 @@ missions:
       name: "Separation Section"
       gantt_position: 3
       unlocks_on_pass:
-        - "Heat & Utilities Basics"
-        - "Mission 4: Count the Heat"
+        - "Heat & Utility Integration"
+        - "Mission 4: Heat & Utilities"
     unlock:
       unlocks_on_pass:
-        - "Heat & Utilities Basics"
-        - "Mission 4: Count the Heat"
+        - "Heat & Utility Integration"
+        - "Mission 4: Heat & Utilities"
       next_mission_id: solvex_a_mission_4
       requires_score_percent: 70
       requires_perfect_score: false
     learning_goals:
-      - "Identify what contaminants the reactor effluent carries and which product specifications they threaten."
-      - "Link the aqueous catalyst feed to a downstream water-removal obligation."
-      - "Recognise that immiscible phases should be split before further separation."
-      - "Avoid specifying a separation technology before the physical property basis exists."
-      - "Include organic vapor recovery as both a feedstock-recovery and a VOC-control measure."
+      - "Convert product purity, impurity, water-content, and stream-property clues into separation requirements."
+      - "Distinguish between a separation requirement and a specific equipment selection."
+      - "Recognise that separation choices depend on physical property data that may not yet be available."
+      - "Avoid jumping to over-specific equipment choices or detailed simulation too early."
+      - "Link Feed B aqueous catalyst feed to downstream water-removal needs."
 
     briefing:
       senior_engineer_message: >
-        The reactor section is defined. Now we move downstream. The Solvex-A product leaves
-        the reactor carrying water from the catalyst solution, light impurity X from Feed A,
-        and a small fraction of unreacted Feed A. Your task is to select the separation-section
-        design decisions that are directly supported by the product specification and the process
-        information we have so far. Do not choose a specific separation technology unless the
-        data in front of you justifies it.
+        The reactor effluent contains Solvex-A, unreacted Feed A, light impurity X,
+        water from Feed B, and dissolved catalyst residues. Your job is to outline the
+        separation train — not to size equipment yet. Read the clues about purity,
+        water, temperature sensitivity, and physical property gaps. Select only the
+        separation-section design-basis decisions that are justified.
 
     instructions:
       prompt: >
-        Select the separation-section design-basis decisions that are justified by the information
-        above. Avoid selecting a specific separation technology that requires physical property data
-        not yet provided.
+        Select the separation-section design-basis decisions that are justified by the
+        information above. Focus on what the separation train must accomplish, not on
+        detailed equipment dimensions.
       selection_rule: "Select all that apply."
       expected_time_minutes: 6
 
@@ -927,145 +935,159 @@ missions:
         label: "Separation System"
       - id: heat_transfer_and_utilities
         label: "Heat Transfer & Utilities"
-      - id: process_control_and_safety
-        label: "Process Control & Safety"
       - id: environmental_treatment
         label: "Environmental Treatment"
+      - id: process_control_and_safety
+        label: "Process Control & Safety"
       - id: unsupported_for_now
         label: "Not Justified Yet"
 
     decision_cards:
-      - id: remove_light_impurity_x
+      - id: sep_light_impurity_removal
         category: separation_system
-        label: "Include a separation step to remove light impurity X from Solvex-A"
+        label: "Include a light-impurity removal step in the separation train"
         type: correct
         linked_clues:
-          - "Light impurity X must be reduced to below 1 wt%."
-          - "Final Solvex-A purity must be at least 98.5 wt%."
-        short_hint: "Impurity X and the purity target together require a dedicated removal step."
+          - "Light impurity X has a lower normal boiling point than Solvex-A."
+          - "Final Solvex-A purity shall be at least 98.5 wt%."
+        short_hint: "A known impurity with a boiling-point difference suggests a separation step."
 
-      - id: include_water_removal_step_sep
+      - id: sep_product_water_removal
         category: separation_system
-        label: "Include a dedicated water-removal or drying step downstream of the reactor"
+        label: "Include a product water-removal or drying step"
         type: correct
         linked_clues:
-          - "The reactor effluent contains water from the catalyst solution."
-          - "Final product water content must be below 0.5 wt%."
-        short_hint: "An aqueous feed input means water ends up in the product stream."
+          - "Water from Feed B aqueous catalyst solution."
+          - "Final product water content shall be below 0.5 wt%."
+        short_hint: "An aqueous feed plus a tight water spec means water must be removed."
 
-      - id: phase_separation_before_drying
+      - id: sep_performance_targets
         category: separation_system
-        label: "Include a liquid-liquid phase separation step to split the organic and aqueous phases before further processing"
+        label: "Define separation performance targets for purity and water content"
         type: correct
         linked_clues:
-          - "The organic and aqueous phases from the reactor effluent are partially immiscible."
-        short_hint: "Immiscible phases can be split cheaply before more energy-intensive steps."
+          - "Final Solvex-A purity shall be at least 98.5 wt%."
+          - "Final product water content shall be below 0.5 wt%."
+        short_hint: "Quantitative targets are needed before any equipment can be specified."
 
-      - id: recycle_unreacted_feed_a
+      - id: sep_request_vle_data
         category: separation_system
-        label: "Recover and recycle unreacted Feed A back to the reactor"
+        label: "Request VLE or relative volatility data before locking a specific distillation design"
         type: correct
         linked_clues:
-          - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
-          - "Feed A is a flammable organic feedstock."
-        short_hint: "Discarding unreacted feedstock is a cost and a waste problem."
+          - "Exact relative volatility and VLE data have not yet been confirmed."
+        short_hint: "Without confirmed VLE data, any specific distillation design is premature."
 
-      - id: organic_vapor_recovery_on_separation
+      - id: sep_account_temp_sensitivity
+        category: heat_transfer_and_utilities
+        label: "Account for Solvex-A temperature sensitivity when choosing separation conditions"
+        type: correct
+        linked_clues:
+          - "Product shall not be exposed to temperatures above 130 C for more than 5 minutes."
+        short_hint: "Thermal degradation limits constrain reboiler temperatures and distillation pressure."
+
+      - id: sep_water_routing_to_treatment
         category: environmental_treatment
-        label: "Include organic vapor recovery on separation-unit overhead streams before any destruction device"
+        label: "Route water-rich purge and aqueous streams to downstream wastewater treatment"
         type: correct
         linked_clues:
-          - "Organic vapors generated during separation are flammable and must be contained."
-          - "VOC emissions must be controlled."
-        short_hint: "Recover first, then destroy — vapors from heated organic streams are both a safety and an emissions obligation."
+          - "Aqueous purge and water-rich streams must be routed to wastewater neutralisation."
+        short_hint: "Separation generates aqueous waste — it must be accounted for in the design."
 
-      - id: temp_limit_below_130c
+      - id: sep_requirements_vs_sizing
         category: separation_system
-        label: "Constrain all separation steps to operate below 130 C to prevent Solvex-A degradation"
+        label: "Document separation requirements now; defer final equipment sizing to a later stage"
         type: correct
         linked_clues:
-          - "Solvex-A is temperature-sensitive; all separation steps must operate below 130 C."
-        short_hint: "A product degradation temperature limit constrains reboiler and heater design."
+          - "Final column tray counts, column diameters, and rigorous simulation are outside scope."
+        short_hint: "This mission defines what the separation must do, not the exact dimensions."
 
-      - id: product_quality_checkpoint_sep
-        category: process_control_and_safety
-        label: "Include a product quality measurement point at the final separation step outlet"
-        type: correct
-        linked_clues:
-          - "Final Solvex-A purity must be at least 98.5 wt%."
-          - "Final product water content must be below 0.5 wt%."
-        short_hint: "Product specifications must be verified before the product reaches storage."
-
-      - id: size_separation_for_worst_case_feed
+      - id: sep_evaluate_alternatives
         category: separation_system
-        label: "Size the separation train for the worst-case feed impurity level, not the nominal"
+        label: "Evaluate both distillation and non-distillation separation methods before selecting"
         type: correct
         linked_clues:
-          - "Feed A contains light impurity X."
-          - "Light impurity X must be reduced to below 1 wt%."
-        short_hint: "Design for the highest credible impurity load, not the average."
+          - "Water forms a heterogeneous azeotrope with some organic components."
+          - "Product shall not be exposed to temperatures above 130 C."
+        short_hint: "Azeotrope behaviour and thermal sensitivity may make non-distillation methods attractive."
 
-      - id: select_cryogenic_distillation_no_data
+      - id: sep_link_feedb_to_water
+        category: separation_system
+        label: "Link Feed B aqueous catalyst feed to the downstream water-removal requirement"
+        type: correct
+        linked_clues:
+          - "Water from Feed B aqueous catalyst solution."
+          - "Final product water content shall be below 0.5 wt%."
+        short_hint: "The water entering the process through Feed B must leave somewhere."
+
+      - id: sep_cryogenic_no_data
+        category: separation_system
+        label: "Select cryogenic distillation without confirmed property or economic data"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Cryogenic service needs strong justification — boiling points alone are not enough."
+
+      - id: sep_skip_water_removal
+        category: separation_system
+        label: "Skip water removal because Feed B is only a catalyst and water evaporates later"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "The 0.5 wt% water spec is a product requirement regardless of where water came from."
+
+      - id: sep_purity_packaging_only
+        category: separation_system
+        label: "Treat 98.5 wt% purity as a packaging quality check, not a process design target"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Purity is achieved in the process, not at the packaging line."
+
+      - id: sep_column_sizing_now
+        category: separation_system
+        label: "Select final column tray count, diameter, and height in the design-basis mission"
+        type: wrong_plausible
+        linked_clues: []
+        short_hint: "Equipment sizing needs confirmed VLE data and rigorous simulation — not available yet."
+
+      - id: sep_full_simulation
         category: unsupported_for_now
-        label: "Select cryogenic distillation for light impurity X removal"
+        label: "Run full plant-wide rigorous process simulation at this stage"
         type: wrong_plausible
         linked_clues: []
-        short_hint: "Cryogenic service needs boiling point and VLE data that are not in the design basis."
+        short_hint: "A rigorous simulation needs physical property data not yet confirmed."
 
-      - id: single_flash_to_meet_purity
+      - id: sep_ignore_light_impurity
         category: separation_system
-        label: "Achieve the 98.5 wt% purity target in a single flash drum"
+        label: "Ignore light impurity X because it appears in the feed, not in the product specification"
         type: wrong_plausible
         linked_clues: []
-        short_hint: "A single equilibrium stage is unlikely to achieve a 98.5 wt% purity target."
+        short_hint: "Impurities in the feed will end up in the product unless removed."
 
-      - id: combine_impurity_and_water_removal
-        category: unsupported_for_now
-        label: "Combine impurity X removal and water removal in a single distillation column"
+      - id: sep_high_temp_stripping
+        category: heat_transfer_and_utilities
+        label: "Use high-temperature steam stripping without checking Solvex-A temperature sensitivity"
         type: wrong_plausible
         linked_clues: []
-        short_hint: "Combining two different separation objectives in one column requires VLE data to justify."
-
-      - id: skip_recycle_loss_acceptable
-        category: separation_system
-        label: "Do not recycle unreacted Feed A — the 4 to 8 percent loss is acceptable"
-        type: wrong_plausible
-        linked_clues:
-          - "Unreacted Feed A represents approximately 4 to 8 percent of the reactor outlet stream."
-        short_hint: "For a 5,000 tpy plant, 4 to 8 percent feed loss is 200 to 400 tonnes per year."
-
-      - id: skip_phase_separation_direct_to_column
-        category: separation_system
-        label: "Skip phase separation and send the full reactor effluent directly to a distillation column"
-        type: wrong_plausible
-        linked_clues:
-          - "The organic and aqueous phases from the reactor effluent are partially immiscible."
-        short_hint: "A two-phase immiscible feed to a distillation column creates serious operability problems."
-
-      - id: defer_all_separation_to_detailed_engineering
-        category: unsupported_for_now
-        label: "Defer all separation-section decisions to detailed engineering"
-        type: wrong_plausible
-        linked_clues: []
-        short_hint: "Separation-step sequence, recycle routes, and quality checkpoints must be defined at the design-basis stage."
+        short_hint: "Solvex-A degrades above 130 C — high-temperature stripping could destroy product."
 
     correct_decision_ids:
-      - remove_light_impurity_x
-      - include_water_removal_step_sep
-      - phase_separation_before_drying
-      - recycle_unreacted_feed_a
-      - organic_vapor_recovery_on_separation
-      - temp_limit_below_130c
-      - product_quality_checkpoint_sep
-      - size_separation_for_worst_case_feed
+      - sep_light_impurity_removal
+      - sep_product_water_removal
+      - sep_performance_targets
+      - sep_request_vle_data
+      - sep_account_temp_sensitivity
+      - sep_water_routing_to_treatment
+      - sep_requirements_vs_sizing
+      - sep_evaluate_alternatives
+      - sep_link_feedb_to_water
 
     wrong_but_plausible_decision_ids:
-      - select_cryogenic_distillation_no_data
-      - single_flash_to_meet_purity
-      - combine_impurity_and_water_removal
-      - skip_recycle_loss_acceptable
-      - skip_phase_separation_direct_to_column
-      - defer_all_separation_to_detailed_engineering
+      - sep_cryogenic_no_data
+      - sep_skip_water_removal
+      - sep_purity_packaging_only
+      - sep_column_sizing_now
+      - sep_full_simulation
+      - sep_ignore_light_impurity
+      - sep_high_temp_stripping
 
     scoring:
       mode: deterministic_easy
@@ -1079,86 +1101,89 @@ missions:
       result_bands:
         - id: excellent
           min_percent: 90
-          title: "Separation basis sound"
-          message: "You correctly identified the required separation steps, the product quality checkpoint, and the constraints on technology selection. The separation section design basis is well defined."
+          title: "Design review ready"
+          message: "You correctly identified the required separation steps and avoided over-specifying equipment. The separation train outline is sound."
         - id: pass
           min_percent: 70
           title: "Acceptable first review"
-          message: "You identified the main separation requirements, but some steps or constraints were missed. Review the feedback and re-check the product specification and effluent composition sections."
+          message: "You caught the main separation requirements, but some impurity, water, or property-data decisions were missed. Review the feedback."
         - id: retry
           min_percent: 0
           title: "Needs revision"
-          message: "The separation design basis is not yet defensible. Re-read the effluent composition and product specification sections and select only decisions directly supported by the data."
+          message: "Your separation-section decision set is not yet defensible. Re-read the clues about feed composition, purity targets, and physical property gaps."
 
     senior_engineer_explanations:
       correct:
-        remove_light_impurity_x: >
-          Correct. Impurity X originates from Feed A and the design basis sets both a 1 wt% limit
-          on X and a 98.5 wt% purity target. A dedicated removal step is required regardless of
-          which technology is ultimately selected.
-        include_water_removal_step_sep: >
-          Correct. Feed B is aqueous, so water enters the process at the reactor. The product
-          specification requires water below 0.5 wt%, so the separation train must include a
-          dedicated water-removal or drying step — it cannot be assumed to disappear.
-        phase_separation_before_drying: >
-          Correct. The organic and aqueous phases are partially immiscible, which means a liquid-
-          liquid decanter or settler can bulk-separate them with minimal energy. Sending an
-          immiscible two-phase mixture to a distillation column or dryer without this step first
-          creates hydraulic and operability problems.
-        recycle_unreacted_feed_a: >
-          Correct. Unreacted Feed A at 4–8% of the reactor outlet is a significant material
-          loss if discarded. For a 5,000 tpy plant, that is 200–400 tonnes per year of organic
-          feed that contributes to both feed cost and waste disposal. Recycle is the standard
-          design position pending an economic confirmation.
-        organic_vapor_recovery_on_separation: >
-          Correct. Heated separation steps generate organic vapors from the flammable feedstock
-          and product. Recovering these vapors for recycle before any destruction step is both the
-          preferred waste minimisation approach and a requirement for VOC compliance.
-        temp_limit_below_130c: >
-          Correct. A 130 C degradation limit on Solvex-A constrains how every separation unit
-          is operated. Reboiler temperature, steam supply pressure, and product-side temperatures
-          in all heat exchangers must all be checked against this limit during equipment sizing.
-        product_quality_checkpoint_sep: >
-          Correct. The 98.5 wt% purity and 0.5 wt% water targets must be verified at the outlet
-          of the final separation step before the product goes to storage or dispatch. This is a
-          basic quality assurance requirement that belongs in the design basis.
-        size_separation_for_worst_case_feed: >
-          Correct. Feed specifications always carry variability. The separation equipment must
-          meet the product quality target at the highest credible impurity load in the feed,
-          not only at the nominal or average composition.
+        sep_light_impurity_removal: >
+          Correct. Light impurity X has a lower boiling point than Solvex-A, and the product purity
+          target is 98.5 wt%. The separation train must include a step capable of removing this light
+          component. The exact method depends on VLE data, but the requirement itself is clear.
+        sep_product_water_removal: >
+          Correct. Feed B introduces water into the process, and the final product water content must
+          stay below 0.5 wt%. A water-removal or drying step must be part of the separation train —
+          the water does not simply evaporate on its own.
+        sep_performance_targets: >
+          Correct. Before any equipment can be selected, the separation train needs defined targets:
+          minimum Solvex-A recovery, maximum impurity carryover, and maximum water content. These
+          become the basis for all downstream equipment decisions.
+        sep_request_vle_data: >
+          Correct. The relative volatility of Solvex-A and impurity X is not yet confirmed. Without
+          reliable VLE data, you cannot select the correct number of stages, reflux ratio, or even
+          confirm that distillation is the best method. Requesting this data is a proper design-basis step.
+        sep_account_temp_sensitivity: >
+          Correct. Solvex-A degrades above 130 C. This constraint affects choices like reboiler
+          temperature, column operating pressure (and therefore relative volatility), and whether
+          vacuum distillation or alternative separation methods are needed.
+        sep_water_routing_to_treatment: >
+          Correct. The separation train will generate aqueous purge streams. These must be accounted
+          for in the design and routed to wastewater neutralisation. Full treatment design comes later,
+          but the routing requirement belongs here in the separation section.
+        sep_requirements_vs_sizing: >
+          Correct. At the design-basis stage, your job is to define what the separation train must
+          achieve — not the column diameter, tray count, or heat exchanger area. Those come after
+          confirmed physical property data and rigorous simulation.
+        sep_evaluate_alternatives: >
+          Correct. The mixture includes water that can form azeotropes, and Solvex-A is
+          temperature-sensitive. Distillation may work, but alternatives like extraction, adsorption,
+          or membrane separation should be considered before locking in a specific technology.
+        sep_link_feedb_to_water: >
+          Correct. Feed B is an aqueous catalyst solution — water enters the process with it. The
+          final product water limit is 0.5 wt%, so that water must be removed somewhere in the
+          separation train. Tracing water from entry to exit is fundamental process engineering.
       incorrect:
-        select_cryogenic_distillation_no_data: >
-          Not justified. Cryogenic distillation requires a large boiling point difference between
-          the impurity and the product and specific VLE data to confirm feasibility. Neither
-          boiling points nor relative volatility data appear in this design basis. A generic
-          impurity-removal step is defensible; cryogenic service is not yet.
-        single_flash_to_meet_purity: >
-          Incorrect. A single equilibrium flash at one temperature and pressure achieves a
-          separation limited by the thermodynamic equilibrium of the system. Without very
-          favourable VLE data — which is not provided — achieving 98.5 wt% in a single
-          flash stage cannot be assumed.
-        combine_impurity_and_water_removal: >
-          Not justified. Combining removal of an organic impurity and removal of water in a
-          single column is an advanced design option that depends on relative volatilities, any
-          azeotrope behaviour, and feasibility studies. Without VLE data, this cannot be
-          specified.
-        skip_recycle_loss_acceptable: >
-          Incorrect. A 4–8% feedstock loss is rarely acceptable economically or environmentally.
-          Recycle feasibility must be assessed and either confirmed or rejected with calculation —
-          it cannot be dismissed by assumption at the design-basis stage.
-        skip_phase_separation_direct_to_column: >
-          Incorrect. Feeding an immiscible organic-aqueous two-phase liquid directly to a
-          distillation column disrupts tray or packing hydraulics. Phase separation upstream
-          is standard practice when the phases are known to be immiscible, as stated in the
-          design basis.
-        defer_all_separation_to_detailed_engineering: >
-          Not justified. The separation-step sequence, recycle routes, product quality checkpoints,
-          and key constraints on temperature and technology must all appear in the design basis.
-          Deferring everything leaves the detailed engineering team without a defined scope.
+        sep_cryogenic_no_data: >
+          Not justified. Cryogenic distillation is expensive and energy-intensive. Nothing in the
+          design basis indicates it is needed — the boiling point difference exists, but that alone
+          does not justify cryogenic temperatures. Wait for confirmed VLE and economic data.
+        sep_skip_water_removal: >
+          Incorrect. Feed B is indeed a catalyst, but it is an aqueous solution. That water enters
+          the reactor and leaves in the effluent. The product specification of under 0.5 wt% water
+          applies regardless of the water's origin. Skipping water removal would fail the product spec.
+        sep_purity_packaging_only: >
+          Incorrect. Purity is achieved by the process — separation, reaction selectivity, and impurity
+          removal. Packaging cannot improve chemical purity. The 98.5 wt% target drives the entire
+          separation train design.
+        sep_column_sizing_now: >
+          Not justified. Tray count, column diameter, and height require confirmed VLE data, validated
+          thermodynamic models, and rigorous simulation. None of these are available at the design-basis
+          stage. Your task is to define the separation requirements, not size the hardware.
+        sep_full_simulation: >
+          Not justified. A rigorous plant-wide simulation requires physical property data, kinetic
+          parameters, and confirmed equilibrium data that are not yet available. The current mission
+          is to outline the separation train — simulation comes later.
+        sep_ignore_light_impurity: >
+          Incorrect. Light impurity X is present in the reactor effluent. If the separation train
+          does not remove it, it will end up in the Solvex-A product and violate the 98.5 wt% purity
+          target. The impurity's source (feed or reaction) does not change the need to remove it.
+        sep_high_temp_stripping: >
+          Incorrect. Solvex-A degrades above 130 C. High-temperature steam stripping could destroy
+          the product you are trying to purify. Always check thermal stability before choosing a
+          high-temperature separation method.
       missed:
         default: >
-          Missed decision. This selection is directly supported by the reactor effluent composition,
-          product specification, or separation constraints. Re-check those sections of the design basis.
+          Missed decision. This choice is directly supported by the separation-section design basis.
+          Re-check the separation feed composition, product specifications, and physical property
+          constraints.
 
     review_summary_template:
       - "You selected {correct_selected_count} out of {total_correct_count} required separation decisions."

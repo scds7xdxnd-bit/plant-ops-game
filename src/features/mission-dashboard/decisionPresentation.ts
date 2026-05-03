@@ -46,6 +46,22 @@ export const displayLabels: Record<string, string> = {
   exotic_metallurgy_no_corrosion_evidence: "Exotic metallurgy without corrosion evidence",
   full_cfd_fea_3d_reactor_modeling: "Full CFD/FEA/3D modelling for reactor",
   same_control_safety_protection_layer: "Treat control and safety as same layer",
+  sep_light_impurity_removal: "Light-impurity removal step",
+  sep_product_water_removal: "Product water-removal or drying step",
+  sep_performance_targets: "Separation performance targets",
+  sep_request_vle_data: "Request VLE / relative volatility data",
+  sep_account_temp_sensitivity: "Account for temperature sensitivity",
+  sep_water_routing_to_treatment: "Route water-rich streams to treatment",
+  sep_requirements_vs_sizing: "Requirements now; sizing later",
+  sep_evaluate_alternatives: "Evaluate distillation and alternatives",
+  sep_link_feedb_to_water: "Link Feed B to water removal",
+  sep_cryogenic_no_data: "Cryogenic distillation without data",
+  sep_skip_water_removal: "Skip water removal",
+  sep_purity_packaging_only: "Purity as packaging check only",
+  sep_column_sizing_now: "Final column sizing now",
+  sep_full_simulation: "Full rigorous simulation now",
+  sep_ignore_light_impurity: "Ignore light impurity X",
+  sep_high_temp_stripping: "High-temp stripping without check",
 };
 
 export function getDecisionDisplayLabel(id: string, fallback: string): string {

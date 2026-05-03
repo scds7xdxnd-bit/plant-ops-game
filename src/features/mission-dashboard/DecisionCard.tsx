@@ -104,6 +104,22 @@ function getDecisionIcon(id: string, category: DecisionCategoryId): string {
     exotic_metallurgy_no_corrosion_evidence: shieldIcon,
     full_cfd_fea_3d_reactor_modeling: cubeIcon,
     same_control_safety_protection_layer: gearIcon,
+    sep_light_impurity_removal: filterIcon,
+    sep_product_water_removal: waterDropIcon,
+    sep_performance_targets: filterIcon,
+    sep_request_vle_data: filterIcon,
+    sep_account_temp_sensitivity: thermometerIcon,
+    sep_water_routing_to_treatment: waterNeutralizationIcon,
+    sep_requirements_vs_sizing: filterIcon,
+    sep_evaluate_alternatives: filterIcon,
+    sep_link_feedb_to_water: waterDropIcon,
+    sep_cryogenic_no_data: filterIcon,
+    sep_skip_water_removal: waterDropIcon,
+    sep_purity_packaging_only: filterIcon,
+    sep_column_sizing_now: cubeIcon,
+    sep_full_simulation: cubeIcon,
+    sep_ignore_light_impurity: filterIcon,
+    sep_high_temp_stripping: flameIcon,
   };
 
   if (iconsByDecisionId[id]) {

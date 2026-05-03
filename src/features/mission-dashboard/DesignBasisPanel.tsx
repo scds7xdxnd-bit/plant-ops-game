@@ -24,6 +24,7 @@ type SectionKey =
   | "product_specification_detail"
   | "separation_constraints"
   | "separation_scope"
+  | "environmental_interfaces"
   | "utility_supply"
   | "plant_heat_demands"
   | "heat_recovery_note"
@@ -126,6 +127,11 @@ const SECTION_CONFIG: Record<SectionKey, SectionConfig> = {
     heading: "Separation Scope",
     icon: lightbulbIcon,
     iconClass: "design-basis-section__icon--scope",
+  },
+  environmental_interfaces: {
+    heading: "Environmental Interfaces",
+    icon: leafIcon,
+    iconClass: "design-basis-section__icon--environmental",
   },
   utility_supply: {
     heading: "Utility Supply",

@@ -3,6 +3,7 @@ import { loadSolvexCampaign } from "../content/loadCampaign";
 import { loadSolvexLevelOne } from "../content/loadScenario";
 import { scoreScenario } from "../domain/scoring";
 import { validateCampaign, isCampaignValid } from "../domain/validateCampaign";
+import { getBodForMission } from "../store/useGameStore";
 import {
   categoryLabels,
   getDecisionDisplayLabel,
@@ -18,6 +19,13 @@ describe("campaign loader", () => {
 
   it("contains at least 2 missions after Mission 2 is added", () => {
     expect(campaign.missions.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("contains the full 8-mission easy-mode campaign", () => {
+    expect(campaign.missions).toHaveLength(8);
+    expect(campaign.missions.map((mission) => mission.mission_number)).toEqual([
+      1, 2, 3, 4, 5, 6, 7, 8,
+    ]);
   });
 
   it("has Mission 1 as the first mission", () => {
@@ -182,11 +190,56 @@ describe("Mission 2 data integrity", () => {
   });
 });
 
+describe("Mission 3 data integrity", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[2];
+
+  it("has the correct id, title, and locked initial status", () => {
+    expect(mission.id).toBe("solvex_a_mission_3");
+    expect(mission.mission_number).toBe(3);
+    expect(mission.title).toBe("Mission 3: Separation Section");
+    expect(mission.short_title).toBe("Separation Section");
+    expect(mission.status).toBe("locked");
+  });
+
+  it("has 9 correct decisions, 7 wrong-but-plausible decisions, and 16 cards", () => {
+    expect(mission.correct_decision_ids).toHaveLength(9);
+    expect(mission.wrong_but_plausible_decision_ids).toHaveLength(7);
+    expect(mission.decision_cards).toHaveLength(16);
+  });
+
+  it("all answer-key IDs exist in decision_cards", () => {
+    const cardIds = new Set(mission.decision_cards.map((c) => c.id));
+    for (const id of [
+      ...mission.correct_decision_ids,
+      ...mission.wrong_but_plausible_decision_ids,
+    ]) {
+      expect(cardIds.has(id)).toBe(true);
+    }
+  });
+
+  it("every answer-key decision has a senior engineer explanation", () => {
+    for (const correctId of mission.correct_decision_ids) {
+      expect(mission.senior_engineer_explanations.correct[correctId]).toBeTruthy();
+    }
+    for (const wrongId of mission.wrong_but_plausible_decision_ids) {
+      expect(mission.senior_engineer_explanations.incorrect[wrongId]).toBeTruthy();
+    }
+  });
+
+  it("unlocks Mission 4 on pass", () => {
+    expect(mission.unlock).toBeDefined();
+    expect(mission.unlock!.next_mission_id).toBe("solvex_a_mission_4");
+    expect(mission.unlock!.requires_score_percent).toBe(70);
+    expect(mission.unlock!.requires_perfect_score).toBe(false);
+  });
+});
+
 describe("decision board ordering", () => {
   const campaign = loadSolvexCampaign();
 
-  it("sorts Mission 1 and Mission 2 decisions by category display label, then card display label", () => {
-    for (const mission of campaign.missions.slice(0, 2)) {
+  it("sorts campaign decisions by category display label, then card display label", () => {
+    for (const mission of campaign.missions) {
       const sortedCards = sortCardsByCategoryDisplayLabel(mission.decision_cards);
 
       expect(sortedCards).toHaveLength(mission.decision_cards.length);
@@ -205,6 +258,31 @@ describe("decision board ordering", () => {
 
       expect(sortKeys).toEqual(expectedSortKeys);
     }
+  });
+});
+
+describe("progressive BoD document", () => {
+  const campaign = loadSolvexCampaign();
+
+  it("shows only sections introduced by the current mission", () => {
+    const mission2Keys = getBodForMission(campaign, 2).map((entry) => entry.key);
+    const mission3Keys = getBodForMission(campaign, 3).map((entry) => entry.key);
+
+    expect(mission2Keys).not.toContain("environmental_interfaces");
+    expect(mission3Keys).toContain("environmental_interfaces");
+  });
+
+  it("marks only current-mission BoD sections as new", () => {
+    const mission3Sections = getBodForMission(campaign, 3);
+    const newKeys = mission3Sections
+      .filter((entry) => entry.isNew)
+      .map((entry) => entry.key);
+
+    expect(newKeys).toContain("reactor_effluent_composition");
+    expect(newKeys).toContain("environmental_interfaces");
+    expect(
+      mission3Sections.find((entry) => entry.key === "project_context")?.isNew,
+    ).toBe(false);
   });
 });
 
@@ -234,6 +312,35 @@ describe("scoring with mission 2", () => {
 
   it("returns retry when no correct decisions are selected", () => {
     const result = scoreScenario(mission, ["ignore_summer_cw_use_annual_avg"]);
+    expect(result.passed).toBe(false);
+    expect(result.band.id).toBe("retry");
+  });
+});
+
+describe("scoring with mission 3", () => {
+  const campaign = loadSolvexCampaign();
+  const mission = campaign.missions[2];
+
+  it("returns 100% for a perfect selection", () => {
+    const result = scoreScenario(mission, mission.correct_decision_ids);
+    expect(result.scorePercent).toBe(100);
+    expect(result.passed).toBe(true);
+    expect(result.perfect).toBe(true);
+    expect(result.incorrectSelectedIds).toEqual([]);
+    expect(result.missedCorrectIds).toEqual([]);
+  });
+
+  it("penalizes unsupported over-selection", () => {
+    const result = scoreScenario(mission, [
+      ...mission.correct_decision_ids,
+      "sep_full_simulation",
+    ]);
+    expect(result.scorePercent).toBeLessThan(100);
+    expect(result.incorrectSelectedIds).toEqual(["sep_full_simulation"]);
+  });
+
+  it("returns retry when no correct decisions are selected", () => {
+    const result = scoreScenario(mission, ["sep_full_simulation"]);
     expect(result.passed).toBe(false);
     expect(result.band.id).toBe("retry");
   });
@@ -272,6 +379,42 @@ describe("campaign validation", () => {
     const campaign = loadSolvexCampaign();
     expect(isCampaignValid(campaign)).toBe(true);
     expect(validateCampaign(campaign)).toHaveLength(0);
+  });
+
+  it("rejects an invalid bod_document introduced mission number", () => {
+    const campaign = loadSolvexCampaign();
+    const errors = validateCampaign({
+      ...campaign,
+      bod_document: {
+        ...campaign.bod_document,
+        bad_section: {
+          introduced_in_mission: 0,
+          items: ["Invalid section."],
+        },
+      },
+    });
+
+    expect(errors.map((error) => error.path)).toContain(
+      "bod_document.bad_section.introduced_in_mission",
+    );
+  });
+
+  it("rejects an empty bod_document section", () => {
+    const campaign = loadSolvexCampaign();
+    const errors = validateCampaign({
+      ...campaign,
+      bod_document: {
+        ...campaign.bod_document,
+        bad_section: {
+          introduced_in_mission: 1,
+          items: [],
+        },
+      },
+    });
+
+    expect(errors.map((error) => error.path)).toContain(
+      "bod_document.bad_section.items",
+    );
   });
 
   it("rejects a campaign with no missions", () => {

@@ -48,12 +48,13 @@ graph TD
 
 #### Current Implementation Anchor
 
-The active browser prototype is now a two-mission campaign in `src/content/scenarios/solvex-a-campaign.yaml`:
+The active browser prototype is now an eight-mission easy-mode campaign in `src/content/scenarios/solvex-a-campaign.yaml`, with Missions 1-3 ready for the next local playtest:
 
 - Mission 1: Decode The Design Basis
 - Mission 2: The Reactor Runs Hot
+- Mission 3: Separation Section
 
-Use [[Scenario Data Schema]], [[MVP Backlog]], and [[Roadmap]] for the current implementation state before adding Mission 3.
+Use [[Scenario Data Schema]], [[MVP Backlog]], and [[Roadmap]] for the current implementation state before editing Missions 4-8 or adding new mechanics.
 
 #### Related Notes
 

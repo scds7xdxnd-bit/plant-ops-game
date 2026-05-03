@@ -148,9 +148,11 @@ Use mission framing instead of plain quizzes:
 | Mission | Runtime Status | Content Notes | Unlock Rule |
 |---:|---|---|---|
 | 1 | Playable/current at campaign start | 17 decision cards: 10 correct, 7 wrong-plausible | 70% pass unlocks Mission 2 |
-| 2 | Playable/locked at campaign start | 15 decision cards: 9 correct, 6 wrong-plausible; exothermic reactor, summer cooling-water limit, normal control vs independent safety protection | 70% pass points to future Mission 3 |
+| 2 | Playable/locked at campaign start | 15 decision cards: 9 correct, 6 wrong-plausible; exothermic reactor, summer cooling-water limit, normal control vs independent safety protection | 70% pass unlocks Mission 3 |
+| 3 | Playable/locked at campaign start, reconciled locally | 16 decision cards: 9 correct, 7 wrong-plausible; separation requirements, impurity/water removal, property-data gaps, temperature sensitivity, wastewater routing | 70% pass unlocks Mission 4 |
+| 4-8 | Authored/locked scaffold | Easy-mode campaign content exists; needs playtest and polish after Missions 1-3 are proven | Chained 70% pass unlocks |
 
-The current UI supports a two-mission flow. Level map items can show current, completed, and locked states. Continue from the design review uses pass status, not perfect status.
+The current UI supports chained mission flow. Level map items can show current, completed, and locked states. Continue from the design review uses pass status, not perfect status.
 
 Decision cards are sorted by category display label and card display label. The current category display order is alphabetical by displayed label, including Advanced, Control, Environment, Materials, Separation, and Utilities.
 

@@ -11,20 +11,25 @@ Completed in the browser prototype:
 - Mission 1 dashboard screen
 - Mission 1 decision card selection
 - Mission 2 reactor-section content
-- Mission 1 to Mission 2 switching and unlock behavior
-- pass-based unlock from Mission 1 at 70%
+- Mission 3 separation-section content reconciled locally
+- Missions 4-8 authored as easy-mode campaign scaffold
+- mission-to-mission switching and unlock behavior
+- pass-based unlocks at 70%
 - selected decision tray
 - senior engineer action bar
 - design review completion screen
 - deterministic scoring tests
 - campaign-level YAML schema
+- campaign-level progressive `bod_document`
 - campaign loader with validation
 - custom SVG icon usage
 - dynamic mission header and level map status
 - shared decision display labels and sorted decision board order
 - selected tray and design review feedback aligned by decision ID
-- Mission 2 design-basis sections rendered in the dashboard
+- progressive design-basis sections rendered in the dashboard and BoD reader
+- `NEW` badges for current-mission BoD sections
 - compact review summary copy and score ring sizing
+- `.claude/` local worktrees ignored and excluded from test discovery
 
 Current runtime source:
 
@@ -34,7 +39,7 @@ Legacy duplicate still present:
 
 - `src/content/scenarios/solvex-a-level-1.yaml`
 
-Recommendation: keep the legacy file during the current two-mission playtest, then archive or delete it once `solvex-a-campaign.yaml` is accepted as the sole runtime content source.
+Recommendation: keep the legacy file during the current Mission 1-3 playtest, then archive or delete it once `solvex-a-campaign.yaml` is accepted as the sole runtime content source.
 
 #### Must Have
 
@@ -50,8 +55,9 @@ Recommendation: keep the legacy file during the current two-mission playtest, th
 | Campaign schema | Support multiple missions from one campaign YAML | [[Scenario Data Schema]] |
 | Scenario validation | Reject broken campaign YAML before app runtime | [[Scenario Data Schema]] |
 | Design review screen | Summarize score, supported decisions, unsupported decisions, and missed decisions | [[Player Experience Flow]] |
-| Mission switching | Continue from Mission 1 to Mission 2 after unlock criteria are met | [[Level Structure and Difficulty Modes]] |
+| Mission switching | Continue from one mission to the next after unlock criteria are met | [[Level Structure and Difficulty Modes]] |
 | Mission 2 content | Reactor heat-removal and summer cooling-water constraint mission | [[Chemical Engineering Decision Mapping]] |
+| Mission 3 content | Separation requirements, impurity/water removal, property data gaps, and wastewater routing | [[Chemical Engineering Decision Mapping]] |
 
 #### Should Have
 
@@ -63,8 +69,8 @@ Recommendation: keep the legacy file during the current two-mission playtest, th
 | Review mode | Let the player revisit missed design decisions |
 | Simple plant map | Unlock process sections as visual progress |
 | Classroom materials | Instructor notes, printable scenario sheets, and post-level review screens |
-| Mission 1-2 playtest | Test the first two missions as a continuous vertical slice |
-| Mission 3 content | Add separation section mission after Mission 1-2 playtest |
+| Mission 1-3 playtest | Test the first three missions as a continuous vertical slice |
+| Commit reconciled local changes | Push the Deepseek Mission 3 reconciliation on top of Claude's GitHub branch |
 
 #### Could Have
 

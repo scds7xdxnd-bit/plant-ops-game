@@ -42,7 +42,7 @@ Deliverables:
 
 #### Phase 3: Vertical Slice
 
-Goal: make Missions 1 and 2 prove the production direction before building the full level set.
+Goal: make Missions 1-3 prove the production direction before investing in richer mechanics.
 
 Deliverables:
 
@@ -53,6 +53,9 @@ Deliverables:
 - Refined review and feedback copy — done
 - Decision board sorting and selected/review feedback alignment — done
 - Mission 2 design-basis section rendering — done
+- Campaign-level progressive BoD document — done
+- Mission 3 separation-section content — done locally
+- BoD `NEW` badges and helper tests — done locally
 - First informal playtest pass
 
 #### Phase 4: MVP
@@ -69,9 +72,11 @@ Deliverables:
 
 #### Current Status
 
-The project is in Phase 3. Missions 1 and 2 are playable in one campaign flow. Mission 1 unlocks Mission 2 on a 70% pass score, campaign schema and validation are implemented, and the UI uses dynamic mission metadata. Current tests pass at 48 tests and the production build is clean.
+The project is in Phase 3 moving toward Phase 4. Claude's pushed branch contains the eight-mission easy-mode campaign and the campaign-level progressive BoD document. The local branch has also reconciled Deepseek's Mission 3 separation-section work into that architecture, preserving the progressive `bod_document` model instead of restoring per-mission `bod_excerpt`.
 
-The next engineering step is a Mission 1-2 playtest pass, followed by Mission 3 separation-section content if the two-mission loop holds up.
+Current local verification: `npm run test` passes with 61 tests and `npm run build` passes.
+
+The next engineering step is to commit and push the reconciled local changes, then playtest Missions 1-3 as one flow and verify continue/unlock behavior into Mission 4.
 
 #### Related Notes
 

@@ -45,11 +45,12 @@ graph TD
 
 Every number used in the simulation should eventually have a documented source, even if the first source is a design estimate.
 
-Current runtime rule: use `src/content/scenarios/solvex-a-campaign.yaml` as the app content source. It now contains Mission 1 and Mission 2. Vault scenario files and `src/content/scenarios/solvex-a-level-1.yaml` are drafts, references, or legacy compatibility files until copied into the validated runtime YAML.
+Current runtime rule: use `src/content/scenarios/solvex-a-campaign.yaml` as the app content source. It contains the eight-mission easy-mode campaign scaffold and the campaign-level progressive `bod_document`. Vault scenario files and `src/content/scenarios/solvex-a-level-1.yaml` are drafts, references, or legacy compatibility files until copied into the validated runtime YAML.
 
 The active campaign workflow is:
 
 - Author or edit mission content in `solvex-a-campaign.yaml`.
+- Add BoD text to the top-level `bod_document` with `introduced_in_mission`; do not reintroduce per-mission `bod_excerpt`.
 - Validate through `loadSolvexCampaign()` and `validateCampaign()`.
 - Keep `loadSolvexLevelOne()` only as a compatibility wrapper for older Mission 1 tests/components.
 - Use tests/build as the acceptance gate before treating YAML changes as playable.

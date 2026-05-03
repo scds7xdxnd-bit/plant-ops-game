@@ -75,18 +75,18 @@ plant-ops-game/
 
 | File | Purpose |
 |---|---|
-| `src/content/scenarios/solvex-a-campaign.yaml` | Runtime campaign data for Missions 1 and 2, and future missions |
+| `src/content/scenarios/solvex-a-campaign.yaml` | Runtime campaign data for the eight-mission easy-mode campaign and progressive BoD |
 | `src/content/loadCampaign.ts` | YAML parser and validation entrypoint |
 | `src/content/loadScenario.ts` | Compatibility wrapper for Mission 1 |
 | `src/domain/scenarioTypes.ts` | Campaign, mission, decision, scoring, and unlock types |
 | `src/domain/validateCampaign.ts` | Lightweight campaign validation |
 | `src/domain/scoring.ts` | Deterministic scoring |
-| `src/store/useGameStore.ts` | Campaign, current mission, selected decisions, score result, and screen state |
+| `src/store/useGameStore.ts` | Campaign, current mission, selected decisions, score result, screen state, and progressive BoD helper |
 | `src/features/mission-dashboard/decisionPresentation.ts` | Shared decision display labels, category labels, and sort order |
-| `src/features/mission-dashboard/DesignBasisPanel.tsx` | Design basis excerpt renderer with support for Mission 1 and Mission 2 section keys |
+| `src/features/mission-dashboard/DesignBasisPanel.tsx` | Progressive design-basis excerpt renderer with current-mission `NEW` badges |
 | `src/features/design-review/DesignReviewCompleteScreen.tsx` | Review summary, senior engineer feedback, pass-based continue, and mission advancement |
 
-Current runtime note: `src/content/scenarios/solvex-a-campaign.yaml` now contains Missions 1 and 2. `src/content/scenarios/solvex-a-level-1.yaml` remains a legacy duplicate and should not be treated as the active runtime source.
+Current runtime note: `src/content/scenarios/solvex-a-campaign.yaml` now contains Missions 1-8 and the top-level `bod_document`. `src/content/scenarios/solvex-a-level-1.yaml` remains a legacy duplicate and should not be treated as the active runtime source.
 
 #### Future Layout
 
@@ -125,9 +125,9 @@ plant-ops-game/
 flowchart LR
   A[Obsidian Notes] --> B[Scenario Draft]
   B --> C[Structured YAML]
-  C --> D[Schema Validation]
-  D --> E[Runtime JSON]
-  E --> F[Simulation Package]
+  C --> D[Campaign Validation]
+  D --> E[Zustand Campaign State]
+  E --> F[Scoring And Progressive BoD Helpers]
   F --> G[Web App]
 ```
 

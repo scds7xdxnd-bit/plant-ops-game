@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 import { useGameStore } from "../../store/useGameStore";
 import { TopMissionHeader } from "../mission-dashboard/TopMissionHeader";
+import {
+  getDecisionDisplayLabel,
+  sortDecisionIdsByBoardOrder,
+} from "../mission-dashboard/decisionPresentation";
 import engineerSvgUrl from "../../assets/icons/plant-ops/icon-engineer.svg";
 import bellIcon from "../../assets/icons/plant-ops/icon-bell.svg";
 import cloudIcon from "../../assets/icons/plant-ops/icon-cloud.svg";
@@ -46,19 +50,37 @@ export function DesignReviewCompleteScreen() {
     return null;
   }
 
-  const correctFeedback = scoreResult.correctSelectedIds.map((id) => ({
+  const correctFeedback = sortDecisionIdsByBoardOrder(
+    scenario,
+    scoreResult.correctSelectedIds,
+  ).map((id) => ({
     id,
-    label: scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    label: getDecisionDisplayLabel(
+      id,
+      scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    ),
     text: scenario.senior_engineer_explanations.correct[id],
   }));
-  const incorrectFeedback = scoreResult.incorrectSelectedIds.map((id) => ({
+  const incorrectFeedback = sortDecisionIdsByBoardOrder(
+    scenario,
+    scoreResult.incorrectSelectedIds,
+  ).map((id) => ({
     id,
-    label: scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    label: getDecisionDisplayLabel(
+      id,
+      scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    ),
     text: scenario.senior_engineer_explanations.incorrect[id],
   }));
-  const missedFeedback = scoreResult.missedCorrectIds.map((id) => ({
+  const missedFeedback = sortDecisionIdsByBoardOrder(
+    scenario,
+    scoreResult.missedCorrectIds,
+  ).map((id) => ({
     id,
-    label: scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    label: getDecisionDisplayLabel(
+      id,
+      scenario.decision_cards.find((card) => card.id === id)?.label ?? id,
+    ),
     text:
       scenario.senior_engineer_explanations.correct[id] ??
       scenario.senior_engineer_explanations.missed.default,
@@ -637,6 +659,129 @@ const conciseFeedback: Record<
       why: "If the controller fails, the same instrument cannot also trip the reactor.",
     },
   },
+  sep_light_impurity_removal: {
+    supported: {
+      text: "Impurity X threatens product purity, so a removal step belongs in the separation basis.",
+    },
+    missed: {
+      text: "The separation train needs a light-impurity removal step.",
+      why: "Impurity X is present and final Solvex-A purity must reach 98.5 wt%.",
+    },
+  },
+  sep_product_water_removal: {
+    supported: {
+      text: "Feed B introduces water and the product water limit is tight.",
+    },
+    missed: {
+      text: "A water-removal or drying step is required.",
+      why: "The final product water content must stay below 0.5 wt%.",
+    },
+  },
+  sep_performance_targets: {
+    supported: {
+      text: "Purity and water targets must be defined before equipment is selected.",
+    },
+    missed: {
+      text: "The separation basis needs explicit performance targets.",
+      why: "Targets drive later equipment selection and sizing.",
+    },
+  },
+  sep_request_vle_data: {
+    supported: {
+      text: "Confirmed VLE data is needed before locking a distillation design.",
+    },
+    missed: {
+      text: "Request VLE or relative-volatility data before selecting final technology.",
+      why: "The design basis says the equilibrium data is not confirmed.",
+    },
+  },
+  sep_account_temp_sensitivity: {
+    supported: {
+      text: "Thermal sensitivity constrains separation temperature and pressure choices.",
+    },
+    missed: {
+      text: "Separation conditions must respect the Solvex-A temperature limit.",
+      why: "The product must not exceed 130 C for more than 5 minutes.",
+    },
+  },
+  sep_water_routing_to_treatment: {
+    supported: {
+      text: "Water-rich purge streams must be routed to treatment.",
+    },
+    missed: {
+      text: "Aqueous separation streams need a treatment route.",
+      why: "Wastewater neutralisation is required before discharge.",
+    },
+  },
+  sep_requirements_vs_sizing: {
+    supported: {
+      text: "This stage defines requirements; final sizing comes after data and simulation.",
+    },
+    missed: {
+      text: "Document the separation requirements while deferring final sizing.",
+      why: "Tray counts, diameters, and rigorous simulation are outside this mission.",
+    },
+  },
+  sep_evaluate_alternatives: {
+    supported: {
+      text: "Azeotrope behavior and thermal limits justify evaluating alternatives.",
+    },
+    missed: {
+      text: "Consider distillation and non-distillation options before selecting.",
+      why: "Water azeotrope behavior and temperature sensitivity may limit standard distillation.",
+    },
+  },
+  sep_link_feedb_to_water: {
+    supported: {
+      text: "The water entering with Feed B must leave through the separation train.",
+    },
+    missed: {
+      text: "Link the aqueous catalyst feed to downstream water removal.",
+      why: "Feed B is the source of water that threatens the product water spec.",
+    },
+  },
+  sep_cryogenic_no_data: {
+    revision: {
+      text: "Cryogenic distillation needs stronger property and economic justification.",
+      why: "A boiling-point difference alone does not justify cryogenic service.",
+    },
+  },
+  sep_skip_water_removal: {
+    revision: {
+      text: "Water removal cannot be skipped just because the water came with a catalyst feed.",
+      why: "The product water specification still applies.",
+    },
+  },
+  sep_purity_packaging_only: {
+    revision: {
+      text: "Packaging cannot fix chemical purity.",
+      why: "The 98.5 wt% purity target is a process design requirement.",
+    },
+  },
+  sep_column_sizing_now: {
+    revision: {
+      text: "Final column sizing is premature at the design-basis stage.",
+      why: "Tray count and diameter require VLE data and rigorous simulation.",
+    },
+  },
+  sep_full_simulation: {
+    revision: {
+      text: "A full rigorous simulation comes after property data is confirmed.",
+      why: "The current mission is to define the separation basis.",
+    },
+  },
+  sep_ignore_light_impurity: {
+    revision: {
+      text: "Impurity X cannot be ignored because it enters the reactor effluent.",
+      why: "Without removal, it can violate the Solvex-A purity target.",
+    },
+  },
+  sep_high_temp_stripping: {
+    revision: {
+      text: "High-temperature stripping could degrade Solvex-A.",
+      why: "The product has a 130 C exposure limit.",
+    },
+  },
 };
 
 function getFeedbackDisplay(
@@ -692,6 +837,22 @@ function getDecisionIcon(id: string): string {
     exotic_metallurgy_no_corrosion_evidence: shieldIcon,
     full_cfd_fea_3d_reactor_modeling: cubeIcon,
     same_control_safety_protection_layer: gearIcon,
+    sep_light_impurity_removal: filterIcon,
+    sep_product_water_removal: waterDropIcon,
+    sep_performance_targets: filterIcon,
+    sep_request_vle_data: filterIcon,
+    sep_account_temp_sensitivity: thermometerIcon,
+    sep_water_routing_to_treatment: waterNeutralizationIcon,
+    sep_requirements_vs_sizing: filterIcon,
+    sep_evaluate_alternatives: filterIcon,
+    sep_link_feedb_to_water: waterDropIcon,
+    sep_cryogenic_no_data: filterIcon,
+    sep_skip_water_removal: waterDropIcon,
+    sep_purity_packaging_only: filterIcon,
+    sep_column_sizing_now: cubeIcon,
+    sep_full_simulation: cubeIcon,
+    sep_ignore_light_impurity: filterIcon,
+    sep_high_temp_stripping: flameIcon,
   };
   return map[id] ?? gearIcon;
 }

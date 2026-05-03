@@ -45,6 +45,20 @@ plant:
   plant_type: Small continuous/batch hybrid chemical plant
   annual_capacity_tpy: 5000
 
+bod_document:
+  project_context:
+    introduced_in_mission: 1
+    items:
+      - The project is a new Solvex-A specialty solvent additive unit.
+  reaction_section_overview:
+    introduced_in_mission: 2
+    items:
+      - The reactor section converts Feed A and Feed B into Solvex-A.
+  reactor_effluent_composition:
+    introduced_in_mission: 3
+    items:
+      - Reactor effluent contains Solvex-A, unreacted Feed A, impurity X, water, and catalyst residues.
+
 missions:
   - id: solvex_a_mission_1
     version: 0.1.0
@@ -68,11 +82,6 @@ missions:
       next_mission_id: solvex_a_mission_2
       requires_score_percent: 70
       requires_perfect_score: false
-    bod_excerpt:
-      feedstock_requirements:
-        - Feed A is a liquid organic feedstock.
-      product_targets:
-        - Final Solvex-A purity must be at least 98.5 wt%.
     decision_cards:
       - id: reactor_temperature_control_loop
         category: process_control_and_safety
@@ -94,9 +103,9 @@ missions:
         perfect_bonus: 1
 ```
 
-The example above is abbreviated. The live Mission 1 YAML contains the full BoD excerpt, 17 decision cards, 10 correct decisions, 7 wrong-but-plausible decisions, result bands, explanations, and telemetry event names.
+The example above is abbreviated. The live campaign YAML contains the full progressive `bod_document`, Mission 1's 17 decision cards, 10 correct decisions, 7 wrong-but-plausible decisions, result bands, explanations, and telemetry event names.
 
-Mission 2 is now also in the live campaign YAML:
+Mission 2 is in the live campaign YAML:
 
 - ID: `solvex_a_mission_2`
 - Title: `Mission 2: The Reactor Runs Hot`
@@ -106,14 +115,29 @@ Mission 2 is now also in the live campaign YAML:
 - Correct decisions: 9
 - Wrong-but-plausible decisions: 6
 - Scoring: same deterministic easy point system as Mission 1, with 70% pass and 100% perfect
-- Unlock: points to future `solvex_a_mission_3`
+- Unlock: points to `solvex_a_mission_3`
 
-The design-basis renderer now supports mission-specific `bod_excerpt` keys such as `reactor_requirements`, `cooling_utility_constraints`, `safety_requirements`, and `design_scope`, with a fallback heading formatter for future keys.
+Mission 3 is reconciled locally in the live campaign YAML:
+
+- ID: `solvex_a_mission_3`
+- Title: `Mission 3: Separation Section`
+- Status at campaign start: `locked`
+- Design basis focus: reactor effluent composition, product purity and water targets, physical property gaps, temperature sensitivity, separation scope, and wastewater/environmental interfaces
+- Decision cards: 16 total
+- Correct decisions: 9
+- Wrong-but-plausible decisions: 7
+- Scoring: same deterministic easy point system as Missions 1 and 2, with 70% pass and 100% perfect
+- Unlock: points to `solvex_a_mission_4`
+
+Missions 4-8 are authored as easy-mode campaign scaffold. The design-basis renderer uses campaign-level `bod_document` sections, not per-mission `bod_excerpt`. `getBodForMission(campaign, missionNumber)` returns sections where `introduced_in_mission <= missionNumber` and marks sections introduced in the current mission with `isNew`.
 
 #### Current Validation Rules
 
 - IDs must be stable and unique.
 - Campaign must have at least one mission.
+- Campaign must define a `bod_document` object.
+- Each BoD section must have a positive `introduced_in_mission`.
+- Each BoD section must have at least one item.
 - Mission IDs must be unique.
 - Mission numbers must be unique.
 - Campaign missions must define `mission_number`, `short_title`, `status`, and `unlock`.
@@ -132,11 +156,12 @@ The design-basis renderer now supports mission-specific `bod_excerpt` keys such 
 #### Current Implementation Notes
 
 - `src/domain/scenarioTypes.ts` defines `Campaign`, `PlantProfile`, `MissionUnlock`, and the per-mission `Scenario` type.
+- `Campaign.bod_document` is the source of all design-basis text shown during missions.
 - `Scenario` remains the per-mission compatibility type while the UI is migrated gradually.
 - `loadSolvexCampaign()` validates campaign data at load time.
 - `loadSolvexLevelOne()` remains as a compatibility wrapper for older tests and components.
-- `src/content/scenarios/solvex-a-level-1.yaml` is a legacy duplicate and should be archived or deleted after the Mission 1-2 playtest proves the campaign YAML workflow.
-- Current test coverage includes scoring, campaign validation, duplicate mission IDs and numbers, Mission 2 data integrity, Mission 2 scoring, and decision board ordering.
+- `src/content/scenarios/solvex-a-level-1.yaml` is a legacy duplicate and should be archived or deleted after the Mission 1-3 playtest proves the campaign YAML workflow.
+- Current test coverage includes scoring, campaign validation, duplicate mission IDs and numbers, BoD validation, progressive BoD visibility, Mission 2 and Mission 3 data integrity, Mission 2 and Mission 3 scoring, and decision board ordering.
 
 #### Related Notes
 
